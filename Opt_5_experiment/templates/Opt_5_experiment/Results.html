@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    {% if my_cumulative_payoff > opp_cumulative_payoff %}
+        You win!
+    {% elif my_cumulative_payoff < opp_cumulative_payoff %}
+        You Lost!
+    {% else %}
+        Draw!
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Your choices: {{ my_list_of_decisions }} </p>
+        <p> Opponent's choices: {{ opp_list_of_decisions }} </p>
+
+        <p> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Your score: {{ my_cumulative_payoff }} </p>
+        <p> Opponent's score: {{ opp_cumulative_payoff }} </p>
+        <p>
+        {% for x in my_list_of_decisions %}
+            {{ x }} <br>
+        {% endfor %}
+        </p>
+        
+
+    </p>
+
+    <p>
+        As a result, you earned {{ player.payoff }}.
+    </p>
+
+    
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}

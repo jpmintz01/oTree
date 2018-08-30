@@ -1,0 +1,94 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+ 
+{% block title %}
+    Your Choice 
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+    <style>
+        .highlight-row-on-hover:hover td {
+            background-color: #fcf8e3;
+        }
+        .invalid-blink {
+            background-color: gray;
+        }
+       .highlight-selected {
+            background-color: red;
+        }
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function() {
+        var on = false;
+        window.setInterval(function() {
+            on = !on;
+            if (on) {
+                $('.invalid').addClass('invalid-blink')
+            } else {
+                $('.invalid-blink').removeClass('invalid-blink')
+            }
+        }, 200);
+    });
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    Adversary: {{ my_adversary }}
+    <div class="form-group required">
+
+
+        last round: {{ last_round }}
+        <br>
+        adv_decisions: {{ adv_decisions }}
+        <br>
+        my_decisions: {{ my_list_of_decisions }}
+        <br>
+        adv scores: {{ adv_score }}
+        <br>
+        my scores: {{ my_scores }}
+        <table border=1  class="table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2">Round: {{ player.round_number }} of {{ Constants.num_rounds }}</th>
+                <th colspan="2" class="invalid-blink">Opponent: {{my_adversary}} <br> {{ adv_cumulative_payoff }} </th>
+            </tr>
+            <tr>
+                {% if adv_choice == 'Cooperate' %}
+                    <th class="highlight-selected">Cooperate</th>
+                    <th>Defect</th>
+                {% elif adv_choice == 'Defect' %}
+                    <th>Cooperate</th>
+                    <th class="highlight-selected">Defect</th>
+                {% else %}
+                    <th>Cooperate</th>
+                    <th>Defect</th>
+                {% endif %}
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2" class="invalid-blink"><span>You: {{ my_cumulative_payoff }}</span></th>
+                <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">I will cooperate</button></td>
+                <td>You: {{Constants.both_cooperate_payoff}} <br> Opp: {{Constants.both_cooperate_payoff}}</td>
+                <td>You: {{ Constants.betrayed_payoff }} <br> Opp: {{Constants.betray_payoff}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <td><button name="decision" value="Defect" class="btn btn-primary btn-large">I will defect</button></td>
+                <td>You: {{Constants.betray_payoff}} <br> Opp: {{ Constants.betrayed_payoff }}</td>
+                <td>You: {{Constants.both_defect_payoff}} <br> Opp: {{Constants.both_defect_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+{% include Constants.instructions_template %}
+
+
+
+
+
+{% endblock %}

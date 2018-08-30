@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+            My decisions w: adv 1: {{ my_decision_adv_1_total }} <br>
+            Adv 1 ({{ player.adv_1_type }}) decisions: {{ adv_1_decision_total }}<br>
+
+            My decisions w: adv 2: {{ my_decision_adv_2_total }} <br>
+            Adv 2 ({{ player.adv_2_type }}) decisions: {{ adv_2_decision_total }}<br>
+            
+            My total payoff across rounds: {{ my_total_payoff }} <br>
+   
+    {% next_button %}
+{% endblock %}
+
+

@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Introduction
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+    Do you want to play a human or an AI? <br>
+    {{ my_adv_type }}
+
+    {% next_button %}
+
+{% endblock %}
