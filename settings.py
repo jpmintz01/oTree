@@ -22,24 +22,7 @@ SESSION_CONFIGS = [
         'app_sequence': ['prisoner_multiplayer', 'payment_info'],
         'use_browser_bots': False,
     },
-    {
-        'name': 'prisoner_nochat',
-        'display_name': "Prisoner's Dilemma (no Chat allowed)",
-        'num_demo_participants': 1,
-        'app_sequence': ['prisoner_nochat', 'payment_info'],
-        'use_browser_bots': False,
-    },
 
-    {
-        'name': 'survey',
-        'num_demo_participants': 1,
-        'app_sequence': ['survey', 'payment_info'],
-    },
-    {
-        'name': 'quiz',
-        'num_demo_participants': 1,
-        'app_sequence': ['quiz'],
-    },
 ]
 # see the end of this file for the inactive session configs
 
@@ -99,6 +82,24 @@ SECRET_KEY = '(92a15wamnlz#lnupw5agxu)s*cu^uh&ro27o9+onw)8kl@ub9'
 INSTALLED_APPS = ['otree']
 
 # inactive session configs
+##    {
+##        'name': 'prisoner_nochat',
+##        'display_name': "Prisoner's Dilemma (no Chat allowed)",
+##        'num_demo_participants': 1,
+##        'app_sequence': ['prisoner_nochat', 'payment_info'],
+##        'use_browser_bots': False,
+##    },
+##
+##    {
+##        'name': 'survey',
+##        'num_demo_participants': 1,
+##        'app_sequence': ['survey', 'payment_info'],
+##    },
+##    {
+##        'name': 'quiz',
+##        'num_demo_participants': 1,
+##        'app_sequence': ['quiz'],
+##    },
 ##    {
 ##        'name': 'my_public_goods',
 ##        'display_name': "My Public Goods (Simple Version)",

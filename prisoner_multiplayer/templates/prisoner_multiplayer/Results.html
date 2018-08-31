@@ -2,19 +2,82 @@
 {% load otree static %}
 
 {% block title %}
-    Page title
+Results
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+<style>
+    .highlight-row-on-hover:hover td {
+        background-color: #fcf8e3;
+    }
+    .invalid-blink {
+        background-color: gray;
+    }
+
+    .highlight-selected {
+        background-color: red;
+    }
+    .floatedTable {
+        float:left;
+    }
+    .inlineTable {
+        display: inline-block;
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
-            My decisions w: adv 1: {{ my_decision_adv_1_total }} <br>
-            Adv 1 ({{ player.adv_1_type }}) decisions: {{ adv_1_decision_total }}<br>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>You</b></td>
+    {% for day in my_decision_adv_1_total   %}
+    <tr>
+        <td>{{ day }}</td>
+    </tr>
+    {% endfor %}
+</table>
+vs.
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Adv 1 ({{ player.adv_1_type }})</b></td>
+    {% for night in adv_1_decision_total   %}
+    <tr>
+        <td>{{ night }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-            My decisions w: adv 2: {{ my_decision_adv_2_total }} <br>
-            Adv 2 ({{ player.adv_2_type }}) decisions: {{ adv_2_decision_total }}<br>
-            
-            My total payoff across rounds: {{ my_total_payoff }} <br>
-   
-    {% next_button %}
+
+<hr>
+
+
+
+
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>You</b></td>
+    {% for day in my_decision_adv_2_total   %}
+    <tr>
+        <td>{{ day }}</td>
+    </tr>
+    {% endfor %}
+</table>
+vs.
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Adv 2 ({{ player.adv_2_type }})</b></td>
+    {% for night in adv_2_decision_total   %}
+    <tr>
+        <td>{{ night }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+</div>
+<hr>
+My total payoff across rounds: {{ my_total_payoff }} <br>
+<hr>
+{% next_button %}
 {% endblock %}
 
 
