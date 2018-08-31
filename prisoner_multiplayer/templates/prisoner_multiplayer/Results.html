@@ -30,6 +30,15 @@ Results
 {% endblock %}
 
 {% block content %}
+
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Round</b></td>
+    {% for num in list_of_round_nums   %}
+    <tr>
+        <td>{{ num }}</td>
+    </tr>
+    {% endfor %}
+</table>
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>You</b></td>
     {% for day in my_decision_adv_1_total   %}
@@ -38,9 +47,8 @@ Results
     </tr>
     {% endfor %}
 </table>
-vs.
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Adv 1 ({{ player.adv_1_type }})</b></td>
+    <td><b>Competitor #1 ({{ player.adv_1_type }})</b></td>
     {% for night in adv_1_decision_total   %}
     <tr>
         <td>{{ night }}</td>
@@ -52,7 +60,14 @@ vs.
 <hr>
 
 
-
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Round</b></td>
+    {% for num in list_of_round_nums   %}
+    <tr>
+        <td>{{ num }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>You</b></td>
@@ -62,9 +77,8 @@ vs.
     </tr>
     {% endfor %}
 </table>
-vs.
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Adv 2 ({{ player.adv_2_type }})</b></td>
+    <td><b>Competitor #2 ({{ player.adv_2_type }})</b></td>
     {% for night in adv_2_decision_total   %}
     <tr>
         <td>{{ night }}</td>
