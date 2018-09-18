@@ -18,9 +18,10 @@ At each "turn", the player must make a play (cooperate or defect) with all other
 class Constants(BaseConstants):
     name_in_url = 'prisoner_multiplayer'
     players_per_group = None
-    num_rounds = 5
-    #num_adversaries = 4
+    num_adversaries = 2
+    num_rounds = 50 #this is set high just to be higher than self.session.config['num_rounds']
     # the below two must add up to the num_adversaries
+    #num_rounds = self.session.config['num_rounds']
     #num_AI_adv = 2
     #num_human_adv = 2
     # 
@@ -40,7 +41,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
-class Adversary:
+class Adversary:  ## not used in this version - didn't work with oTree
     adv_decision = models.StringField(
         choices=['Cooperate', 'Defect'],
         doc="""Adversary decision""",
@@ -80,7 +81,7 @@ class Adversary:
                     adversary.adv_decision = 'Cooperate'
 
 class Player(BasePlayer):
-    ###### adversary #1
+    ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Cooperate', 'Defect'],
         doc="""This player's decision vs human 1""",
@@ -107,7 +108,7 @@ class Player(BasePlayer):
     )
     ######### end adversary #1
 
-    ###### adversary #2 
+    ###### adversary #2 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_2 = models.StringField( #my decision
         choices=['Cooperate', 'Defect'],
         doc="""This player's decision vs adv 2""",
@@ -135,8 +136,9 @@ class Player(BasePlayer):
     ########## end adversary #2
 
     round_payoff = models.CurrencyField(
-        choices=currency_range(c(0), Constants.num_rounds*Constants.betray_payoff, c(1)),
+        choices=currency_range(c(0), c(1000), c(1)),
         initial=c(0)
+        #c(1000) is just an arbitrary allowed max amount
     )
     
     def set_payoff(self):

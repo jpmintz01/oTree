@@ -7,17 +7,33 @@ from .models import Constants
 class Demographics(Page):
     form_model = 'player'
     form_fields = ['age',
-                   'gender']
-
-
-class CognitiveReflectionTest(Page):
+                   'gender',
+                   'service',
+                   'major',
+                   'minor',
+                   'post_grad',
+                  ]
+    
+class Experience(Page):
     form_model = 'player'
-    form_fields = ['crt_bat',
-                   'crt_widget',
-                   'crt_lake']
+    form_fields = ['years_military_experience',
+                   'game_theory_experience',
+                   'machine_learning_experience',
+                   'attention_check'
+                  ]
+
+class Expectations(Page): 
+    form_model = 'player'
+    form_fields = ['strategy_already',
+                   'self_cooperativeness',
+                   'other_humans_cooperativeness',
+                   'computer_cooperativeness',
+                   'AI_cooperativeness',
+                  ]
 
 
 page_sequence = [
     Demographics,
-    CognitiveReflectionTest
+    Experience,
+    Expectations
 ]

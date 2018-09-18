@@ -11,6 +11,7 @@ class Constants(BaseConstants):
     num_rounds = 1
 
 
+
 class Subsession(BaseSubsession):
     pass
 
@@ -18,37 +19,69 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
+def likert_var(label):
+    return models.IntegerField(
+        choices=[1,2,3,4,5],
+        label=label,
+        widget=widgets.RadioSelectHorizontal,
+    )
 
 class Player(BasePlayer):
 
     age = models.IntegerField(
-        label='What is your age?',
-        min=13, max=125)
+        label='In what year were you born?',
+        min=1900, max=2015)
 
     gender = models.StringField(
         choices=['Male', 'Female', 'Other'],
         label='What is your gender?',
         widget=widgets.RadioSelect)
 
-    crt_bat = models.IntegerField(
-        label='''
-        A bat and a ball cost 22 dollars in total.
-        The bat costs 20 dollars more than the ball.
-        How many dollars does the ball cost?'''
+    service = models.StringField(
+        choices=['Air Force', 'Army', 'Navy', 'Marine', 'Other'],
+        label='What service are you a part of?',
+        widget=widgets.RadioSelect)
+
+    years_military_experience = models.IntegerField(
+        label='How many years of military experience do you have? (include time in a military academy)',
+        min=0, max=50)
+
+    major = models.StringField(
+        label='What was/is your undergraduate major? (list all separated by comma)',
     )
 
-    crt_widget = models.IntegerField(
-        label='''
-        "If it takes 5 machines 5 minutes to make 5 widgets,
-        how many minutes would it take 100 machines to make 100 widgets?"
-        '''
+    minor = models.StringField(
+        label='What was/is your undergraduate minor? (list all separated by comma, or "none")',
     )
 
-    crt_lake = models.IntegerField(
-        label='''
-        In a lake, there is a patch of lily pads.
-        Every day, the patch doubles in size.
-        If it takes 48 days for the patch to cover the entire lake,
-        how many days would it take for the patch to cover half of the lake?
-        '''
+    post_grad = models.StringField(
+        label='What post-graduate degrees do you have? (list all separated by comma, or "none". Ex. MS in Computer Engineering, MA in Military and Strategic Studies, PhD in English Literature)',
     )
+
+    game_theory_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I understand terms such as Nash equilibria and Pareto Optimal", what level of understanding do you have with Game Theory or Prisoners Dilemma?')
+
+    machine_learning_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I can code an AI using tensorflow", what level of understanding do you have with machine learning and/or artificial intelligence?')
+
+
+    strategy_already = models.BooleanField(
+        label='Do you have a strategy selected already?')
+
+
+    # Should i make these likert variables for each type of player?
+    self_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect yourself to behave during this game?'
+                                     )
+
+    other_humans_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "other human players" to behave during this game?'
+                                             ) 
+
+    computer_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "the computer" to behave during this game?'
+                                         ) 
+
+    AI_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "the AI" to behave during this game?'
+                                   ) 
+    
+    attention_check = models.StringField(
+        choices=['Texas', 'Austria', 'Tennessee', 'Georgia', 'Other'],
+        label='What state is Atlanta in?',
+        widget=widgets.RadioSelect)
+

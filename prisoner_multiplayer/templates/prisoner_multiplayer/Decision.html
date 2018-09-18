@@ -26,6 +26,30 @@ Your Choices
         display: inline-block;
     }
     h4 {text-align:center;}
+
+    .adv_1_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_1_DelayTime }};
+    }
+    .adv_2_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_2_DelayTime }};
+    }
+    @keyframes pulse {
+        0% {
+            color: white;
+            background-color: white;
+
+        }
+        100% {
+            background-color: greenyellow;
+            color: black;
+        }
+    }
 </style>
 
 {% endblock %}
@@ -88,9 +112,12 @@ Your Choices
     <div class="btn-group form-group required">
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
-                <th colspan="2" rowspan="2"></th>
+                <th colspan="2" rowspan="3"></th>
                 <th colspan="2">Competitor 1</th>
+            <tr>
+                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Choice Selected</th>
             </tr>
+
             <tr>
                 <th>Cooperate</th>
                 <th>Defect</th>
@@ -152,8 +179,11 @@ Your Choices
 <div class="inlineTable btn-group form-group required">
     <table class="table table-bordered text-center" style="width: auto; margin: auto">
         <tr>
-            <th colspan="2" rowspan="2"></th>
+            <th colspan="2" rowspan="3"></th>
             <th colspan="2">Competitor 2</th>
+        </tr>
+        <tr>
+            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Choice Selected</th>
         </tr>
         <tr>
             <th>Cooperate</th>

@@ -3,19 +3,30 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
+
 class Introduction(Page):
     pass
 
         
 class Decision(Page):
+    def is_displayed(self):
+        return self.round_number <= self.session.config['num_rounds']
     form_model = 'player'
-    form_fields = ['decision_vs_adv_1', 'decision_vs_adv_2']
-
+    def get_form_fields(self):
+        fields = []
+        for i in (1, Constants.num_adversaries):
+            fields.append('decision_vs_adv_{}'.format(i))
+        return fields
+            #form_fields = ['decision_vs_adv_1', 'decision_vs_adv_2']
+        
+        #form_fields = ['decision_vs_adv_{}'.format(i) for i in range(1, Constants.num_adversaries)]
+    
     def vars_for_template(self):
         me = self.player
         
         last_round = max(0,self.round_number-1)
         return {
+            'adv_1_DelayTime': str(random.randint(1,10)) + 's',
             'my_decision_adv_1': me.decision_vs_adv_1,
             'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
             'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
@@ -24,6 +35,7 @@ class Decision(Page):
             'adv_1_decision': me.decision_of_adv_1,
             'adv_1_payoff': me.payoff_of_adv_1,
             
+            'adv_2_DelayTime': str(random.randint(1,3)) + 's',
             'my_decision_adv_2': me.decision_vs_adv_2,
             'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()[:-1]],
             'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()[:-1]],
@@ -63,33 +75,38 @@ class Decision(Page):
                 else:
                     me.decision_of_adv_2 = 'Cooperate'
                    
- 
-class ResultsWaitPage(WaitPage):
 
-    def after_all_players_arrive(self):
-        for p in self.group.get_players():
-            p.set_payoff()
+        me.set_payoff()
+        
+#class ResultsWaitPage(WaitPage):
+    
+#    def sim_wait(self):
+#        self.set_payoff()
+    
+#   def after_all_players_arrive(self):
+#        for p in self.group.get_players():
+#       self.set_payoff()
 
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds
+        return self.round_number == self.session.config['num_rounds']
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
         last_round = max(0,self.round_number-1)
         return {
             'my_decision_adv_1': me.decision_vs_adv_1,
-            'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
-            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
-            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()[:-1]],
+            'list_of_round_nums': [p.round_number for p in me.in_all_rounds()],
+            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()],
+            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()],
             'my_payoff_adv_1': me.payoff_vs_adv_1,
             'adv_1_decision': me.decision_of_adv_1,
             'adv_1_payoff': me.payoff_of_adv_1,
             
             'my_decision_adv_2': me.decision_vs_adv_2,
-            'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()[:-1]],
-            'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()[:-1]],
+            'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()],
+            'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()],
             'my_payoff_adv_2': me.payoff_vs_adv_2,
             'adv_2_decision': me.decision_of_adv_2,
             'adv_2_payoff': me.payoff_of_adv_2,
@@ -102,6 +119,6 @@ class Results(Page):
 page_sequence = [
     #Introduction,
     Decision,
-    ResultsWaitPage,
+    #ResultsWaitPage,
     Results
 ]

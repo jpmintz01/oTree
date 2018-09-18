@@ -1,9 +1,12 @@
 from os import environ
+import random
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
+
+
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
@@ -14,18 +17,63 @@ SESSION_CONFIG_DEFAULTS = {
 BROWSER_COMMAND = 'Safari'
 
 SESSION_CONFIGS = [
+    #    {
+    #        'name': 'survey',
+    #        'num_demo_participants': 1,
+    #        'app_sequence': ['survey'],
+    #    },
+#    {
+#        'name': 'prisoner',
+#        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['prisoner', 'payment_info'],
+#    },
+    #    {
+    #        'name': 'prisoner_w_comms',
+    #        'display_name': "Prisoner's Dilemma (one-shot with Discrete Comms) (not working)",
+    #        'num_demo_participants': 2,
+    #        'app_sequence': ['prisoner_w_comms'],
+    #    },
+#    {
+#        'name': 'chicken',
+#        'display_name': "Chicken",
+#        'num_demo_participants': 2,
+#        'num_rounds': 2,
+#        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
+#        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
+#        'swerve_death_chance': 50, #1 in 50 chance of death in crash into ditch
+#        'app_sequence': [
+#            'chicken'
+#
+#        ],
+#    },
+
+
+#    {
+#        'name': 'prisoner_multiplayer',
+#        'display_name': "Prisoner's Dilemma (multiplayer strategic no chat)",
+#        'num_demo_participants': 1,
+#        'app_sequence': ['prisoner_multiplayer'],
+#        'use_browser_bots': False,
+#        'num_rounds': 3,
+#    },
 
     {
-        'name': 'prisoner_multiplayer',
-        'display_name': "Prisoner's Dilemma (multiplayer strategic)",
+        'name': 'multi_game_test',
+        'display_name': "Game Example",
         'num_demo_participants': 1,
-        'app_sequence': ['prisoner_multiplayer', 'payment_info'],
+        'num_rounds': 3,
+        'app_sequence': ['survey','prisoner_multiplayer', 'chicken','post_game_survey'],
+        #'app_sequence':random.shuffle(['prisoner_multiplayer', 'chicken']),
+        #['survey','prisoner_multiplayer',],#'closing_comments'],
         'use_browser_bots': False,
+        'use_strategy_method': True,
+        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
+        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
+        'swerve_death_chance': 50, #1 in 50 chance of death
     },
-
 ]
 # see the end of this file for the inactive session configs
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -36,15 +84,20 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ROOMS = [
+    #    {
+    #        'name': 'econ101',
+    #        'display_name': 'Econ 101 class',
+    #        'participant_label_file': '_rooms/econ101.txt',
+    #    },
     {
-        'name': 'econ101',
-        'display_name': 'Econ 101 class',
-        'participant_label_file': '_rooms/econ101.txt',
+        'name': 'USAFA',
+        'display_name': 'USAFA',
+        'participant_label_file': '_rooms/USAFA.txt',
     },
-    {
-        'name': 'live_demo',
-        'display_name': 'Room for live demo (no participant labels)',
-    },
+    #    {
+    #        'name': 'live_demo',
+    #        'display_name': 'Room for live demo (no participant labels)',
+    #    },
 ]
 
 
@@ -82,6 +135,33 @@ SECRET_KEY = '(92a15wamnlz#lnupw5agxu)s*cu^uh&ro27o9+onw)8kl@ub9'
 INSTALLED_APPS = ['otree']
 
 # inactive session configs
+#    {
+#        'name': 'ultimatum_non_strategy',
+#        'display_name': "Ultimatum (direct response treatment)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['ultimatum',],# 'payment_info'],
+#        'use_strategy_method': False,
+#    },
+#    {
+#        'name': 'ultimatum_strategy',
+#        'display_name': "Ultimatum (strategy method treatment)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['ultimatum',],#, 'payment_info'],
+#        'use_strategy_method': True,
+#    },
+#    {
+#        'name': 'dictator',
+#        'display_name': "Dictator Game",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['dictator',],# 'payment_info'],
+#    },
+
+#    {
+#        'name': 'ultimatum',
+#        'display_name': "Ultimatum (randomized: strategy vs. direct response)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['ultimatum',],# 'payment_info'],
+#    },
 ##    {
 ##        'name': 'prisoner_nochat',
 ##        'display_name': "Prisoner's Dilemma (no Chat allowed)",
@@ -90,11 +170,7 @@ INSTALLED_APPS = ['otree']
 ##        'use_browser_bots': False,
 ##    },
 ##
-##    {
-##        'name': 'survey',
-##        'num_demo_participants': 1,
-##        'app_sequence': ['survey', 'payment_info'],
-##    },
+
 ##    {
 ##        'name': 'quiz',
 ##        'num_demo_participants': 1,
@@ -113,13 +189,7 @@ INSTALLED_APPS = ['otree']
 ##        'num_demo_participants': 3,
 ##        'app_sequence': ['public_goods', 'payment_info'],
 ##    },
-##    {
-##        'name': 'ultimatum_strategy',
-##        'display_name': "Ultimatum (strategy method treatment)",
-##        'num_demo_participants': 2,
-##        'app_sequence': ['ultimatum', 'payment_info'],
-##        'use_strategy_method': True,
-##    },
+
 ### {
 ###     'name': 'trust',
 ###     'display_name': "Trust Game",
@@ -133,24 +203,14 @@ INSTALLED_APPS = ['otree']
 ###     'app_sequence': ['prisoner', 'payment_info'],
 ### },
 ### {
-###     'name': 'ultimatum',
-###     'display_name': "Ultimatum (randomized: strategy vs. direct response)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-### },
+
 ##    {
 ##        'name': 'prisoner',
 ##        'display_name': "Prisoner's Dilemma",
 ##        'num_demo_participants': 2,
 ##        'app_sequence': ['prisoner', 'payment_info'],
 ##    },
-### {
-###     'name': 'ultimatum_non_strategy',
-###     'display_name': "Ultimatum (direct response treatment)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['ultimatum', 'payment_info'],
-###     'use_strategy_method': False,
-### },
+
 ### {
 ###     'name': 'vickrey_auction',
 ###     'display_name': "Vickrey Auction",
@@ -171,25 +231,13 @@ INSTALLED_APPS = ['otree']
 ###         'cournot', 'payment_info'
 ###     ],
 ### },
-##    {
-##        'name': 'Opt_5_experiment',
-##        'display_name': "Prisoner's Dilemma (one-shot, multiplayer)",
-##        'num_demo_participants': 2,
-##        'app_sequence': ['1_5_experiment', 'payment_info'],
-##        'use_browser_bots': False,
-##    },
 ### {
 ###     'name': 'principal_agent',
 ###     'display_name': "Principal Agent",
 ###     'num_demo_participants': 2,
 ###     'app_sequence': ['principal_agent', 'payment_info'],
 ### },
-### {
-###     'name': 'dictator',
-###     'display_name': "Dictator Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['dictator', 'payment_info'],
-### },
+
 ### {
 ###     'name': 'matching_pennies',
 ###     'display_name': "Matching Pennies",
