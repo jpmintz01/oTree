@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Debrief
+{% endblock %}
+
+{% block content %}
+<p> Thank you for your participation in this experiment. </p>
+<br>
+<p> As you may have noticed in your informed consent document, this game included some level of deception. To clear up any deception, the following experiences during your game were as follows:</p>
+<br>
+<p> Any player listed as human in the game was actually a random number generator. </p> <br>
+<p> Any player listed as Artificial Intelligence (AI) was actually a relatively simple algorithm called Tit-for-Tat (TFT), not artificial intelligence.  TFT is one of the most effective strategies in the Prisoners Dilemma.  In the game of Chicken, the algorithm played a similar strategy.  There ARE artificially intelligent players that exist and are very effective.  In fact, they exhibit some very interesting, and very non-human, characteristics in simple games such as the ones you played today. If you are interested, the researcher will be happy to discuss the topic with you.  Please let him know</p>
+<br>
+<p><b>Please do not share your experience in the game with anyone </b> until told by the researcher that is ok to discuss. You can understand how a participant's prior knowledge of the information on this page would corrupt the experiment. </p>
+<br>
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends "global/Page.html" %} {% load otree static %}
+
+
+{% block title %}
+Your Choices 
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+
+<style>
+    .highlight-row-on-hover:hover td {
+        background-color: #fcf8e3;
+    }
+    .invalid-blink {
+        background-color: gray;
+    }
+
+    .highlight-selected {
+        background-color: red;
+    }
+    .floatedTable {
+        float:left;
+    }
+    .inlineTable {
+        display: inline-block;
+    }
+    h4 {text-align:center;}
+
+    .adv_1_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_1_DelayTime }};
+    }
+    .adv_2_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_2_DelayTime }};
+    }
+    @keyframes pulse {
+        0% {
+            color: white;
+            background-color: white;
+
+        }
+        100% {
+            background-color: greenyellow;
+            color: black;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function() {
+        var on = false;
+        window.setInterval(function() {
+            on = !on;
+            if (on) {
+                $('.invalid').addClass('invalid-blink')
+            } else {
+                $('.invalid-blink').removeClass('invalid-blink')
+            }
+        }, 200);
+    });
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <h3>Round: {{player.round_number}}</h3>
+    {% next_button %}
+</section>
+
+<hr>
+<h4> Competitor 1 ({{ player.adv_1_type }})</h4>
+<!-- Table history of choices for player and adversary 1 -->
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Round</b></td>
+    {% for num in list_of_round_nums   %}
+    <tr>
+        <td>{{ num }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>You</b></td>
+    {% for day in my_decision_adv_1_total   %}
+    <tr>
+        <td>{{ day }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Your Payoff</b></td>
+    {% for midday in my_payoffs_adv_1_total   %}
+    <tr>
+        <td>{{ midday }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Competitor</b></td>
+    {% for night in adv_1_decision_total   %}
+    <tr>
+        <td>{{ night }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Their Payoff</b></td>
+    {% for monday in adv_1_payoffs_total   %}
+    <tr>
+        <td>{{ monday }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable form-group required">
+
+    <div class="btn-group form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="3"></th>
+                <th colspan="2">Competitor 1</th>
+            <tr>
+                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Competitor has made their choice</th>
+            </tr>
+
+            <tr>
+                <th>Straight</th>
+                <th>Swerve</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <th>       
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Straight" autocomplete="off"> Straight
+                    </label>
+                </th>
+                <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
+                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th>
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Swerve" autocomplete="off"> Swerve
+                    </label>
+                </th>
+                <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
+                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+<hr> <!-- begins section for adversary 2-->
+<h4> Competitor 2 ({{ player.adv_2_type }})</h4>
+<!-- Table history of choices for player and adversary 2 -->
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Round</b></td>
+    {% for num in list_of_round_nums   %}
+    <tr>
+        <td>{{ num }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>You</b></td>
+    {% for day in my_decision_adv_2_total   %}
+    <tr>
+        <td>{{ day }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Your Payoff</b></td>
+    {% for midday in my_payoffs_adv_1_total   %}
+    <tr>
+        <td>{{ midday }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Competitor</b></td>
+    {% for night in adv_2_decision_total   %}
+    <tr>
+        <td>{{ night }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+    <td><b>Their Payoff</b></td>
+    {% for monday in adv_2_payoffs_total   %}
+    <tr>
+        <td>{{ monday }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable btn-group form-group required">
+    <table class="table table-bordered text-center" style="width: auto; margin: auto">
+        <tr>
+            <th colspan="2" rowspan="3"></th>
+            <th colspan="2">Competitor 2</th>
+        </tr>
+        <tr>
+            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has made their choice</th>
+        </tr>
+        <tr>
+            <th>Straight</th>
+            <th>Swerve</th>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th rowspan="2"><span class="rotate90">You</span></th>
+            <th>       
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Straight" autocomplete="off"> Straight
+                </label>
+            </th>
+            <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th>
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Swerve" autocomplete="off"> Swerve
+                </label>
+            </th>
+            <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+    </table>
+</div>
+<hr>
+
+<br>
+{% next_button %}
+
+
+{% include Constants.instructions_template %}
+
+
+
+
+
+{% endblock %}

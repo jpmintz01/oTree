@@ -1,0 +1,52 @@
+{% load otree static %}
+
+<div class="card bg-light instructions">
+
+    <div class="card-body">
+        <h3>
+            Instructions
+        </h3>
+
+
+
+    <p>
+        In this test, you will be randomly and anonymously paired with other participants.  Some of these participants are other human participants, others are artificially intelligent participants.
+        <br><br>
+        Each of you simultaneously and privately chooses whether you want to drive Straight or Swerve to miss the other player.
+        <br><br>
+        If <b>you drive straight and your opponent swerves</b>, you will receive {{ Constants.winner_payoff }}.
+        <br>
+        If <b>you drive straight and your opponent drives straight</b>, you have a <b>1 in {{ crash_death_chance }} chance of dying </b>({{ Constants.crash_payoff }}) from the head-on collision.
+        <br><br>
+        If <b>you swerve and your opponent drives straight</b>, you will receive {{ Constants.loser_payoff }}, unless you die in a crash into the ditch ({{ Constants.crash_payoff }}), of which you have a <b>1 in {{ swerve_death_chance }} chance</b>.
+        <br><br>
+        Your payoffs will be determined by the choices of both as below (except for the chance of dying).
+    </p>
+    <p><i>In each cell, the amount to the left is the payoff for
+        you and to the right for the other participant.</i></p>
+
+    <table border=1 class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>The Other Participant's Choice</th>
+        </tr>
+        <tr>
+            <th>Straight</th>
+            <th>Swerve</th>
+        </tr>
+        <tr>
+            <th align="center" rowspan=2><span class="rotate90">Your Choice</span></th>
+            <th>Straight</th>
+            <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+        <tr>
+            <th align="center">Swerve</th>
+            <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+    </table>
+
+</div>
+</div>
