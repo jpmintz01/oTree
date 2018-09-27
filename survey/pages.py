@@ -9,6 +9,7 @@ class Demographics(Page):
     form_fields = ['age',
                    'gender',
                    'service',
+                   'rank',
                    'major',
                    'minor',
                    'post_grad',

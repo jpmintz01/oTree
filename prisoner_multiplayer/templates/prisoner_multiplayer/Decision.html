@@ -2,7 +2,6 @@
 
 
 {% block title %}
-Your Choices 
 {% endblock %}
 
 {% block styles %}
@@ -24,6 +23,7 @@ Your Choices
     }
     .inlineTable {
         display: inline-block;
+        vertical-align: top;
     }
     h4 {text-align:center;}
 
@@ -73,13 +73,47 @@ Your Choices
 
 
 {% block content %}
-<section>
-    <h3>Round: {{player.round_number}}</h3>
-    {% next_button %}
-</section>
 
-<hr>
-<h4> Competitor 1 ({{ player.adv_1_type }})</h4>
+
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable form-group required">
+
+    <div class="btn-group form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
+                <th colspan="2">Competitor 1  ({{ player.adv_1_type }})</th>
+            <tr>
+                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Choice has selected their choice</th>
+            </tr>
+
+            <tr>
+                <th>Cooperate</th>
+                <th>Defect</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <th>       
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off"> Cooperate
+                    </label>
+                </th>
+                <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them: {{Constants.both_cooperate_payoff}}</td>
+                <td><b>You : {{ Constants.betrayed_payoff }}</b><br>Them: {{Constants.betray_payoff}}</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th>
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off"> Defect
+                    </label>
+                </th>
+                <td><b>You : {{Constants.betray_payoff}}</b><br> Them:  {{ Constants.betrayed_payoff }}</td>
+                <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 <!-- Table history of choices for player and adversary 1 -->
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>Round</b></td>
@@ -105,50 +139,42 @@ Your Choices
     </tr>
     {% endfor %}
 </table>
-<br>
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable form-group required">
-
-    <div class="btn-group form-group required">
-        <table class="table table-bordered text-center" style="width: auto; margin: auto">
-            <tr>
-                <th colspan="2" rowspan="3"></th>
-                <th colspan="2">Competitor 1</th>
-            <tr>
-                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Choice Selected</th>
-            </tr>
-
-            <tr>
-                <th>Cooperate</th>
-                <th>Defect</th>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th rowspan="2"><span class="rotate90">You</span></th>
-                <th>       
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off"> Cooperate
-                    </label>
-                </th>
-                <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
-                <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th>
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off"> Defect
-                    </label>
-                </th>
-                <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
-                <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
-            </tr>
-        </table>
-    </div>
-
-</div>
-
-
 <hr> <!-- begins section for adversary 2-->
-<h4> Competitor 2 ({{ player.adv_2_type }})</h4>
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable btn-group form-group required">
+    <table class="table table-bordered text-center" style="width: auto; margin: auto">
+        <tr>
+            <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
+            <th colspan="2">Competitor 2 ({{ player.adv_2_type }})</th>
+        </tr>
+        <tr>
+            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
+        </tr>
+        <tr>
+            <th>Cooperate</th>
+            <th>Defect</th>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th rowspan="2"><span class="rotate90">You</span></th>
+            <th>       
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Cooperate" autocomplete="off"> Cooperate
+                </label>
+            </th>
+            <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them:  {{Constants.both_cooperate_payoff}}</td>
+            <td><b>You : {{ Constants.betrayed_payoff }}</b><br> Them:   {{Constants.betray_payoff}}</td>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th>
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Defect" autocomplete="off"> Defect
+                </label>
+            </th>
+            <td><b>You : {{Constants.betray_payoff}}</b><br> Them: {{ Constants.betrayed_payoff }}</td>
+            <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
+        </tr>
+    </table>
+</div>
 <!-- Table history of choices for player and adversary 2 -->
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>Round</b></td>
@@ -174,45 +200,8 @@ Your Choices
     </tr>
     {% endfor %}
 </table>
-<br>
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable btn-group form-group required">
-    <table class="table table-bordered text-center" style="width: auto; margin: auto">
-        <tr>
-            <th colspan="2" rowspan="3"></th>
-            <th colspan="2">Competitor 2</th>
-        </tr>
-        <tr>
-            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Choice Selected</th>
-        </tr>
-        <tr>
-            <th>Cooperate</th>
-            <th>Defect</th>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th rowspan="2"><span class="rotate90">You</span></th>
-            <th>       
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Cooperate" autocomplete="off"> Cooperate
-                </label>
-            </th>
-            <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
-            <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th>
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Defect" autocomplete="off"> Defect
-                </label>
-            </th>
-            <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
-            <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
-        </tr>
-    </table>
-</div>
 <hr>
 
-<br>
 {% next_button %}
 
 

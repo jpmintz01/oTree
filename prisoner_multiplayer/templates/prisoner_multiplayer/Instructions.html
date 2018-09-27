@@ -3,22 +3,27 @@
 <div class="card bg-light instructions">
     <div class="card-body">
 
-    <h3>
-        Instructions
-    </h3>
+        <h3>
+            Instructions
+        </h3>
 
-    <link rel="stylesheet" type="text/css"
-          href="{% static 'global/matrix.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'global/matrix.css' %}"/>
 
-    <p>
-        In this study, you will be randomly and anonymously paired with another
-        participant.
-        Each of you simultaneously and privately chooses whether you want to
-        cooperate or defect.
-        Your payoffs will be determined by the choices of both as below:
-    </p>
-    <p><i>In each cell, the amount to the left is the payoff for
-        you and to the right for the other participant.</i></p>
+        <p>
+            In this study, you will be randomly and anonymously paired with one or more human participants and one or more artificially intelligenct (AI) participants.  You will play a number of rounds before moving on to the next game. <br><br>
+            Here's your scenario: <br>
+
+            You are one of two members of a criminal gang who have been arrested and imprisoned. Each of you is in solitary confinement with no means of communicating with the other. The prosecutors lack sufficient evidence to convict both of you on the principal charge, but they have enough to convict both of you on a lesser charge. The prosecutors offer each of you a bargain. Each of you is given the opportunity either to "defect" against the other by testifying that the other committed the crime, or to "cooperate" with the other by remaining silent. The offer is:<br>
+        <ul>
+            <li> If you both betray the other, each of you serves two years in prison.</li>
+            <li>If you betray the other but they remain silent, you will be set free and your fellow prisoner will serve three years in prison (and vice versa).</li>
+            <li>If both of you remain silent, both of you will only serve one year in prison (on the lesser charge).</li>
+        </ul><br>
+
+        In each round, each of you simultaneously and privately chooses whether you want to cooperate or defect.
+        Instead of years, you earn a points based on the amount of years of prison you didn't get. Your score will be determined by your and your "competitor's" choices as below:
+        </p>
 
     <table class='table table-bordered text-center'
            style='width: auto; margin: auto'>
@@ -33,13 +38,13 @@
         <tr>
             <th rowspan=2><span class="rotate90">You</span></th>
             <th>Cooperate</th>
-            <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
-            <td>0, {{ Constants.betray_payoff }}</td>
+            <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them:  {{Constants.both_cooperate_payoff}}</td>
+            <td><b>You : {{ Constants.betrayed_payoff }}</b><br> Them:   {{Constants.betray_payoff}}</td>
         </tr>
         <tr>
             <th>Defect</th>
-            <td>{{ Constants.betray_payoff }}, 0</td>
-            <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
+            <td><b>You : {{Constants.betray_payoff}}</b><br> Them: {{ Constants.betrayed_payoff }}</td>
+            <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
         </tr>
     </table>
 

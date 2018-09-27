@@ -5,7 +5,8 @@ import random
 
 
 class Introduction(Page):
-    pass
+    def is_displayed(self):
+        return self.round_number <= 1
 
         
 class Decision(Page):
@@ -117,7 +118,7 @@ class Results(Page):
         self.player.participant_vars_dump = str(self.participant.vars)
 
 page_sequence = [
-    #Introduction,
+    Introduction,
     Decision,
     #ResultsWaitPage,
     Results

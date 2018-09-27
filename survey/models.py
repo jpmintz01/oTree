@@ -41,6 +41,8 @@ class Player(BasePlayer):
         choices=['Air Force', 'Army', 'Navy', 'Marine', 'Other'],
         label='What service are you a part of?',
         widget=widgets.RadioSelect)
+    
+    rank = models.StringField(label='What is your rank?')
 
     years_military_experience = models.IntegerField(
         label='How many years of military experience do you have? (include time in a military academy)',

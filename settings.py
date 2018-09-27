@@ -57,13 +57,19 @@ SESSION_CONFIGS = [
 #        'use_browser_bots': False,
 #        'num_rounds': 3,
 #    },
-
+#    {
+#        'name': 'rps',
+#        'display_name': "Rock Paper Scissors",
+#        'num_demo_participants': 1,
+#        'num_rounds': 10,
+#        'app_sequence': ['rps',],# 'payment_info'],
+#    },
     {
         'name': 'multi_game_test',
         'display_name': "Game Example",
         'num_demo_participants': 1,
         'num_rounds': 3,
-        'app_sequence': ['survey','prisoner_multiplayer', 'chicken','post_game_survey'],
+        'app_sequence': ['survey','prisoner_multiplayer', 'chicken', 'rps','post_game_survey'],
         #'app_sequence':random.shuffle(['prisoner_multiplayer', 'chicken']),
         #['survey','prisoner_multiplayer',],#'closing_comments'],
         'use_browser_bots': False,
