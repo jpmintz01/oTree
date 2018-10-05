@@ -10,6 +10,7 @@ class Introduction(Page):
 
 
 class Decision(Page):
+
     form_model = 'player'
     form_fields = ['decision']
 
@@ -41,11 +42,18 @@ class Results(Page):
             'opponent_decision': opponent.decision,
             'same_choice': me.decision == opponent.decision,
         }
-
+    
+class EndGame(Page):
+    
+    form_model = 'player'
+    form_fields = ['player_guess_adv_1_type']
+    def is_displayed(self):
+        return self.round_number == self.session.config['num_rounds']
 
 page_sequence = [
     Introduction,
     Decision,
     ResultsWaitPage,
-    Results
+    Results,
+    EndGame
 ]

@@ -2,14 +2,16 @@
 {% load otree static %}
 
 {% block title %}
-    Pre-Experiment Questionnaire
+    Game Introduction
 {% endblock %}
 
 {% block content %}
 
-    {% for field in form %}
-        {% formfield field %}
-    {% endfor %}
+    <p>
+        Get Ready to play!
+    </p>
+
+    {{initializing other players and waiting for other players}}
 
     {% next_button %}
 

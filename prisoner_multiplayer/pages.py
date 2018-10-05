@@ -116,10 +116,18 @@ class Results(Page):
 
         }
         self.player.participant_vars_dump = str(self.participant.vars)
-
+        
+class EndGame(Page):
+    
+    form_model = 'player'
+    form_fields = ['player_guess_adv_1_type']
+    def is_displayed(self):
+        return self.round_number == self.session.config['num_rounds']
+    
 page_sequence = [
     Introduction,
     Decision,
     #ResultsWaitPage,
-    Results
+    Results,
+    EndGame
 ]

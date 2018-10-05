@@ -56,38 +56,6 @@ Results
     {% endfor %}
 </table>
 
-
-<hr>
-
-
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Round</b></td>
-    {% for num in list_of_round_nums   %}
-    <tr>
-        <td>{{ num }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>You</b></td>
-    {% for day in my_decision_adv_2_total   %}
-    <tr>
-        <td>{{ day }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Competitor #2 ({{ player.adv_2_type }})</b></td>
-    {% for night in adv_2_decision_total   %}
-    <tr>
-        <td>{{ night }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<br>
-
-</div>
 <hr>
 My total payoff across rounds: {{ my_total_payoff }} <br>
 <hr>

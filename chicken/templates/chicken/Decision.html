@@ -2,13 +2,23 @@
 
 
 {% block title %}
-Your Choices 
 {% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
 
 <style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
     .highlight-row-on-hover:hover td {
         background-color: #fcf8e3;
     }
@@ -24,6 +34,7 @@ Your Choices
     }
     .inlineTable {
         display: inline-block;
+        vertical-align: top;
     }
     h4 {text-align:center;}
 
@@ -67,19 +78,58 @@ Your Choices
             }
         }, 200);
     });
+    $(document).ready(function() {
+        $("#flip").click(function(){
+            $("#panel").slideToggle("slow");
+        });
+    });
 </script>
 
 {% endblock %}
 
 
 {% block content %}
-<section>
-    <h3>Round: {{player.round_number}}</h3>
-    {% next_button %}
-</section>
 
-<hr>
-<h4> Competitor 1 ({{ player.adv_1_type }})</h4>
+
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable form-group required">
+
+    <div class="btn-group form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="3">    <h3>Round: <br>{{player.round_number}}</h3></th>
+                <th colspan="2"><h4> Competitor 1 ({{ player.adv_1_type }})</h4></th>
+            <tr>
+                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Competitor has made their choice</th>
+            </tr>
+
+            <tr>
+                <th>Straight</th>
+                <th>Swerve</th>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th rowspan="2"><span class="rotate90">You</span></th>
+                <th>       
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Straight" autocomplete="off"> Straight
+                    </label>
+                </th>
+                <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
+                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+            </tr>
+            <tr class="highlight-row-on-hover">
+                <th>
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Swerve" autocomplete="off"> Swerve
+                    </label>
+                </th>
+                <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
+                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
 <!-- Table history of choices for player and adversary 1 -->
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>Round</b></td>
@@ -122,49 +172,46 @@ Your Choices
     {% endfor %}
 </table>
 <br>
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable form-group required">
 
-    <div class="btn-group form-group required">
-        <table class="table table-bordered text-center" style="width: auto; margin: auto">
-            <tr>
-                <th colspan="2" rowspan="3"></th>
-                <th colspan="2">Competitor 1</th>
-            <tr>
-                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Competitor has made their choice</th>
-            </tr>
-
-            <tr>
-                <th>Straight</th>
-                <th>Swerve</th>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th rowspan="2"><span class="rotate90">You</span></th>
-                <th>       
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Straight" autocomplete="off"> Straight
-                    </label>
-                </th>
-                <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
-                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th>
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Swerve" autocomplete="off"> Swerve
-                    </label>
-                </th>
-                <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
-                <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
-            </tr>
-        </table>
-    </div>
-
-</div>
 
 
 <hr> <!-- begins section for adversary 2-->
-<h4> Competitor 2 ({{ player.adv_2_type }})</h4>
+
+<!-- selection table with buttons for adversary 1-->
+<div class="inlineTable btn-group form-group required">
+    <table class="table table-bordered text-center" style="width: auto; margin: auto">
+        <tr>
+            <th colspan="2" rowspan="3">    <h3>Round: <br>{{player.round_number}}</h3></th>
+            <th colspan="2"><h4> Competitor 2 ({{ player.adv_2_type }})</h4></th>
+        </tr>
+        <tr>
+            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has made their choice</th>
+        </tr>
+        <tr>
+            <th>Straight</th>
+            <th>Swerve</th>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th rowspan="2"><span class="rotate90">You</span></th>
+            <th>       
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Straight" autocomplete="off"> Straight
+                </label>
+            </th>
+            <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+        <tr class="highlight-row-on-hover">
+            <th>
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Swerve" autocomplete="off"> Swerve
+                </label>
+            </th>
+            <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
+            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+        </tr>
+    </table>
+</div>
 <!-- Table history of choices for player and adversary 2 -->
 <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
     <td><b>Round</b></td>
@@ -207,48 +254,15 @@ Your Choices
     {% endfor %}
 </table>
 <br>
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable btn-group form-group required">
-    <table class="table table-bordered text-center" style="width: auto; margin: auto">
-        <tr>
-            <th colspan="2" rowspan="3"></th>
-            <th colspan="2">Competitor 2</th>
-        </tr>
-        <tr>
-            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has made their choice</th>
-        </tr>
-        <tr>
-            <th>Straight</th>
-            <th>Swerve</th>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th rowspan="2"><span class="rotate90">You</span></th>
-            <th>       
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Straight" autocomplete="off"> Straight
-                </label>
-            </th>
-            <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
-            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th>
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Swerve" autocomplete="off"> Swerve
-                </label>
-            </th>
-            <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
-            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
-        </tr>
-    </table>
-</div>
+
 <hr>
 
 <br>
 {% next_button %}
 
 
-{% include Constants.instructions_template %}
+    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
 
 
 

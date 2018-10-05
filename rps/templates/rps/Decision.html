@@ -2,173 +2,147 @@
 
 
 {% block title %}
-<!--Your Choices -->
 {% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+
 <style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+    #panel {
+        padding: 50px;
+        display: none;
+    }
     .pattern {
         background: repeating-linear-gradient(45deg, green, blue 30px, green 30px, blue 60px);
-    }
-    .highlight-row-on-hover:hover td {
-        background-color: #fcf8e3;
-    }
-    .invalid-blink {
-        background-color: gray;
-    }
-    .record_table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .record_table tr:hover {
-        background: #fcf8e3;
-    }
-    .record_table td {
-        border: 1px solid #fcf8e3;
-    }
-    .highlight_row {
-        background: #fcf8e3;
-    }
-    .unhighlight_row {
-
-    }
-    .highlight-selected {
-        background-color: red;
-    }
-    .floatedTable {
-        float:left;
     }
     .inlineTable {
         display: inline-block;
         vertical-align: top;
     }
     h4 {text-align:center;}
-    .adv_1_DecisionIndicator {
-        animation: pulse .25s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        animation-delay: {{ adv_1_DelayTime }};
+    #overlay {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0; 
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
     }
-
-    .human_advisor_adv_1_Indicator {
-        animation: pulse .25s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        animation-delay: {{ human_DelayTime_adv_1 }};
-    }
-    .ai_advisor_adv_1_Indicator {
-        animation: pulse .25s;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-        animation-delay: {{ AI_DelayTime_adv_1 }};
-    }
-    @keyframes pulse {
-        0% {
-            color: white;
-            background-color: white;
-
-        }
-        100% {
-            background-color: orange;
-            color: black;
-        }
+    #overlay_text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color: white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
     }
 </style>
 
 {% endblock %}
 
 {% block scripts %}
-
 <script>
-    var humanColor = "green";
-    var aiColor = "blue";
-    var black = "black"
-    var decisionVsAdv1 = document.getElementById("decision_vs_adv_1").value;
-    function setBackground(){
-        document.body.style.backgroundColor = "red";
-    }
-    function randInt(min, max) {
-        return Math.floor(Math.random() * (max-min + 1) + min)
-    }
-    function setHumanColor(id) {
-        document.getElementById(id).style.backgroundColor=humanColor;
+    //var decisionVsAdv1 = document.getElementById("decision_vs_adv_1").value;
 
-    }
-    function setHumanAdvice(id) {
-        document.getElementById(id).style.color= "black";
-    }
-    function setAIColor(id) {
-        document.getElementById(id).style.backgroundColor=aiColor;
-    }
-    function setBothColor(id) {
-        document.getElementById(id).style.backgroundColor= "white";
-        document.getElementById(id).className="pattern";
-    }
-    function changeRowColor(id) {
-        if (document.getElementById(id).checked) {
-            document.getElementByD
-        }
-    }
-    function adv_1 () { //creates the effect of AI and human advisors
-        var ai_advice_v_adv_1 = "{{ AI_advice_v_adv_1 }}"
-        var human_advice_time = randInt(2,10)*1000;
-        var ai_advice_time = randInt(0,3)*1000;
-        var human_advice_v_adv_1 = "{{ human_advice_v_adv_1 }}"
-        if (human_advice_v_adv_1 == 'Rock' && ai_advice_v_adv_1 == 'Rock') {
-            //            setAIColor("adv_1_Rock");
-            setTimeout(setAIColor, ai_advice_time,"adv_1_Rock");
-            setTimeout(setBothColor, human_advice_time,"adv_1_Rock");
-            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
-        } else if (human_advice_v_adv_1  == 'Paper' && ai_advice_v_adv_1 == 'Paper') {
-            //            setAIColor("adv_1_Paper");
-            setTimeout(setAIColor, ai_advice_time,"adv_1_Paper");
-            setTimeout(setBothColor, human_advice_time,"adv_1_Paper");
-            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
-        } else if (human_advice_v_adv_1  == 'Scissors' && ai_advice_v_adv_1 == 'Scissors') {   
-            //            setAIColor("adv_1_Scissors");
-            setTimeout(setAIColor, ai_advice_time,"adv_1_Scissors");
-            setTimeout(setBothColor, human_advice_time,"adv_1_Scissors");
-            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+    //    function randInt(min, max) {
+    //        return Math.floor(Math.random() * (max-min + 1) + min)
+    //    }
+
+    function show_adv (e){
+        $(':button').prop('disabled', true);
+        $(e).prop('disabled', false);
+        if ('{{ adv_1_decision }}' == "Rock") {
+            $("#adv_button_rock").prop('disabled', false);
+            $("#adv_button_rock").show();
+
+        } else if ('{{ adv_1_decision }}'  == "Paper") {
+            $("#adv_button_paper").prop('disabled', false);
+            $("#adv_button_paper").show();
         } else {
-            if (human_advice_v_adv_1 == 'Rock') {
-                //                setHumanColor('adv_1_Rock');
-                setTimeout(setHumanColor, human_advice_time, "adv_1_Rock");
-                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
-            } else if (human_advice_v_adv_1 == 'Paper'){
-                //                setHumanColor('adv_1_Paper');
-                setTimeout(setHumanColor, human_advice_time, "adv_1_Paper");
-                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
-            } else if (human_advice_v_adv_1 == 'Scissors'){
-//                setHumanColor('adv_1_Scissors');
-                setTimeout(setHumanColor, human_advice_time, "adv_1_Scissors");
-                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
-            } 
-            if (ai_advice_v_adv_1 == 'Rock') {
-                setAIColor('adv_1_Rock');    
-            } else if (ai_advice_v_adv_1 == 'Paper'){
-                setAIColor('adv_1_Paper');      
-            } else if (ai_advice_v_adv_1 == 'Scissors'){
-                setAIColor('adv_1_Scissors');                         
-            } 
+            $("#adv_button_scissors").prop('disabled', false);
+            $("#adv_button_scissors").show();           
         }
+    }
+
+    function show_choice (e){ //e is participant button
+        $(e).find('i').remove();
+        console.log(e);
+        if ($(e).text().trim() == 'Rock') {
+            $(e).html($('<i/>',{class:'far fa-hand-rock fa-5x'})).append('Rock');
+            $("#Paper").hide();
+            $("#Scissors").hide();
+        }
+        else if ($(e).text().trim() == 'Paper') {
+            $(e).html($('<i/>',{class:'far fa-hand-paper fa-5x'})).append('Paper');
+            $("#Rock").hide();
+            $("#Scissors").hide();
+        }
+        else {
+            $(e).html($('<i/>',{class:'far fa-hand-scissors fa-5x fa-flip-horizontal'})).append('Scissors');
+            $("#Paper").hide();
+            $("#Rock").hide();
+        }
+    }
+
+    function select_winner (e) {//e is participant button
+        if (('{{ adv_1_decision }}' == "Rock") && ($(e).text().trim() == 'Paper')||//or
+            (('{{ adv_1_decision }}' == "Paper") && ($(e).text().trim() == 'Scissors'))||//or
+            (('{{ adv_1_decision }}' == "Scissors") && ($(e).text().trim() == 'Rock'))) {
+            $(e).css('background-color','green');
+            $("[id^=adv_button_]").css("background-color", "gray").hide(1500);
+            return "player";
+        } else if (('{{ adv_1_decision }}' == "Rock") && ($(e).text().trim() == 'Scissors')||//or
+                   (('{{ adv_1_decision }}' == "Paper") && ($(e).text().trim() == 'Rock'))||//or
+                   (('{{ adv_1_decision }}' == "Scissors") && ($(e).text().trim() == 'Paper'))) {
+            $("[id^=adv_button_]").css("background-color", "red");
+            return "adversary";
+
+        } else {
+            $(e).css('background-color','gray');
+            $("[id^=adv_button_]").css("background-color", "gray");
+            return "draw";
+        }
+    }
+
+    function win_animation (w, e){ //w is a string of winner, e is player button
+        if (w == "adversary") { //adversary won
+            document.getElementById("overlay_text").innerHTML="You lost!";
+        } else if (w == "player") { //player won
+            document.getElementById("overlay_text").innerHTML="You won!";
+        } else { //draw
+
+            document.getElementById("overlay_text").innerHTML="It's a draw.";
+        }
+        document.getElementById("overlay").style.display = "block";
 
     }
-    $(document).ready(function () { // highlights the row when the radio button is selected.
-        $('.record_table tr').click(function (event) {
-            if (event.target.type !== 'radio') {
-                $(':radio', this).trigger('click');
-            }
+    $(document).ready(function () { 
+        $("#flip").click(function(){ //toggles instruction bar
+            $("#panel").slideToggle("slow");
         });
-
-        $("input[type='radio']").change(function (e) {
-            e.stopPropagation();     
-            if ($(this).is(":checked")) {
-                $(this).closest('tr').siblings('tr').removeClass("highlight_row");
-                $(this).closest('tr').addClass("highlight_row");
-            }
-        });   
+        $("button").click(function(){ // when any button is clicked (only participant choices are visible)
+            show_choice(this); // animate player's choice
+            document.getElementById("my_hidden_value").value = $(this).attr("id"); //set the value of the player's choice to send to oTree/django
+            setTimeout(function () {show_adv(this);},1000); //show the adversary's choice (maybe include a delay here)
+            winner = select_winner(this); // choose a winner (no display here)
+            setTimeout(function() {win_animation (winner, this);},1500); // animate the win
+            setTimeout(function() { $('form').submit(); }, 5000);//delay for a moment before submitting to let player see. can remove this once win anmiation is coded
+        });
     });
+
 
 </script>
 
@@ -176,74 +150,39 @@
 
 
 {% block content %}
-<body onload="adv_1()">
+<body>
 
+    <h2 align="center">Round: {{player.round_number}} </h2>
 
-<!--<hr>-->
-    <!--    <h4> Competitor 1 </h4>-->
-
-
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <tr><th style="color: white" bgcolor="green">Human expert's advice to you:</th><th id="human_advice" style="color:white"> {{ human_advice_v_adv_1 }}</th></tr>
-        <tr><th style="color: white" bgcolor="blue">AI's advice to you: </th><th id="ai_advice" style:"color:white">{{ AI_advice_v_adv_1 }}</th></tr>
-    </table>
+    <button align="center" type="button" class="btn btn-secondary active" id="Rock" autocomplete="off">
+        <i class="far fa-hand-rock fa-3x"></i>   Rock  
+    </button>
     <br>
 
+    <button align="center" type="button" class="btn btn-secondary active" id="Paper"  autocomplete="off">
+        <i class="far fa-hand-paper fa-3x"></i>   Paper  
+    </button>
+    <br>
+    <button align="center" type="button" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
+        <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i> Scissors
+    </button>
+    <button id="adv_button_rock" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-rock fa-5x"></i>  Rock
+    </button>
 
-    <!-- selection table with buttons for adversary 1-->
-    <div class="inlineTable form-group required">
+    <button id="adv_button_paper" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-paper fa-5x"></i>  Paper
+    </button>
 
-        <div class="btn-group form-group required">
-            <table class="table table-bordered text-center" style="width: auto; margin: auto">
-                <tr>
-                    <th colspan="2" rowspan="3" style="font-size:200%;"> Round: <br> {{player.round_number}} </th>
-                    <th colspan="3">Competitor 1 ({{ player.adv_1_type }})</th>
-                </tr>
-                <tr>
-                    <th style="color:white" class="adv_1_DecisionIndicator" colspan="3">Competitor has selected their choice</th>
-                </tr>
-                <tr>
-                    <th>Rock</th>
-                    <th>Paper</th>
-                    <th>Scissors</th>
-                </tr>
-                <tr id="adv_1_row_rock" class="highlight-row-on-hover">
-                    <th rowspan="4"><span class="rotate90">You</span></th>
-                </tr>
-                <tr class="highlight-row-on-hover">
-                    <th id="adv_1_Rock">       
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Rock" autocomplete="off"> Rock
-                        </label>
-                    </th>
-                    <td>Draw<br>{{Constants.draw_payoff}}, {{Constants.draw_payoff}}</td>
-                    <td>Lose<br>{{ Constants.lose_payoff }}, {{Constants.win_payoff}}</td>
-                    <td>Win!<br>{{Constants.win_payoff}}, {{Constants.lose_payoff}}</td>
-                </tr>
-                <tr class="highlight-row-on-hover">
-                    <th id="adv_1_Paper">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Paper" autocomplete="off"> Paper
-                        </label>
-                    </th>
-                    <td>Win!<br>{{Constants.win_payoff}}, {{Constants.lose_payoff}}</td>
-                    <td>Draw<br>{{ Constants.draw_payoff }}, {{Constants.draw_payoff}}</td>
-                    <td>Lose<br>{{Constants.lose_payoff}}, {{Constants.win_payoff}}</td>
-                </tr>
-                <tr class="highlight-row-on-hover">
-                    <th id="adv_1_Scissors">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Scissors" autocomplete="off"> Scissors
-                        </label>
-                    </th>
-                    <td>Lose<br>{{Constants.lose_payoff}}, {{Constants.win_payoff}}</td>
-                    <td>Win!<br>{{ Constants.win_payoff }}, {{Constants.lose_payoff}}</td>
-                    <td>Draw<br>{{Constants.draw_payoff}}, {{Constants.draw_payoff}}</td>
-                </tr>
-            </table>
-        </div>
-
+    <button id="adv_button_scissors" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-scissors fa-5x fa-flip-horizontal"></i>  Scissors
+    </button>
+    <div id="overlay" onclick="off()">
+        <div id="overlay_text">Overlay Text</div>
     </div>
+    <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
+
+    <hr>
     <!-- Table history of choices for player and adversary 1 -->
     <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
         <td><b>Round</b></td>
@@ -269,17 +208,9 @@
         </tr>
         {% endfor %}
     </table>
-    <br>
-    <br>
-    {% next_button %}
 
-<!--
-
-    {% include Constants.instructions_template %}
--->
-
-
-
-
-
-    {% endblock %}
+    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
+</body>
+{{ form.decision_vs_adv_1.errors }}
+{% endblock %}

@@ -3,16 +3,32 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
-
+def adversary_choice(self):
+    me = self.player
+    choice_list = ['Rock','Paper','Scissors']
+    #if me.adv_1_type == 'human': #if adv = human
+        
+    me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
+#    else: # this is the AI 'TFT
+#        if me.round_number == 1: #
+#            me.decision_of_adv_1 = random.choice(choice_list)
+#        else:
+#            if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
+#                me.decision_of_adv_1 = 'Paper' #beat his last move
+#            elif me.in_round(last_round).decision_vs_adv_1 == 'Paper':
+#                me.decision_of_adv_1 = 'Scissors'
+#            else:
+#                me.decision_of_adv_1 = 'Rock'
+                    
 class Introduction(Page):
     def is_displayed(self):
         return self.round_number == 1
-    pass
 
         
 class Decision(Page):
     def is_displayed(self):
         return self.round_number <= self.session.config['num_rounds']
+    
     form_model = 'player'
     def get_form_fields(self):
         fields = []
@@ -22,12 +38,11 @@ class Decision(Page):
             #form_fields = ['decision_vs_adv_1', 'decision_vs_adv_2']
         
         #form_fields = ['decision_vs_adv_{}'.format(i) for i in range(1, Constants.num_adversaries)]
-
-                
     def vars_for_template(self):
         me = self.player
-        
-        last_round = max(0,self.round_number-1)
+        last_round = max(0, self.round_number-1)
+ 
+                    
         def ai_advice_adv_1(self):
             if me.round_number == 1: #
                 return 'No history. You choose.'
@@ -38,6 +53,10 @@ class Decision(Page):
                     return 'Scissors'
                 else:
                     return 'Rock'
+                
+        
+        adversary_choice(self);
+        
         return {
             'human_advice_v_adv_1': random.choice(['Rock','Paper','Scissors']),
             'human_DelayTime_adv_1': str(random.randint(1,10)) + 's', 
@@ -51,52 +70,28 @@ class Decision(Page):
             'my_payoff_adv_1': me.payoff_vs_adv_1,
             'adv_1_decision': me.decision_of_adv_1,
             'adv_1_payoff': me.payoff_of_adv_1,
-            
-#            'adv_2_DelayTime': str(random.randint(1,3)) + 's',
-#            'my_decision_adv_2': me.decision_vs_adv_2,
-#            'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()[:-1]],
-#            'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()[:-1]],
-#            'my_payoff_adv_2': me.payoff_vs_adv_2,
-#            'adv_2_decision': me.decision_of_adv_2,
-#            'adv_2_payoff': me.payoff_of_adv_2,
-            
             'my_total_payoff': me.round_payoff,
+            
            
         }
    
     #timeout_seconds = 100
                         
     def before_next_page(self):
-        last_round = max(1, self.round_number-1)
         me = self.player
-        choice_list = ['Rock','Paper','Scissors']
-        if me.adv_1_type == 'human': #if adv = human
-            me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
-        else: # this is the AI 'TFT
-            if me.round_number == 1: #
-                me.decision_of_adv_1 = random.choice(choice_list)
-            else:
-                if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
-                    me.decision_of_adv_1 = 'Paper' #beat his last move
-                elif me.in_round(last_round).decision_vs_adv_1 == 'Paper':
-                    me.decision_of_adv_1 = 'Scissors'
-                else:
-                    me.decision_of_adv_1 = 'Rock'
-                   
-#        if me.adv_2_type == 'human': #if adv = human
-#            me.decision_of_adv_2 = random.choice(choice_list)#define human strategy (random choice)
+#        choice_list = ['Rock','Paper','Scissors']
+#        if me.adv_1_type == 'human': #if adv = human
+#            me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
 #        else: # this is the AI 'TFT
-#            if me.round_number == 1: # 
-#                me.decision_of_adv_2 = random.choice(choice_list)
+#            if me.round_number == 1: #
+#                me.decision_of_adv_1 = random.choice(choice_list)
 #            else:
 #                if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
-#                    me.decision_of_adv_2 = 'Paper' #beat his last move
+#                    me.decision_of_adv_1 = 'Paper' #beat his last move
 #                elif me.in_round(last_round).decision_vs_adv_1 == 'Paper':
-#                    me.decision_of_adv_2 = 'Scissors'
+#                    me.decision_of_adv_1 = 'Scissors'
 #                else:
-#                    me.decision_of_adv_2 = 'Rock'
-                   
-
+#                    me.decision_of_adv_1 = 'Rock'
         me.set_payoff()
         
 #class ResultsWaitPage(WaitPage):
@@ -137,9 +132,17 @@ class Results(Page):
         }
         self.player.participant_vars_dump = str(self.participant.vars)
 
+        
+class EndGame(Page):
+    form_model = 'player'
+    form_fields = ['player_guess_adv_1_type']    
+    def is_displayed(self):
+        return self.round_number == self.session.config['num_rounds']
+    
 page_sequence = [
     Introduction,
     Decision,
     #ResultsWaitPage,
-    #Results
+    Results,
+    EndGame
 ]

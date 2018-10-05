@@ -1,0 +1,350 @@
+{% extends "global/Page.html" %} {% load otree static %}
+
+
+{% block title %}
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+
+    .pattern {
+        background: repeating-linear-gradient(45deg, green, blue 30px, green 30px, blue 60px);
+    }
+    .highlight-row-on-hover:hover td {
+        background-color: #fcf8e3;
+    }
+    .invalid-blink {
+        background-color: gray;
+    }
+    .record_table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .record_table tr:hover {
+        background: #fcf8e3;
+    }
+    .record_table td {
+        border: 1px solid #fcf8e3;
+    }
+    .highlight_row {
+        background: #fcf8e3;
+    }
+    .unhighlight_row {
+
+    }
+    .highlight-selected {
+        background-color: red;
+    }
+    .floatedTable {
+        float:left;
+    }
+    .inlineTable {
+        display: inline-block;
+        vertical-align: top;
+    }
+    h4 {text-align:center;}
+    h4 {text-align:center;}
+/*
+    .adv_1_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_1_DelayTime }};
+    }
+
+    .human_advisor_adv_1_Indicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ human_DelayTime_adv_1 }};
+    }
+*/
+/*
+    .ai_advisor_adv_1_Indicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ AI_DelayTime_adv_1 }};
+    }
+*/
+    @keyframes pulse {
+        0% {
+            color: white;
+            background-color: white;
+
+        }
+        100% {
+            background-color: orange;
+            color: black;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    var humanColor = "green";
+    var aiColor = "blue";
+    var black = "black";
+    var decisionVsAdv1 = document.getElementById("decision_vs_adv_1").value;
+
+    function setBackground(){
+        document.body.style.backgroundColor = "red";
+    }
+    function randInt(min, max) {
+        return Math.floor(Math.random() * (max-min + 1) + min)
+    }
+    function setHumanColor(id) {
+        document.getElementById(id).style.backgroundColor=humanColor;
+
+    }
+    function setHumanAdvice(id) {
+        document.getElementById(id).style.color= "black";
+    }
+    function setAIColor(id) {
+        document.getElementById(id).style.backgroundColor=aiColor;
+    }
+    function setBothColor(id) {
+        document.getElementById(id).style.backgroundColor= "white";
+        document.getElementById(id).className="pattern";
+    }
+    function changeRowColor(id) {
+        if (document.getElementById(id).checked) {
+            document.getElementByD
+        }
+    }
+//    function adv_1 () { //creates the effect of AI and human advisors
+//
+//        var ai_advice_v_adv_1 = "{{ AI_advice_v_adv_1 }}"
+//        var human_advice_time = randInt(2,10)*1000;
+//        var ai_advice_time = randInt(0,3)*1000;
+//        var human_advice_v_adv_1 = "{{ human_advice_v_adv_1 }}"
+//        if (human_advice_v_adv_1 == 'Rock' && ai_advice_v_adv_1 == 'Rock') {
+//            //            setAIColor("adv_1_Rock");
+//            setTimeout(setAIColor, ai_advice_time,"adv_1_Rock");
+//            setTimeout(setBothColor, human_advice_time,"adv_1_Rock");
+//            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//        } else if (human_advice_v_adv_1  == 'Paper' && ai_advice_v_adv_1 == 'Paper') {
+//            //            setAIColor("adv_1_Paper");
+//            setTimeout(setAIColor, ai_advice_time,"adv_1_Paper");
+//            setTimeout(setBothColor, human_advice_time,"adv_1_Paper");
+//            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//        } else if (human_advice_v_adv_1  == 'Scissors' && ai_advice_v_adv_1 == 'Scissors') {   
+//            //            setAIColor("adv_1_Scissors");
+//            setTimeout(setAIColor, ai_advice_time,"adv_1_Scissors");
+//            setTimeout(setBothColor, human_advice_time,"adv_1_Scissors");
+//            setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//        } else {
+//            if (human_advice_v_adv_1 == 'Rock') {
+//                //                setHumanColor('adv_1_Rock');
+//                setTimeout(setHumanColor, human_advice_time, "adv_1_Rock");
+//                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//            } else if (human_advice_v_adv_1 == 'Paper'){
+//                //                setHumanColor('adv_1_Paper');
+//                setTimeout(setHumanColor, human_advice_time, "adv_1_Paper");
+//                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//            } else if (human_advice_v_adv_1 == 'Scissors'){
+//                //                setHumanColor('adv_1_Scissors');
+//                setTimeout(setHumanColor, human_advice_time, "adv_1_Scissors");
+//                setTimeout(setHumanAdvice, human_advice_time, "human_advice");
+//            } 
+//            if (ai_advice_v_adv_1 == 'Rock') {
+//                setAIColor('adv_1_Rock');    
+//            } else if (ai_advice_v_adv_1 == 'Paper'){
+//                setAIColor('adv_1_Paper');      
+//            } else if (ai_advice_v_adv_1 == 'Scissors'){
+//                setAIColor('adv_1_Scissors');                         
+//            } 
+//        }
+//
+//    }
+    //var advOneDecision = '{{ adv_1_decision }}'; //not needed for if loop anymore
+    //console.log(advOneDecision); //debug code
+
+    $(document).ready(function () { 
+//        $('.record_table tr').click(function (event) {// highlights the row when the radio button is selected.
+//            if (event.target.type !== 'radio') {
+//                $(':radio', this).trigger('click');
+//            }
+//        });
+//        $("input[type='radio']").change(function (e) {
+//            e.stopPropagation();     
+//            if ($(this).is(":checked")) {
+//                $(this).closest('tr').siblings('tr').removeClass("highlight_row");
+//                $(this).closest('tr').addClass("highlight_row");
+//            }
+//        });   
+
+        $("#flip").click(function(){//toggles instructions
+            $("#panel").slideToggle("slow");
+        });
+
+        //$("button[name=adv_button]").hide();
+        $("button").click(function(){
+            //$("button[name=adv_button]").show();
+            //document.getElementByName("adv_button").style.backgroundColor= "red";
+            if ('{{ adv_1_decision }}' == "Rock") {
+                //console.log("rock")
+                alert("rock");
+                //document.getElementById("adv_button_icon").className = "far fa-hand-rock fa-3x";
+                //$("i[name=adv_button_icon]").attr('class', 'far fa-hand-rock fa-3x');
+                $("#adv_button_rock").show(2500)//.delay(1000);
+            } else if ('{{ adv_1_decision }}'  == "Paper") {
+                //console.log("paper")
+                alert("paper");
+                //document.getElementById("adv_button_icon").className = "far fa-hand-paper fa-3x";
+                //$("i[name=adv_button_icon]").attr('class', 'far fa-hand-paper fa-3x');
+                $("#adv_button_paper").show(2500)//.delay(1000));
+                //document.getElementById("adv_button_paper").style.display = "";
+            } else {
+                //console.log("scissors")
+                alert("scissors");
+                //document.getElementById("adv_button_icon").className = "far fa-hand-scissors fa-3x fa-flip-horizontal";
+                //$("i[name=adv_button_icon]").attr('class', 'far fa-hand-rock fa-3x');
+                $("#adv_button_scissors#").show(2500)//.delay(1000);
+            }
+        });
+    });
+
+
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+<body onload="adv_1()">
+    <h2>Round: {{player.round_number}} </h2>
+    <button class="btn btn-secondary active" name="decision_vs_adv_1" id="rock_button" value="Rock" autocomplete="off">
+        <i class="far fa-hand-rock fa-3x"></i> Rock
+    </button>
+
+    <button id="adv_button_rock" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-rock fa-3x"></i> Adversary Rock
+    </button>
+    <button id="adv_button_paper" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-paper fa-3x"></i> Adversary Paper
+    </button>
+    <button id="adv_button_scissors" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+        <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i> Adversary Scissors
+    </button>
+
+    <br>
+    <button class="btn btn-secondary active" name="decision_vs_adv_1" id="paper_button" value="Paper" autocomplete="off">
+        <i class="far fa-hand-paper fa-3x"></i> Paper
+    </button>
+    <br>
+    <button class="btn btn-secondary active" name="decision_vs_adv_1" id="scissors_button" value="Scissors" autocomplete="off">
+        <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i> Scissors
+    </button>
+    <br>
+<!--
+
+
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <tr><th style="color: white" bgcolor="green">Human expert's advice to you:</th><th id="human_advice" style="color:white"> {{ human_advice_v_adv_1 }}</th></tr>
+        <tr><th style="color: white" bgcolor="blue">AI's advice to you: </th><th id="ai_advice" style="color:white">{{ AI_advice_v_adv_1 }}</th></tr>
+    </table>
+    <br>
+
+-->
+
+
+    <!-- selection table with buttons for adversary 1-->
+<!--
+    <div class="inlineTable form-group required">
+
+        <div class="btn-group form-group required">
+            <table class="table table-bordered text-center" style="width: auto; margin: auto">
+                <tr>
+                    <th colspan="2" rowspan="3" style="font-size:200%;"> Round: <br> {{player.round_number}} </th>
+                    <th colspan="3">Competitor 1 ({{ player.adv_1_type }})</th>
+                </tr>
+                <tr>
+                    <th style="color:white" class="adv_1_DecisionIndicator" colspan="3">Competitor has selected their choice</th>
+                </tr>
+                <tr>
+                    <th>Rock</th>
+                    <th>Paper</th>
+                    <th>Scissors</th>
+                </tr>
+                <tr id="adv_1_row_rock" class="highlight-row-on-hover">
+                    <th rowspan="4"><span class="rotate90">You</span></th>
+                </tr>
+                <tr class="highlight-row-on-hover">
+                    <th id="adv_1_Rock">       
+                        <button class="btn btn-secondary active" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Rock" autocomplete="off"><i class="far fa-hand-rock fa-3x"></i> Rock </button>
+                    </th>
+                    <td>Draw<br>{{Constants.draw_payoff}}, {{Constants.draw_payoff}}</td>
+                    <td>Lose<br>{{ Constants.lose_payoff }}, {{Constants.win_payoff}}</td>
+                    <td>Win!<br>{{Constants.win_payoff}}, {{Constants.lose_payoff}}</td>
+                </tr>
+                <tr class="highlight-row-on-hover">
+                    <th id="adv_1_Paper">
+                        <button class="btn btn-secondary active" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Paper" autocomplete="off"><i class="far fa-hand-paper fa-3x"></i> Paper
+                        </button>
+                    </th>
+                    <td>Win!<br>{{Constants.win_payoff}}, {{Constants.lose_payoff}}</td>
+                    <td>Draw<br>{{ Constants.draw_payoff }}, {{Constants.draw_payoff}}</td>
+                    <td>Lose<br>{{Constants.lose_payoff}}, {{Constants.win_payoff}}</td>
+                </tr>
+                <tr class="highlight-row-on-hover">
+                    <th id="adv_1_Scissors">
+                        <button class="btn btn-secondary active" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Scissors" autocomplete="off"><i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i> Scissors
+                        </button>
+                    </th>
+                    <td>Lose<br>{{Constants.lose_payoff}}, {{Constants.win_payoff}}</td>
+                    <td>Win!<br>{{ Constants.win_payoff }}, {{Constants.lose_payoff}}</td>
+                    <td>Draw<br>{{Constants.draw_payoff}}, {{Constants.draw_payoff}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+-->
+    <!-- Table history of choices for player and adversary 1 -->
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Round</b></td>
+        {% for num in list_of_round_nums   %}
+        <tr>
+            <td>{{ num }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>You</b></td>
+        {% for day in my_decision_adv_1_total   %}
+        <tr>
+            <td>{{ day }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Competitor</b></td>
+        {% for night in adv_1_decision_total   %}
+        <tr>
+            <td>{{ night }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
+</body>
+{% endblock %}

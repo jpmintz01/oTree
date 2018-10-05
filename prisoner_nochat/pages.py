@@ -64,7 +64,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds
+        return self.round_number == self.session.config['num_rounds']
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
@@ -85,11 +85,17 @@ class Results(Page):
             #'my_id_hash': (hash(self.participant.code) % 2),
         }
 
-
+class EndGame(Page):
+    
+    form_model = 'player'
+    form_fields = ['player_guess_adv_1_type']
+    def is_displayed(self):
+        return self.round_number == self.session.config['num_rounds']
 
 page_sequence = [
     Introduction,
     Decision,
     ResultsWaitPage,
-    Results
+    Results,
+    EndGame
 ]

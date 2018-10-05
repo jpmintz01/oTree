@@ -2,127 +2,107 @@
 {% load otree static %}
 
 {% block title %}
-Your Choice
 {% endblock %}
 
 {% block scripts %}
 <script>
-
-
+    var feelings = ["Do as I say, or I'll punish you.", "I accept your last proposal.", "I don't accept your proposal.", "That's not fair.",  "I don't trust you.","Excellent!", "Sweet. We are getting rich.", "Give me another chance.", "I forgive you.",  "I'm changing my strategy.", "We can both do better than this.", "Curse you.","You betrayed me.", "You will pay for this!", "In your face!" ];
+    $(document).ready(function() {
+        $("#flip").click(function(){ //instructions flip
+            $("#panel").slideToggle("slow");
+        });
+        var maxHeight = $("#checkbox_cell").height();
+        $(".otree-chat").css("height","100%");
+        $(".otree-chat__messages").css("height",maxHeight);
+        $(".otree-chat__input").hide();
+        $('.otree-chat__btn-send').hide();
+        $("#add_text_to_chat").click( function(){
+            var favorite = [];
+            $.each($("input[name='feeling']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+            $('.otree-chat__input').val(favorite);
+            $('.otree-chat__btn-send').click();
+            $.each($("input[name='feeling']").prop("checked", false));
+        })
+    });
 </script>
 {% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 
 <style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+    #panel {
+        padding: 50px;
+        display: none;
+    }
     .highlight-row-on-hover:hover td {
         background-color: #fcf8e3;
     }
-
+    .container {
+        height: 100%;
+    }
     h4 {text-align:center;}
 </style>
-<style>
-    .dropbtn {
-        background-color: #3498DB;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-    }
 
-    /* Dropdown button on hover & focus */
-    .dropbtn:hover, .dropbtn:focus {
-        background-color: #2980B9;
-    }
-
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    /* Links inside the dropdown */
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-    /* Change color of dropdown links on hover */
-    .dropdown-content a:hover {background-color: #ddd}
-
-    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-    .show {display:block;}
-</style>
-<style>
-.otree-chat {
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin: 30px 0 0 0;
-}
-.otree-chat__messages {
-    height: 200px;
-    overflow: auto;
-    background: #eee;
-    margin: 2px 0 5px 0;
-}
-
-.otree-chat__nickname {
-    display: inline-block;
-    color: #C07A36;
-    width: 150px;
-    font-weight: bold;
-}
-</style>
 {% endblock %}
 
 {% block content %}
 
 
-<div class="form-group required">
-    <table class="table table-bordered text-center" style="width: auto; margin: auto">
-        <tr>
-            <th colspan="2" rowspan="2"></th>
-            <th colspan="2">Competitor</th>
-        </tr>
-        <tr>
-            <th>Cooperate</th>
-            <th>Defect</th>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th rowspan="2"><span class="rotate90">You</span></th>
-            <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">I will cooperate</button></td>
-            <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
-            <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <td><button name="decision" value="Defect" class="btn btn-primary btn-large">I will defect</button></td>
-            <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
-            <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
-        </tr>
-    </table>
+<div align="center" class="form-group required">
+
+    <button name="decision" value="Cooperate" class="btn btn-primary btn-large"><i class="far fa-handshake fa-5x "></i><br>I will Cooperate</button>
+    <button name="decision" value="Defect" class="btn btn-primary btn-large"><i class="far fa-thumbs-down fa-5x "></i><br>I will Defect</button>
 </div>
+<br>
+
+<table align="center">
+    <tr align="center">
+        <th>Choices</th>
+        <th>Chat</th>
+    <tr>
+        <td width="40%" id="checkbox_cell">
+            <div id="checkboxes" class="text-left">
+                <ul>
+                    <input type="checkbox" value="Do as I say, or I'll punish you." name="feeling"> Do as I say, or I'll punish you.<br>
+                    <input type="checkbox" value="I accept your last proposal." name="feeling"> I accept your last proposal.<br>
+                    <input type="checkbox"  value="I don't accept your proposal." name="feeling"> I don't accept your proposal.<br>
+                    <input type="checkbox"  value="That's not fair." name="feeling"> That's not fair.<br>
+                    <input type="checkbox"  value="I don't trust you." name="feeling"> I don't trust you.<br>
+                    <input type="checkbox"  value="Excellent!" name="feeling"> Excellent!<br>
+                    <input type="checkbox"  value="Sweet. We are getting rich." name="feeling"> Sweet. We are getting rich.<br>
+                    <input type="checkbox"  value="Give me another chance." name="feeling"> Give me another chance.<br>
+                    <input type="checkbox"  value="I forgive you." name="feeling"> I forgive you.<br>
+                    <input type="checkbox"  value="I'm changing my strategy." name="feeling"> I'm changing my strategy.<br>
+                    <input type="checkbox" value="We can both do better than this."  name="feeling"> We can both do better than this.<br>
+                    <input type="checkbox" value="Curse you."  name="feeling"> Curse you.<br>
+                    <input type="checkbox"  value="You betrayed me." name="feeling"> You betrayed me.<br>
+                    <input type="checkbox"  value="You will pay for this!" name="feeling"> You will pay for this!<br> 
+                    <input type="checkbox"  value="In your face!" name="feeling"> In your face!<br>
+                </ul>
+                <button type="button" class="btn btn-secondary active" id="add_text_to_chat" style="background-color: green; float:right;"><i class="fas fa-arrow-circle-right fa-3x "></i>Send</button>
+            </div>
+        </td>
+        <td width="60%" height="1px">{% chat %}
+        </td>
+    </tr>
+</table>
+
+
+
 
 <br>
-<p>Here you can chat with the other participant.</p>
 
-
-{% chat %}
-
-
-{% include Constants.instructions_template %}
+<div id="flip">Click for a reminder on Instructions</div> 
+<div id="panel">{% include Constants.instructions_template %}</div>
 
 {% endblock %}

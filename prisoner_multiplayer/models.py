@@ -134,7 +134,12 @@ class Player(BasePlayer):
         initial='AI'
     )
     ########## end adversary #2
-
+    player_guess_adv_1_type = models.StringField(
+        choices=['Simple Algorithm', 'Artificial Intelligence'],
+        label='What type of machine were you just playing with?',
+        widget=widgets.RadioSelect
+    )
+    
     round_payoff = models.CurrencyField(
         choices=currency_range(c(0), c(1000), c(1)),
         initial=c(0)

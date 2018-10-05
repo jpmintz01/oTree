@@ -36,6 +36,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
+        
+    player_guess_adv_1_type = models.StringField(
+        choices=['Simple Algorithm', 'Artificial Intelligence'],
+        label='What type of machine were you just playing with?',
+        widget=widgets.RadioSelect
+    )
+
     decision = models.StringField(
         choices=['Cooperate', 'Defect'],
         doc="""This player's decision""",

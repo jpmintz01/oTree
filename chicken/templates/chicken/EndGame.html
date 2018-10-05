@@ -2,15 +2,19 @@
 {% load otree static %}
 
 {% block title %}
-    Pre-Experiment Questionnaire
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block styles %}
 {% endblock %}
 
 {% block content %}
-
     {% for field in form %}
         {% formfield field %}
     {% endfor %}
 
-    {% next_button %}
-
+{% next_button %}
 {% endblock %}

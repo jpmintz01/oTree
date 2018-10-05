@@ -6,8 +6,21 @@
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 
 <style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+
     .highlight-row-on-hover:hover td {
         background-color: #fcf8e3;
     }
@@ -50,22 +63,17 @@
             color: black;
         }
     }
+
 </style>
 
 {% endblock %}
 
 {% block scripts %}
 <script>
-    $(function() {
-        var on = false;
-        window.setInterval(function() {
-            on = !on;
-            if (on) {
-                $('.invalid').addClass('invalid-blink')
-            } else {
-                $('.invalid-blink').removeClass('invalid-blink')
-            }
-        }, 200);
+    $(document).ready(function() {
+        $("#flip").click(function(){
+            $("#panel").slideToggle("slow");
+        });
     });
 </script>
 
@@ -73,142 +81,164 @@
 
 
 {% block content %}
+<body>
+    <h3> You:</h3>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off">  <i class="far fa-handshake fa-2x"><br> Peace</i>
+        </label>
+        <label class="btn btn-secondary active">
+            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off">   <i class="fas fa-fighter-jet fa-2x"><br> War</i>
+        </label>
+    </div>
+    <!-- selection table with buttons for adversary 1-->
+    <div class="inlineTable form-group required">
 
+        <div class="btn-group form-group required">
+            <table class="table table-bordered text-center" style="width: auto; margin: auto">
+                <tr>
+                    <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
+                    <th colspan="2"><i class="far fa-user fa-3x">  ({{ player.adv_1_type }})</i></th>
+                <tr>
+                    <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
+                </tr>
 
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable form-group required">
+                <tr>
+                    <th>    
+                        <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+                            <i class="far fa-handshake fa-2x"><br> Peace</i>
+                        </button>
+                    </th>
+                    <th>    
+                        <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+                            <i class="fas fa-fighter-jet fa-2x"><br> War</i>
+                        </button>
+                    </th>
+                </tr>
+                <tr class="highlight-row-on-hover">
+                    <th rowspan="2"><span class="rotate90">You</span></th>
+                    <th>       
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off">  <i class="far fa-handshake fa-2x"><br> Peace</i>
+                        </label>
+                    </th>
+                    <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them: {{Constants.both_cooperate_payoff}}</td>
+                    <td><b>You : {{ Constants.betrayed_payoff }}</b><br>Them: {{Constants.betray_payoff}}</td>
+                </tr>
+                <tr class="highlight-row-on-hover">
+                    <th>
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off">   <i class="fas fa-fighter-jet fa-2x"><br> War</i>
+                        </label>
+                    </th>
+                    <td><b>You : {{Constants.betray_payoff}}</b><br> Them:  {{ Constants.betrayed_payoff }}</td>
+                    <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="btn-group form-group required">
+    </div>
+    <!-- Table history of choices for player and adversary 1 -->
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Round</b></td>
+        {% for num in list_of_round_nums   %}
+        <tr>
+            <td>{{ num }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>You</b></td>
+        {% for day in my_decision_adv_1_total   %}
+        <tr>
+            <td>{{ day }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Competitor</b></td>
+        {% for night in adv_1_decision_total   %}
+        <tr>
+            <td>{{ night }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- begins section for adversary 2-->
+
+    <!-- selection table with buttons for adversary 2-->
+    <div class="inlineTable btn-group form-group required">
         <table class="table table-bordered text-center" style="width: auto; margin: auto">
             <tr>
                 <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
-                <th colspan="2">Competitor 1  ({{ player.adv_1_type }})</th>
-            <tr>
-                <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Choice has selected their choice</th>
+                <th colspan="2"><i class="fas fa-desktop fa-3x">  ({{ player.adv_2_type }})</i></th>
             </tr>
-
             <tr>
-                <th>Cooperate</th>
-                <th>Defect</th>
+                <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
+            </tr>
+            <tr>
+                <th>    
+                    <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+                        <i class="far fa-handshake fa-2x"><br> Peace</i>
+                    </button>
+                </th>
+                <th>    
+                    <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
+                        <i class="fas fa-fighter-jet fa-2x"><br> War</i>
+                    </button>
+                </th>
             </tr>
             <tr class="highlight-row-on-hover">
                 <th rowspan="2"><span class="rotate90">You</span></th>
                 <th>       
                     <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off"> Cooperate
+                        <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Cooperate" autocomplete="off">   <i class="far fa-handshake fa-2x"><br> Peace</i>
                     </label>
                 </th>
-                <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them: {{Constants.both_cooperate_payoff}}</td>
-                <td><b>You : {{ Constants.betrayed_payoff }}</b><br>Them: {{Constants.betray_payoff}}</td>
+                <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them:  {{Constants.both_cooperate_payoff}}</td>
+                <td><b>You : {{ Constants.betrayed_payoff }}</b><br> Them:   {{Constants.betray_payoff}}</td>
             </tr>
             <tr class="highlight-row-on-hover">
                 <th>
                     <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off"> Defect
+                        <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Defect" autocomplete="off">  <i class="fas fa-fighter-jet fa-2x"><br> War</i>
                     </label>
                 </th>
-                <td><b>You : {{Constants.betray_payoff}}</b><br> Them:  {{ Constants.betrayed_payoff }}</td>
+                <td><b>You : {{Constants.betray_payoff}}</b><br> Them: {{ Constants.betrayed_payoff }}</td>
                 <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
             </tr>
         </table>
     </div>
-
-</div>
-<!-- Table history of choices for player and adversary 1 -->
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Round</b></td>
-    {% for num in list_of_round_nums   %}
-    <tr>
-        <td>{{ num }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>You</b></td>
-    {% for day in my_decision_adv_1_total   %}
-    <tr>
-        <td>{{ day }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Competitor</b></td>
-    {% for night in adv_1_decision_total   %}
-    <tr>
-        <td>{{ night }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<hr> <!-- begins section for adversary 2-->
-<!-- selection table with buttons for adversary 1-->
-<div class="inlineTable btn-group form-group required">
-    <table class="table table-bordered text-center" style="width: auto; margin: auto">
+    <!-- Table history of choices for player and adversary 2 -->
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Round</b></td>
+        {% for num in list_of_round_nums   %}
         <tr>
-            <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
-            <th colspan="2">Competitor 2 ({{ player.adv_2_type }})</th>
+            <td>{{ num }}</td>
         </tr>
-        <tr>
-            <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
-        </tr>
-        <tr>
-            <th>Cooperate</th>
-            <th>Defect</th>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th rowspan="2"><span class="rotate90">You</span></th>
-            <th>       
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Cooperate" autocomplete="off"> Cooperate
-                </label>
-            </th>
-            <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them:  {{Constants.both_cooperate_payoff}}</td>
-            <td><b>You : {{ Constants.betrayed_payoff }}</b><br> Them:   {{Constants.betray_payoff}}</td>
-        </tr>
-        <tr class="highlight-row-on-hover">
-            <th>
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Defect" autocomplete="off"> Defect
-                </label>
-            </th>
-            <td><b>You : {{Constants.betray_payoff}}</b><br> Them: {{ Constants.betrayed_payoff }}</td>
-            <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
-        </tr>
+        {% endfor %}
     </table>
-</div>
-<!-- Table history of choices for player and adversary 2 -->
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Round</b></td>
-    {% for num in list_of_round_nums   %}
-    <tr>
-        <td>{{ num }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>You</b></td>
-    {% for day in my_decision_adv_2_total   %}
-    <tr>
-        <td>{{ day }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Competitor</b></td>
-    {% for night in adv_2_decision_total   %}
-    <tr>
-        <td>{{ night }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<hr>
-
-{% next_button %}
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>You</b></td>
+        {% for day in my_decision_adv_2_total   %}
+        <tr>
+            <td>{{ day }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+        <td><b>Competitor</b></td>
+        {% for night in adv_2_decision_total   %}
+        <tr>
+            <td>{{ night }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
 
-{% include Constants.instructions_template %}
+    {% next_button %}
 
+    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
 
-
-
-
+</body>
 {% endblock %}

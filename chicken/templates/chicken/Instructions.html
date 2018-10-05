@@ -14,7 +14,7 @@
         <br><br>
         Each of you simultaneously and privately chooses whether you want to drive Straight or Swerve to miss the other player.
         <br><br>
-        If <b>you drive straight and your opponent swerves</b>, you will receive {{ Constants.winner_payoff }}.
+        If <b>you drive straight and your opponent swerves</b>, you will receive {{ Constants.winner_payoff }} <b>and have no chance of dying.</b>
         <br>
         If <b>you drive straight and your opponent drives straight</b>, you have a <b>1 in {{ crash_death_chance }} chance of dying </b>({{ Constants.crash_payoff }}) from the head-on collision.
         <br><br>
@@ -22,8 +22,6 @@
         <br><br>
         Your payoffs will be determined by the choices of both as below (except for the chance of dying).
     </p>
-    <p><i>In each cell, the amount to the left is the payoff for
-        you and to the right for the other participant.</i></p>
 
     <table border=1 class='table table-bordered text-center'
            style='width: auto; margin: auto'>
@@ -38,13 +36,13 @@
         <tr>
             <th align="center" rowspan=2><span class="rotate90">Your Choice</span></th>
             <th>Straight</th>
-            <td align="center">{{ Constants.crash_payoff }}, {{ Constants.crash_payoff }}<br> (Both players have 1 in {{ crash_death_chance }} chance of death)</td>
-            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.winner_payoff }} <br> (Competitor has 1 in {{ swerve_death_chance }} chance of death)</td>
+            <td align="center"><b>You: {{ Constants.crash_payoff }}</b><br>Them: {{ Constants.crash_payoff }}<br> (Both of you: 1 in {{ crash_death_chance }} chance of death (-100 pts))</td>
+            <td align="center"><b>You: {{ Constants.both_swerve_payoff }}</b><br>Them: {{ Constants.winner_payoff }} <b>and</b><br>a 1 in {{ swerve_death_chance }} chance of death (-100 pts))</td>
         </tr>
         <tr>
             <th align="center">Swerve</th>
-            <td align="center">{{ Constants.winner_payoff }}, {{ Constants.both_swerve_payoff }} <br> (You have 1 in {{ swerve_death_chance }} chance of death)</td>
-            <td align="center">{{ Constants.both_swerve_payoff }}, {{ Constants.both_swerve_payoff }}<br> (Each have 1 in {{ swerve_death_chance }} chance of death)</td>
+            <td align="center"><b>You: {{ Constants.winner_payoff }} and<br>a 1 in {{ swerve_death_chance }} chance of death (-100 pts))</b><br> Them: {{ Constants.both_swerve_payoff }}</td>
+            <td align="center"><b>You: {{ Constants.both_swerve_payoff }}</b><br> Them: {{ Constants.both_swerve_payoff }}<br> (Both players: 1 in {{ swerve_death_chance }} chance of death (-100 pts))</td>
         </tr>
     </table>
 

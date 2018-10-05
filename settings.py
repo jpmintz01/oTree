@@ -34,36 +34,42 @@ SESSION_CONFIGS = [
     #        'num_demo_participants': 2,
     #        'app_sequence': ['prisoner_w_comms'],
     #    },
-#    {
-#        'name': 'chicken',
-#        'display_name': "Chicken",
-#        'num_demo_participants': 2,
-#        'num_rounds': 2,
-#        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
-#        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
-#        'swerve_death_chance': 50, #1 in 50 chance of death in crash into ditch
-#        'app_sequence': [
-#            'chicken'
-#
-#        ],
-#    },
+        {
+        'name': 'prisoner',
+        'display_name': "Prisoner's Dilemma",
+        'num_demo_participants': 2,
+        'app_sequence': ['prisoner'],#, 'payment_info'],
+    },
+    {
+        'name': 'chicken',
+        'display_name': "Chicken",
+        'num_demo_participants': 2,
+        'num_rounds': 2,
+        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
+        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
+        'swerve_death_chance': 50, #1 in 50 chance of death in crash into ditch
+        'app_sequence': [
+            'chicken'
+
+        ],
+    },
 
 
-#    {
-#        'name': 'prisoner_multiplayer',
-#        'display_name': "Prisoner's Dilemma (multiplayer strategic no chat)",
-#        'num_demo_participants': 1,
-#        'app_sequence': ['prisoner_multiplayer'],
-#        'use_browser_bots': False,
-#        'num_rounds': 3,
-#    },
-#    {
-#        'name': 'rps',
-#        'display_name': "Rock Paper Scissors",
-#        'num_demo_participants': 1,
-#        'num_rounds': 10,
-#        'app_sequence': ['rps',],# 'payment_info'],
-#    },
+    {
+        'name': 'prisoner_multiplayer',
+        'display_name': "Prisoner's Dilemma (multiplayer strategic no chat)",
+        'num_demo_participants': 1,
+        'app_sequence': ['prisoner_multiplayer'],
+        'use_browser_bots': False,
+        'num_rounds': 3,
+    },
+    {
+        'name': 'rps',
+        'display_name': "Rock Paper Scissors",
+        'num_demo_participants': 1,
+        'num_rounds': 3,
+        'app_sequence': ['rps',],# 'payment_info'],
+    },
     {
         'name': 'multi_game_test',
         'display_name': "Game Example",

@@ -35,6 +35,7 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
+
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Rock', 'Paper', 'Scissors'],
@@ -61,7 +62,11 @@ class Player(BasePlayer):
         initial='human'
     )
     ######### end adversary #1
-
+    player_guess_adv_1_type = models.StringField(
+        choices=['Simple Algorithm', 'Artificial Intelligence'],
+        label='What type of machine were you just playing with?',
+        widget=widgets.RadioSelect
+    )
     ###### adversary #2 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
 #    decision_vs_adv_2 = models.StringField( #my decision
 #        choices=['Rock', 'Paper', 'Scissors'],
@@ -116,10 +121,12 @@ class Player(BasePlayer):
                     'Scissors': Constants.draw_payoff
                 },
         }
-        print(self.decision_vs_adv_1)
-        print(self.decision_of_adv_1)
+        #print(self.decision_vs_adv_1)
+        #print(self.decision_of_adv_1)
 #        print(self.decision_vs_adv_2)
 #        print(self.decision_of_adv_2)
+        print(self.session.config['num_rounds'])
+        print(self.round_number)
         self.payoff_vs_adv_1 = payoff_matrix[self.decision_vs_adv_1][self.decision_of_adv_1]
         self.payoff_of_adv_1 = payoff_matrix[self.decision_of_adv_1][self.decision_vs_adv_1]
         
