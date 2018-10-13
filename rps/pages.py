@@ -32,8 +32,9 @@ class Decision(Page):
     form_model = 'player'
     def get_form_fields(self):
         fields = []
-        for i in (1, Constants.num_adversaries):
+        for i in (1,Constants.num_adversaries):
             fields.append('decision_vs_adv_{}'.format(i))
+        fields.append('advisor_choice')
         return fields
             #form_fields = ['decision_vs_adv_1', 'decision_vs_adv_2']
         
@@ -45,7 +46,7 @@ class Decision(Page):
                     
         def ai_advice_adv_1(self):
             if me.round_number == 1: #
-                return 'No history. You choose.'
+                return random.choice(['Rock','Paper','Scissors'])
             else:
                 if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
                     return 'Paper' #beat his last move
@@ -56,13 +57,12 @@ class Decision(Page):
                 
         
         adversary_choice(self);
-        
+        history = {}
+        for p in me.in_all_rounds():
+            history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
         return {
             'human_advice_v_adv_1': random.choice(['Rock','Paper','Scissors']),
-            'human_DelayTime_adv_1': str(random.randint(1,10)) + 's', 
             'AI_advice_v_adv_1': ai_advice_adv_1(self),
-            'AI_DelayTime_adv_1': str(random.randint(1,3)) + 's', 
-            'adv_1_DelayTime': str(random.randint(1,10)) + 's',#human takes up to ten seconds to decide
             'my_decision_adv_1': me.decision_vs_adv_1,
             'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
             'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
@@ -71,6 +71,7 @@ class Decision(Page):
             'adv_1_decision': me.decision_of_adv_1,
             'adv_1_payoff': me.payoff_of_adv_1,
             'my_total_payoff': me.round_payoff,
+            'history_list': history,
             
            
         }

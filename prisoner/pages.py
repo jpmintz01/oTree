@@ -6,14 +6,18 @@ from .models import Constants
 
 
 class Introduction(Page):
+    def is_displayed(self):
+        return self.round_number == 1
     timeout_seconds = 100
 
 
 class Decision(Page):
-
+    
     form_model = 'player'
     form_fields = ['decision']
-
+    def is_displayed(self):
+        
+        return self.round_number <= self.session.config['num_rounds']
 #    def vars_for_template(self):
 #        me = self.player
 #        opponent = me.other_player()
@@ -33,7 +37,9 @@ class ResultsWaitPage(WaitPage):
             p.set_payoff()
 
 
-class Results(Page):
+class Results(Page):    
+    def is_displayed(self):
+        return self.round_number == self.session.config['num_rounds']
     def vars_for_template(self):
         me = self.player
         opponent = me.other_player()

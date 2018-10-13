@@ -61,6 +61,10 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
         initial='human'
     )
+    advisor_choice = models.StringField(
+        choices=['human','AI','none'],
+
+    )
     ######### end adversary #1
     player_guess_adv_1_type = models.StringField(
         choices=['Simple Algorithm', 'Artificial Intelligence'],
@@ -99,6 +103,9 @@ class Player(BasePlayer):
         initial=c(0)
         #c(1000) is just an arbitrary allowed max amount
     )
+    winner = models.StringField(
+        choices=["player", 'adversary', 'draw']
+    )
     
     def set_payoff(self):
         payoff_matrix = {
@@ -121,12 +128,6 @@ class Player(BasePlayer):
                     'Scissors': Constants.draw_payoff
                 },
         }
-        #print(self.decision_vs_adv_1)
-        #print(self.decision_of_adv_1)
-#        print(self.decision_vs_adv_2)
-#        print(self.decision_of_adv_2)
-        print(self.session.config['num_rounds'])
-        print(self.round_number)
         self.payoff_vs_adv_1 = payoff_matrix[self.decision_vs_adv_1][self.decision_of_adv_1]
         self.payoff_of_adv_1 = payoff_matrix[self.decision_of_adv_1][self.decision_vs_adv_1]
         
@@ -134,5 +135,12 @@ class Player(BasePlayer):
 #        self.payoff_of_adv_2 = payoff_matrix[self.decision_of_adv_2][self.decision_vs_adv_2]
         
         self.round_payoff = self.payoff_vs_adv_1 #+ self.payoff_vs_adv_2
+        if (self.round_payoff == Constants.win_payoff):
+            self.winner = "player"
+        elif (self.round_payoff == Constants.lose_payoff):
+            self.winner = "adversary"
+        else:
+            self.winner = "draw"
+                
 
  

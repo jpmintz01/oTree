@@ -38,6 +38,7 @@ SESSION_CONFIGS = [
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
+        'num_rounds': 10,
         'app_sequence': ['prisoner'],#, 'payment_info'],
     },
     {
@@ -67,7 +68,7 @@ SESSION_CONFIGS = [
         'name': 'rps',
         'display_name': "Rock Paper Scissors",
         'num_demo_participants': 1,
-        'num_rounds': 3,
+        'num_rounds': 10,
         'app_sequence': ['rps',],# 'payment_info'],
     },
     {

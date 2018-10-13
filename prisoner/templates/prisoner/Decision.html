@@ -13,7 +13,9 @@
         });
         var maxHeight = $("#checkbox_cell").height();
         $(".otree-chat").css("height","100%");
+        $(".otree-chat").css("border-color","black");
         $(".otree-chat__messages").css("height",maxHeight);
+        $(".otree-chat__messages").css("background-color","black");
         $(".otree-chat__input").hide();
         $('.otree-chat__btn-send').hide();
         $("#add_text_to_chat").click( function(){
@@ -33,16 +35,19 @@
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 
+
 <style>
     #panel, #flip {
         padding: 5px;
         text-align: center;
         background-color: #e5eecc;
         border: solid 1px #c3c3c3;
+        color: black;
     }
     #panel {
         padding: 50px;
         display: none;
+        color: black;
     }
     .highlight-row-on-hover:hover td {
         background-color: #fcf8e3;
@@ -51,58 +56,97 @@
         height: 100%;
     }
     h4 {text-align:center;}
+    #decision {
+        position: sticky;
+        top: 20px;
+    }
 </style>
 
 {% endblock %}
 
 {% block content %}
+<body style="background-color: dimgray; color: white">
+    <div id="decision">
+        <h4> Round: {{ player.round_number }}</h4>
+        <div align="center" class="form-group required">
+
+            <button name="decision" value="Cooperate" class="btn btn-primary btn-large" style="border-color: black;"><i class="far fa-handshake fa-5x "></i><br>I will Cooperate</button>
+            <button name="decision" value="Defect" class="btn btn-primary btn-large" style="border-color: black;"><i class="far fa-thumbs-down fa-5x "></i><br>I will Defect</button>
+        </div>
+    </div>
+    <br>
+
+    <table align="center">
+        <tr align="center">
+            <th style="font-size">Message other player</th>
+            <th>Chat Log</th>
+        <tr>
+            <td width="40%" id="checkbox_cell">
+                <div id="checkboxes" class="text-left">
+                    <ul>
+                        <input type="checkbox" value="Do as I say, or I'll punish you." name="feeling"> Do as I say, or I'll punish you.
+                        <button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+
+                        <input type="checkbox" value="I accept your last proposal." name="feeling"> I accept your last proposal.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+
+                        <input type="checkbox"  value="I don't accept your proposal." name="feeling"> I don't accept your proposal.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="That's not fair." name="feeling"> That's not fair.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="I don't trust you." name="feeling"> I don't trust you.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="Excellent!" name="feeling"> Excellent!<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="Sweet. We are getting rich." name="feeling"> Sweet. We are getting rich.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="Give me another chance." name="feeling"> Give me another chance.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="I forgive you." name="feeling"> I forgive you.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="I'm changing my strategy." name="feeling"> I'm changing my strategy.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox" value="We can both do better than this."  name="feeling"> We can both do better than this.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox" value="Curse you."  name="feeling"> Curse you.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="You betrayed me." name="feeling"> You betrayed me.<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="You will pay for this!" name="feeling"> You will pay for this!<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                        <input type="checkbox"  value="In your face!" name="feeling"> In your face!<button type="button" class="btn-sm btn btn-secondary active" id="add_1_to_chat" style="background: green; padding-top: 0px; padding-bottom: 0px; padding-left: 1rem; padding-right: 1rem; border-color: black; color: white; float:right;">
+                        <i class="fas fa-arrow-circle-right"></i>
+                        </button><br>
+                    </ul>
+                    <button type="button" class="btn btn-secondary active" id="add_text_to_chat" style="background-color: green; float:right; border-color: black"><i class="fas fa-arrow-circle-right fa-3x "></i>Send Checked Messages</button>
+                </div>
+            </td>
+            <td width="60%" height="1px">{% chat %}
+            </td>
+        </tr>
+    </table>
 
 
-<div align="center" class="form-group required">
-
-    <button name="decision" value="Cooperate" class="btn btn-primary btn-large"><i class="far fa-handshake fa-5x "></i><br>I will Cooperate</button>
-    <button name="decision" value="Defect" class="btn btn-primary btn-large"><i class="far fa-thumbs-down fa-5x "></i><br>I will Defect</button>
-</div>
-<br>
-
-<table align="center">
-    <tr align="center">
-        <th>Choices</th>
-        <th>Chat</th>
-    <tr>
-        <td width="40%" id="checkbox_cell">
-            <div id="checkboxes" class="text-left">
-                <ul>
-                    <input type="checkbox" value="Do as I say, or I'll punish you." name="feeling"> Do as I say, or I'll punish you.<br>
-                    <input type="checkbox" value="I accept your last proposal." name="feeling"> I accept your last proposal.<br>
-                    <input type="checkbox"  value="I don't accept your proposal." name="feeling"> I don't accept your proposal.<br>
-                    <input type="checkbox"  value="That's not fair." name="feeling"> That's not fair.<br>
-                    <input type="checkbox"  value="I don't trust you." name="feeling"> I don't trust you.<br>
-                    <input type="checkbox"  value="Excellent!" name="feeling"> Excellent!<br>
-                    <input type="checkbox"  value="Sweet. We are getting rich." name="feeling"> Sweet. We are getting rich.<br>
-                    <input type="checkbox"  value="Give me another chance." name="feeling"> Give me another chance.<br>
-                    <input type="checkbox"  value="I forgive you." name="feeling"> I forgive you.<br>
-                    <input type="checkbox"  value="I'm changing my strategy." name="feeling"> I'm changing my strategy.<br>
-                    <input type="checkbox" value="We can both do better than this."  name="feeling"> We can both do better than this.<br>
-                    <input type="checkbox" value="Curse you."  name="feeling"> Curse you.<br>
-                    <input type="checkbox"  value="You betrayed me." name="feeling"> You betrayed me.<br>
-                    <input type="checkbox"  value="You will pay for this!" name="feeling"> You will pay for this!<br> 
-                    <input type="checkbox"  value="In your face!" name="feeling"> In your face!<br>
-                </ul>
-                <button type="button" class="btn btn-secondary active" id="add_text_to_chat" style="background-color: green; float:right;"><i class="fas fa-arrow-circle-right fa-3x "></i>Send</button>
-            </div>
-        </td>
-        <td width="60%" height="1px">{% chat %}
-        </td>
-    </tr>
-</table>
 
 
+    <br>
 
-
-<br>
-
-<div id="flip">Click for a reminder on Instructions</div> 
-<div id="panel">{% include Constants.instructions_template %}</div>
-
+    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
+</body>
 {% endblock %}

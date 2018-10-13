@@ -7,6 +7,8 @@
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
     #panel, #flip {
@@ -14,13 +16,15 @@
         text-align: center;
         background-color: #e5eecc;
         border: solid 1px #c3c3c3;
+        color: black;
     }
     #panel {
         padding: 50px;
         display: none;
+        color: black;
     }
-    .pattern {
-        background: repeating-linear-gradient(45deg, green, blue 30px, green 30px, blue 60px);
+    .buttonFlip {
+        transform: rotate(270deg) scaleX(-1);
     }
     .inlineTable {
         display: inline-block;
@@ -36,7 +40,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        background-color: rgba(0,0,0,0.8); /* Black background with opacity */
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
         cursor: pointer; /* Add a pointer on hover */
     }
@@ -49,99 +53,173 @@
         transform: translate(-50%,-50%);
         -ms-transform: translate(-50%,-50%);
     }
+    #adv_bounce, #player_bounce {
+
+        padding: 20px;
+    }
+    #button1 {
+        display:inline-block;
+    }
+    .button_pre_bounce { 
+        position:relative;
+        margin: 0 auto;
+    }
+    #buttonbounce {
+
+        position: absolute;
+        cursor: pointer;
+    }
 </style>
 
 {% endblock %}
 
 {% block scripts %}
 <script>
-    //var decisionVsAdv1 = document.getElementById("decision_vs_adv_1").value;
+    var human_advice = "{{ human_advice_v_adv_1 }}";
+    var AI_advice = "{{ AI_advice_v_adv_1 }}";
+    console.log("human advice = "+human_advice);
+    console.log("AI advice = " + AI_advice);
+    function log_user_choice (e){ //logs user's button click (rock/paper/scissors/AI/human), then returns R/P/S based on user click or choice of advisor.  
 
-    //    function randInt(min, max) {
-    //        return Math.floor(Math.random() * (max-min + 1) + min)
-    //    }
+        console.log("user_button_choice"+$(e).attr("id"));
+        if ($(e).attr('id')== 'human_expert') {
+            //$("#advisor_choice_value").value = 'human';
+            document.getElementById("advisor_choice_value").value = 'human';
+            document.getElementById("my_hidden_value").value = human_advice;
+            //            $(e).attr('id', human_advice);
+            return "{{ human_advice_v_adv_1 }}"
 
-    function show_adv (e){
-        $(':button').prop('disabled', true);
-        $(e).prop('disabled', false);
-        if ('{{ adv_1_decision }}' == "Rock") {
-            $("#adv_button_rock").prop('disabled', false);
-            $("#adv_button_rock").show();
+        } else if ($(e).attr('id') == 'AI_expert') {
+            //$("#advisor_choice_value").value = 'AI'
+            document.getElementById("advisor_choice_value").value = 'AI';
+            document.getElementById("my_hidden_value").value = AI_advice; //set the value of the player's choice to the id of the button clicked send to oTree/django
+            return "{{ AI_advice_v_adv_1 }}"
 
-        } else if ('{{ adv_1_decision }}'  == "Paper") {
-            $("#adv_button_paper").prop('disabled', false);
-            $("#adv_button_paper").show();
         } else {
-            $("#adv_button_scissors").prop('disabled', false);
-            $("#adv_button_scissors").show();           
+            document.getElementById("my_hidden_value").value = $(e).attr("id"); //set the value of the player's choice to the id of the button clicked send to oTree/django
+            document.getElementById("advisor_choice_value").value = 'none';
+            return $(e).attr("id")
         }
-    }
+        console.log("advisor choice= "+($("#advisor_choice_value").value));
 
-    function show_choice (e){ //e is participant button
+    } //logs the user's choice
+
+    function disable_hide_other_buttons (e){
+        $(':button').hide();
+        $(':button').prop('disabled', true); //disable all buttons
+        //$(e).prop('disabled', false); //re-enable button the user selected (this is just for display since disabled buttons are greyed out) n
+    } //disables user buttons so they can't change choice
+    function bounce_fists (){
+        $("#adv_bounce").show();
+        $("#player_bounce").show();
+        $("#adv_bounce").effect("bounce", { times:1 }, 400);
+        $("#player_bounce").effect("bounce", { times:1 }, 400);
+        $("#adv_bounce").effect("bounce", { times:1 }, 400);
+        $("#player_bounce").effect("bounce", { times:1 }, 400);
+        $("#adv_bounce").effect("bounce", { times:1 }, 400);
+        $("#player_bounce").effect("bounce", { times:1 }, 400);  
+        $("#adv_bounce").effect("bounce", { times:1 }, 400);
+        $("#player_bounce").effect("bounce", { times:1 }, 400);
+    } // bounces the fists like in real RPS
+    function change_fists (e, net_choice) {
+        //change player button
         $(e).find('i').remove();
-        console.log(e);
-        if ($(e).text().trim() == 'Rock') {
-            $(e).html($('<i/>',{class:'far fa-hand-rock fa-5x'})).append('Rock');
-            $("#Paper").hide();
-            $("#Scissors").hide();
+        if (($(e).text().trim() == 'Rock')||(net_choice=="Rock")) { //if it's the rock button
+            $("#player_bounce").html($('<i/>',{class:'far fa-hand-rock fa-7x fa-rotate-90'}));//.append('Rock');
         }
-        else if ($(e).text().trim() == 'Paper') {
-            $(e).html($('<i/>',{class:'far fa-hand-paper fa-5x'})).append('Paper');
-            $("#Rock").hide();
-            $("#Scissors").hide();
+        else if (($(e).text().trim() == 'Paper')||(net_choice=="Paper")) { //samesies
+            $("#player_bounce").html($('<i/>',{class:'far fa-hand-paper fa-7x fa-rotate-90'}));//.append('Paper');
         }
-        else {
-            $(e).html($('<i/>',{class:'far fa-hand-scissors fa-5x fa-flip-horizontal'})).append('Scissors');
-            $("#Paper").hide();
-            $("#Rock").hide();
+        else { //samesies
+            $("#player_bounce").html($('<i/>',{class:'far fa-hand-scissors fa-7x fa-flip-horizontal'}));//.append('Scissors');
         }
-    }
 
-    function select_winner (e) {//e is participant button
-        if (('{{ adv_1_decision }}' == "Rock") && ($(e).text().trim() == 'Paper')||//or
-            (('{{ adv_1_decision }}' == "Paper") && ($(e).text().trim() == 'Scissors'))||//or
-            (('{{ adv_1_decision }}' == "Scissors") && ($(e).text().trim() == 'Rock'))) {
-            $(e).css('background-color','green');
-            $("[id^=adv_button_]").css("background-color", "gray").hide(1500);
+        //change adversary button
+        if ('{{ adv_1_decision }}' == "Rock") {
+            $("#adv_bounce").html($('<i/>',{class:'far fa-hand-rock fa-7x'}));//.append('Rock');
+        } else if ('{{ adv_1_decision }}'  == "Paper") {
+            $("#adv_bounce").html($('<i/>',{class:'far fa-hand-paper fa-7x'}));//.append('Paper');
+
+        } else {
+            $("#adv_bounce").html($('<i/>',{class:'far fa-hand-scissors fa-7x buttonFlip'}));//.append('Scissors');
+
+        }
+    } //changes the bouncing fists into the choice
+    function select_winner (e, net_choice) {//e is participant button
+        if (('{{ adv_1_decision }}' == "Rock") && (net_choice == 'Paper')||//or (replaced $(e).text().trim() with net_choice
+            (('{{ adv_1_decision }}' == "Paper") && (net_choice == 'Scissors'))||//or
+            (('{{ adv_1_decision }}' == "Scissors") && (net_choice == 'Rock'))) { //if the player won
+
             return "player";
-        } else if (('{{ adv_1_decision }}' == "Rock") && ($(e).text().trim() == 'Scissors')||//or
-                   (('{{ adv_1_decision }}' == "Paper") && ($(e).text().trim() == 'Rock'))||//or
-                   (('{{ adv_1_decision }}' == "Scissors") && ($(e).text().trim() == 'Paper'))) {
-            $("[id^=adv_button_]").css("background-color", "red");
+
+        } else if (('{{ adv_1_decision }}' == "Rock") && (net_choice == 'Scissors')||//or
+                   (('{{ adv_1_decision }}' == "Paper") && (net_choice == 'Rock'))||//or
+                   (('{{ adv_1_decision }}' == "Scissors") && (net_choice == 'Paper'))) { // if the adversary won
+
             return "adversary";
 
-        } else {
-            $(e).css('background-color','gray');
-            $("[id^=adv_button_]").css("background-color", "gray");
+        } else { //if it was a draw
+
             return "draw";
         }
-    }
-
-    function win_animation (w, e){ //w is a string of winner, e is player button
+    } //selects the winner for display purposes not oTree
+    function win_animation (w){ //w is a string of winner, e is player button
+        //$("#adv_button").removeClass("buttonFlip");
         if (w == "adversary") { //adversary won
+            //            $(e).css("background-color", "gray");
+            $("#adv_bounce").css("color", "red");
+            $("#adv_bounce").css("border", "solid");
+
+            //$("#player_bounce").addClass("bg-danger")
+            $("#player_bounce").css('color','grey');
             document.getElementById("overlay_text").innerHTML="You lost!";
+            $("#overlay").css('background-color', 'rgba(200,0,0,0.8)');
+            //setTimeout(function (){document.getElementById("overlay").style.display = "block"},1000); //delays before showing overlay
+
         } else if (w == "player") { //player won
+            $("#player_bounce").css('color','green');
+            //$("#player_bounce").addClass("bg-success")
+
+            $("#player_bounce").css("border", "solid");
+            $("#adv_bounce").css("color", "grey");
+            $("#overlay").css('background-color', 'rgba(0,155,0,0.8)');
             document.getElementById("overlay_text").innerHTML="You won!";
         } else { //draw
 
+            $("#adv_bounce").css("color", "grey");
+            $("#player_bounce").css('color','grey');
+            $("#overlay").css('background-color', 'rgba(0,0,0,0.8)');
             document.getElementById("overlay_text").innerHTML="It's a draw.";
         }
+        setTimeout(on, 1000); //delays before showing overlay
+
+    } //animates the win
+    function on() { //overlay on
         document.getElementById("overlay").style.display = "block";
+    } //turns on the overlay
+    function off() { //overlay off and submit the form (for the excited player!)
+        document.getElementById("overlay").style.display = "none"
+        $('form').submit();
+    } //turns off the overlay and submits the form
+    function color_winner (){
 
     }
     $(document).ready(function () { 
         $("#flip").click(function(){ //toggles instruction bar
             $("#panel").slideToggle("slow");
         });
-        $("button").click(function(){ // when any button is clicked (only participant choices are visible)
-            show_choice(this); // animate player's choice
-            document.getElementById("my_hidden_value").value = $(this).attr("id"); //set the value of the player's choice to send to oTree/django
-            setTimeout(function () {show_adv(this);},1000); //show the adversary's choice (maybe include a delay here)
-            winner = select_winner(this); // choose a winner (no display here)
-            setTimeout(function() {win_animation (winner, this);},1500); // animate the win
-            setTimeout(function() { $('form').submit(); }, 5000);//delay for a moment before submitting to let player see. can remove this once win anmiation is coded
+        $("button").click(function(){ // when any button is clicked (only participant choices are visible, so any button is a player's choice)
+
+            net_choice = log_user_choice(this);
+            disable_hide_other_buttons(this); //disables the player's other choices
+            bounce_fists(); //do the 1..2..3..go animation
+            winner = select_winner(this, net_choice); // choose a winner (no display here)
+            setTimeout(change_fists, 1500, this, net_choice);//change bouncing fists to show choices
+            setTimeout(win_animation, 2600, winner); // animate the win
+            setTimeout(function() { $('form').submit(); }, 6000);//delay for a moment before submitting to let player see. 
+
         });
-    });
+    }); 
 
 
 </script>
@@ -150,67 +228,85 @@
 
 
 {% block content %}
-<body>
-
+<body style="background-color: lightgray; color: black">
     <h2 align="center">Round: {{player.round_number}} </h2>
+    <table align="center">
+        <th>
+            <tr>
+                <th>
+                    <div id="player">
+                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Rock" autocomplete="off">
+                            <i class="far fa-hand-rock fa-3x"></i><br>Rock  
+                        </button>
+                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Paper"  autocomplete="off">
+                            <i class="far fa-hand-paper fa-3x"></i><br>Paper  
+                        </button>
+                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
+                            <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i><br>Scissors
+                        </button>
+                        <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div id="adversary">
+                        <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
 
-    <button align="center" type="button" class="btn btn-secondary active" id="Rock" autocomplete="off">
-        <i class="far fa-hand-rock fa-3x"></i>   Rock  
-    </button>
-    <br>
+                    </div>
+                </th>
+            </tr>
 
-    <button align="center" type="button" class="btn btn-secondary active" id="Paper"  autocomplete="off">
-        <i class="far fa-hand-paper fa-3x"></i>   Paper  
-    </button>
-    <br>
-    <button align="center" type="button" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
-        <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i> Scissors
-    </button>
-    <button id="adv_button_rock" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-        <i class="far fa-hand-rock fa-5x"></i>  Rock
-    </button>
+        </th>
+    </table>
 
-    <button id="adv_button_paper" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-        <i class="far fa-hand-paper fa-5x"></i>  Paper
-    </button>
 
-    <button id="adv_button_scissors" style="display: none; background-color: red" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-        <i class="far fa-hand-scissors fa-5x fa-flip-horizontal"></i>  Scissors
-    </button>
+
     <div id="overlay" onclick="off()">
         <div id="overlay_text">Overlay Text</div>
     </div>
     <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
+    <input type="hidden" name="advisor_choice" id="advisor_choice_value">
+    <br>
+    <div align="center">
+        <table>
 
+            <tr>
+                <th>
+                    <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
+                        <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI
+                    </button> 
+                </th>
+                <th>
+                    <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
+                        <i class="fas fa-user fa-3x"></i><br>Human Expert
+                    </button>
+                </th>
+            </tr>
+        </table>
+    </div>
     <hr>
     <!-- Table history of choices for player and adversary 1 -->
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Round</b></td>
-        {% for num in list_of_round_nums   %}
-        <tr>
-            <td>{{ num }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>You</b></td>
-        {% for day in my_decision_adv_1_total   %}
-        <tr>
-            <td>{{ day }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Competitor</b></td>
-        {% for night in adv_1_decision_total   %}
-        <tr>
-            <td>{{ night }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
+    <div align="center">
+        <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
+            <th>Round</th><th>You</th><th>Competitor</th><th>Advisor</th>
+            {% for key,value in history_list.items %}
+                {%if key == player.round_number %}
+                {% else %}
+                <tr>
+                    <td style="background-color: {% if value.3 == "player" %}green{% elif value.3 == "adversary" %}red{% endif %}">{{key}}</td>
+                    {% for i in value|slice:":-1" %}
+                        <td>
+                            {{i}} 
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
     <div id="flip">Click for a reminder on Instructions</div> 
     <div id="panel">{% include Constants.instructions_template %}</div>
+    {{ form.advisor_choice.errors }}
 </body>
-{{ form.decision_vs_adv_1.errors }}
 {% endblock %}
