@@ -14,11 +14,14 @@
         text-align: center;
         background-color: #e5eecc;
         border: solid 1px #c3c3c3;
+        color: black
     }
 
     #panel {
+        text-align: inherit;
         padding: 50px;
         display: none;
+        color: black;
     }
 
     .highlight-row-on-hover:hover td {
@@ -52,17 +55,82 @@
         animation-fill-mode: forwards;
         animation-delay: {{ adv_2_DelayTime }};
     }
+    .adv_3_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_3_DelayTime }};
+    }
     @keyframes pulse {
         0% {
-            color: white;
-            background-color: white;
+            color: inherit;
+            background-color: inherit;
 
         }
         100% {
-            background-color: greenyellow;
-            color: black;
+            background-color: darkgreen;
+            color: inherit;
+            visibility: visible;
+            border-color: inherit;
         }
     }
+    .narrowButton {
+        padding: 0px 5px 0px 5px;
+    }
+    .anim_from_left{
+        -webkit-transition: -webkit-transform 1s ease-in;
+        -webkit-transform:translateX(400px);
+
+    }
+    .anim_from_right{
+        -webkit-transition: -webkit-transform 1s ease-in;
+        -webkit-transform:translateX(-400px);
+        visibility: visible;
+    }
+    table td {
+        padding: 10px 10px 10px 10px;
+    }
+    .underlineCell {
+        border-bottom: 1px solid black;
+    }
+
+    /* Popup container - can be anything you want */
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* The actual popup */
+    .popup .popuptext {
+        visibility: hidden;
+        text-align: center;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+    }
+
+    /* Popup arrow */
+    .popup .popuptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+    }
+
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+    }
+    /* Add animation (fade in the popup) */
 
 </style>
 
@@ -74,6 +142,16 @@
         $("#flip").click(function(){
             $("#panel").slideToggle("slow");
         });
+        $(".btn").click(function(){
+            //animates the "war" or "peace" when clicked
+            $("#v_human_jet").css("visibility","visible");
+            $("#v_human_jet").addClass("anim_from_left");
+            $("#v_human_AI_jet").css("visibility","visible");
+            $("#v_human_AI_jet").addClass("anim_from_left");
+        });
+        $(".popup").click(function(){
+            $(this).children().toggleClass("show");
+        });
     });
 </script>
 
@@ -81,163 +159,177 @@
 
 
 {% block content %}
-<body>
-    <h3> You:</h3>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off">  <i class="far fa-handshake fa-2x"><br> Peace</i>
-        </label>
-        <label class="btn btn-secondary active">
-            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off">   <i class="fas fa-fighter-jet fa-2x"><br> War</i>
-        </label>
-    </div>
-    <!-- selection table with buttons for adversary 1-->
-    <div class="inlineTable form-group required">
 
-        <div class="btn-group form-group required">
-            <table class="table table-bordered text-center" style="width: auto; margin: auto">
-                <tr>
-                    <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
-                    <th colspan="2"><i class="far fa-user fa-3x">  ({{ player.adv_1_type }})</i></th>
-                <tr>
-                    <th style="color:white" class="adv_1_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
-                </tr>
+<body style="background-color: dimgray; color: white">
+    <table align="center" style="border: 1px solid black; width: 100%; table-layout: fixed">
+        <tr class="underlineCell">
+            <td align="center">
+                <div align="center">
+                    <i class="fas fa-user-circle fa-4x"><br><div align="center" style="font-size: 30%">You</div></i>
+                </div>
+                Current score: {{ my_total_payoff }}
+            </td>
+            <td align="center"><h1>Round: {{ player.round_number }}</h1></td>
+            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><button class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when adversary has chosen</small></button>
+            </td>
 
-                <tr>
-                    <th>    
-                        <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-                            <i class="far fa-handshake fa-2x"><br> Peace</i>
-                        </button>
-                    </th>
-                    <th>    
-                        <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-                            <i class="fas fa-fighter-jet fa-2x"><br> War</i>
-                        </button>
-                    </th>
-                </tr>
-                <tr class="highlight-row-on-hover">
-                    <th rowspan="2"><span class="rotate90">You</span></th>
-                    <th>       
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Cooperate" autocomplete="off">  <i class="far fa-handshake fa-2x"><br> Peace</i>
-                        </label>
-                    </th>
-                    <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them: {{Constants.both_cooperate_payoff}}</td>
-                    <td><b>You : {{ Constants.betrayed_payoff }}</b><br>Them: {{Constants.betray_payoff}}</td>
-                </tr>
-                <tr class="highlight-row-on-hover">
-                    <th>
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="decision_vs_adv_1" id="decision_vs_adv_1" value="Defect" autocomplete="off">   <i class="fas fa-fighter-jet fa-2x"><br> War</i>
-                        </label>
-                    </th>
-                    <td><b>You : {{Constants.betray_payoff}}</b><br> Them:  {{ Constants.betrayed_payoff }}</td>
-                    <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
-                </tr>
-            </table>
-        </div>
-
-    </div>
-    <!-- Table history of choices for player and adversary 1 -->
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Round</b></td>
-        {% for num in list_of_round_nums   %}
-        <tr>
-            <td>{{ num }}</td>
         </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>You</b></td>
-        {% for day in my_decision_adv_1_total   %}
-        <tr>
-            <td>{{ day }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Competitor</b></td>
-        {% for night in adv_1_decision_total   %}
-        <tr>
-            <td>{{ night }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <!-- begins section for adversary 2-->
+        <tr class="underlineCell">
+            <td align="center" >
 
-    <!-- selection table with buttons for adversary 2-->
-    <div class="inlineTable btn-group form-group required">
-        <table class="table table-bordered text-center" style="width: auto; margin: auto">
-            <tr>
-                <th colspan="2" rowspan="3">Round:<br>{{player.round_number}}</th>
-                <th colspan="2"><i class="fas fa-desktop fa-3x">  ({{ player.adv_2_type }})</i></th>
-            </tr>
-            <tr>
-                <th style="color:white" class="adv_2_DecisionIndicator" colspan="2">Competitor has selected their choice</th>
-            </tr>
-            <tr>
-                <th>    
-                    <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-                        <i class="far fa-handshake fa-2x"><br> Peace</i>
-                    </button>
-                </th>
-                <th>    
-                    <button disabled id="adv_button_rock" class="btn btn-secondary active" name="adv_button" autocomplete="off">
-                        <i class="fas fa-fighter-jet fa-2x"><br> War</i>
-                    </button>
-                </th>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th rowspan="2"><span class="rotate90">You</span></th>
-                <th>       
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Cooperate" autocomplete="off">   <i class="far fa-handshake fa-2x"><br> Peace</i>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_1" value="Peace">
+                        <i class="far fa-handshake fa-4x"></i><br>Peace
                     </label>
-                </th>
-                <td><b>You : {{Constants.both_cooperate_payoff}}</b><br> Them:  {{Constants.both_cooperate_payoff}}</td>
-                <td><b>You : {{ Constants.betrayed_payoff }}</b><br> Them:   {{Constants.betray_payoff}}</td>
-            </tr>
-            <tr class="highlight-row-on-hover">
-                <th>
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="decision_vs_adv_2" id="decision_vs_adv_2" value="Defect" autocomplete="off">  <i class="fas fa-fighter-jet fa-2x"><br> War</i>
+                    <label class="btn btn-primary" id="fighter" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_1" value="War" ><i class="fas fa-fighter-jet fa-4x "></i><br>War
                     </label>
-                </th>
-                <td><b>You : {{Constants.betray_payoff}}</b><br> Them: {{ Constants.betrayed_payoff }}</td>
-                <td><b>You : {{Constants.both_defect_payoff}}</b><br> Them:  {{Constants.both_defect_payoff}}</td>
-            </tr>
-        </table>
+
+                </div>
+<!--                <i id="v_human_jet" style="visibility: hidden; position:relative" class="fas fa-fighter-jet fa-4x "></i>-->
+
+            </td>
+            <td align="center" style="align:center; vertical-align: top" >
+                <div>
+                    <small>{{ total_payoff_v_adv_1}} </small>| Score |<small> {{ payoff_of_adv_1}}</small>
+                </div>
+                <div class="popup" align="center"><small>Click here for history with this player.</small>
+                    <span class="popuptext" id="myHistory_v_human">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_1.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div align="center">
+                    <button class="btn btn-primary btn-large  adv_1_DecisionIndicator" style="visibility: hidden">
+                        <i class="fas fa-user fa-4x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Human</div></i></button>
+                </div>
+
+
+            </td>
+        </tr>
+        <tr class="underlineCell">
+            <td align="center">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_2" value="Peace">
+                        <i class="far fa-handshake fa-4x "></i><br>Peace
+                    </label>
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_2" value="War" ><i class="fas fa-fighter-jet fa-4x "></i><br>War
+                    </label>
+                </div>
+                    <i id="v_human_AI_jet" style="visibility: hidden; position:fixed" class="fas fa-fighter-jet fa-4x "></i>
+            </td>
+            <td align="center" style="align:center; vertical-align: top">
+                <div>
+                    <small>{{ total_payoff_v_adv_2}} </small>| Score |<small> {{ payoff_of_adv_2}}</small>
+                </div>
+                <div class="popup"><small>Click here for history with this player.</small>
+                    <span class="popuptext" id="myHistory_v_human_AI">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_2.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div>
+                    <button class="btn btn-primary btn-large  adv_2_DecisionIndicator" style="visibility: hidden">
+
+                        <i class="fas fa-user fa-4x" style="visibility: visible"><i class="fas fa-laptop-code" style="visibility: visible"></i><br><div align="center" style="font-size: 30%">Human+AI</div></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td  align="center">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_3" value="Peace">
+                        <i class="far fa-handshake fa-4x "></i><br>Peace
+                    </label>
+                    <label class="btn btn-primary"  style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_3" value="War" ><i class="fas fa-fighter-jet fa-4x "></i><br>War
+                    </label>
+                </div>
+
+            </td>
+            <td align="center" style="align:center; vertical-align: top">
+                <div>
+                    <small>{{ total_payoff_v_adv_3}} </small>| Score |<small> {{ payoff_of_adv_3}}</small>
+                </div>
+                <div class="popup"><small>Click here for history with this player.</small>
+                    <span class="popuptext" id="myHistory_v_AI">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_3.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div>
+                    <button class="btn btn-primary btn-large  adv_3_DecisionIndicator" style="visibility: hidden">
+                        <i class="fas fa-laptop-code fa-4x" style="visibility:visible"><br><div align="center" style="font-size: 30%">AI</div></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div align="center">
+        {% next_button %}
     </div>
-    <!-- Table history of choices for player and adversary 2 -->
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Round</b></td>
-        {% for num in list_of_round_nums   %}
-        <tr>
-            <td>{{ num }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>You</b></td>
-        {% for day in my_decision_adv_2_total   %}
-        <tr>
-            <td>{{ day }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-        <td><b>Competitor</b></td>
-        {% for night in adv_2_decision_total   %}
-        <tr>
-            <td>{{ night }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-
-    {% next_button %}
-
-    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="flip">Click for Instructions</div> 
     <div id="panel">{% include Constants.instructions_template %}</div>
 
 </body>

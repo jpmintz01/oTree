@@ -33,16 +33,22 @@ def likert_var(label):
 
 class Player(BasePlayer):
     prisoner_strategy = models.StringField(
-        label='What was your strategy(ies) in the Prisoners Dilemma game? (i.e. "I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")'
+        label='What was your strategy(ies) in the Peace-War game(i.e. "I always played Peace with the humans and War against the AI","I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")'
     )
     play_different_prisoner = models.StringField(
-        label='In the Prisoners Dilemma game, how did your strategy differ when competing with the human versus the artificial players (if at all)?'
+        label='In the Peace-War game, why did your strategy between the players (if at all)?'
     )
     chicken_strategy = models.StringField(
-        label='What was your strategy(ies) in the Chicken game?(i.e. "I swerved every time because it reduced my risk of dying," "I played essentially randomly because I did not really understand the game")'
+        label='What was your betting strategy(ies) in the Chicken game?(i.e. "I bet on the human because he/she had something to lose.  The AI didn’t", "I bet on the AI because I thought it would know best.", "I bet essentially randomly because I did not really understand the game")'
     )
     play_different_chicken = models.StringField(
-        label='In the Chicken game, how did your strategy differ when competing with the human versus the artificial players (if at all)?'
+        label='In the Chicken game, why did your strategy differ between players (if at all)?'
+    )
+    rps_strategy = models.StringField(
+        label='What was your strategy in the Rock-Paper-Scissors game? (i.e. "I always relied on the AI because it was best", "I chose myself because I did not trust either advisor", "I played essentially randomly because I did not really understand the game")'
+    )
+    play_different_rps = models.StringField(
+        label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?'
     )
     various_comments = models.StringField(
         label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?'

@@ -1,53 +1,97 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<style>
+  .adv_hand {
+    transform: rotate(270deg) scaleX(-1);
+
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+  $(document).ready(function() {
+
+  });
+</script>
+
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Instructions</title>
+    <title>Rock-Paper-Scissors</title>
   </head>
-  <body>
+  <body style="background-color: lightgray; color: black">
     {% load otree static %}
     <div class="card bg-light instructions">
-      <div class="card-body">
-        <h3> Instructions </h3>
-        <p> In this study, you will be randomly and anonymously paired
-          with another participant. Each of you simultaneously and
-          privately chooses whether you want to play Rock, Paper, or Scissors.
-          Your payoffs will be determined by the choices of both as
-          below: </p>
-        <table style="width: auto; margin: auto" class="table
-          table-bordered text-center">
-          <tbody>
-            <tr>
-              <th rowspan="2" colspan="2"><br>
-              </th>
-              <th colspan="3">The Other Participant</th>
-            </tr>
-            <tr>
-              <th>Rock</th>
-              <th>Paper</th>
-              <th>Scissors</th>
-            </tr>
-            <tr>
-              <th rowspan="3">Your choice:</th>
-              <th>Rock</th>
-              <td bgcolor="gray"><b>Draw<br>You: {{Constants.draw_payoff}}</b><br>{{Constants.draw_payoff}}</td>
-              <td bgcolor="pink"><b>Lose<br>You: {{ Constants.lose_payoff }}</b><br>{{Constants.win_payoff}}</td>
-              <td bgcolor="lightgreen"><b>Win!<br>You: {{Constants.win_payoff}}</b><br>{{Constants.lose_payoff}}</td>
-            </tr>
-            <tr>
-              <th>Paper</th>
-              <td bgcolor="lightgreen"><b>Win!<br>{{Constants.win_payoff}}</b><br>{{Constants.lose_payoff}}</td>
-              <td bgcolor="gray"><b>Draw<br>You: {{ Constants.draw_payoff }}</b><br>{{Constants.draw_payoff}}</td>
-              <td bgcolor="pink"><b>Lose<br>You: {{Constants.lose_payoff}}</b><br>Them: {{Constants.win_payoff}}</td>
-            </tr>
-            <tr>
-              <th>Scissors</th>
-              <td bgcolor="pink"><b>Lose<br>You: {{Constants.lose_payoff}}</b><br>{{Constants.win_payoff}}</td>
-              <td bgcolor="lightgreen"><b>Win!<br>You: {{ Constants.win_payoff }}</b><br>{{Constants.lose_payoff}}</td>
-              <td bgcolor="gray"><b>Draw<br>You: {{Constants.draw_payoff}}</b><br> {{Constants.draw_payoff}}</td>
-            </tr>
-          </tbody>
+      <div class="card-body" align="center">
+        <p> In this game, you are playing Rock-Paper-Scissors against another person, <br>but there's a twist!</p>
+        <p> Like any command situation, <br>you may make the choice yourself <b>OR</b> you may ask one of your trusted advisors choose for you. </p>
+        <p><u> To choose for yourself</u>, click <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+          <i class="far fa-hand-rock fa-lg"></i><br><small>Rock</small>
+          </button>, <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+          <i class="far fa-hand-paper fa-lg"></i><br><small>Paper</small>
+          </button>, or 
+          <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+            <i class="far fa-hand-scissors fa-lg"></i><br><small>Scissors</small>
+          </button></p>
+        OR
+        <p> <u>To have an expert advisor choose for you</u>, click <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
+          <i class="fas fa-desktop fa-lg"></i><i class="fas fa-server fa-lg"></i><br><small>AI</small>
+          </button>  or <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
+          <i class="fas fa-user fa-lg"></i><br><small>Human</small></button></p><hr>
+
+        <p>
+          Winner receives 1 point (+1).  Loser loses a point (-1).  In a draw, both players get zero points (0). 
+        </p>
+        <table align="center">
+          <tr>
+            <td align="center">
+
+              <i class="far fa-hand-rock fa-2x fa-rotate-90"></i><br><small>Rock</small>
+
+            </td>
+            <td align="center">beats</td>
+            <td align="center">
+
+              <i class="far fa-hand-scissors fa-2x"></i><br><small>Scissors</small>
+
+            </td>
+
+          </tr>
+          <tr><td align="center" colspan=3>--------------------</td></tr>
+          <tr>
+            <td align="center">
+
+              <i class="far fa-hand-scissors fa-2x fa-rotate-90 fa-flip-horizontal"></i><br><small>Scissors</small>
+
+            </td>
+            <td align="center">beats</td>
+            <td align="center">
+
+              <i class="adv_hand far fa-hand-paper fa-2x"></i><br><small>Paper</small>
+
+            </td>
+
+          </tr>
+          <tr><td align="center" colspan=3>--------------------</td></tr>
+          <tr>
+            <td align="center">
+
+              <i class="far fa-hand-paper fa-2x fa-rotate-90"></i><br><small>Paper</small>
+
+            </td>
+            <td align="center">beats</td>
+            <td align="center">
+
+              <i class="adv_hand far fa-hand-rock fa-2x"></i><br><small>Rock</small>
+
+            </td>
+          </tr>
         </table>
+        <br>
+        <hr>
+        <p><b>Good luck!</b></p>
       </div>
     </div>
   </body>

@@ -75,13 +75,13 @@ class Player(BasePlayer):
     self_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect yourself to behave during this game?'
                                      )
 
-    other_humans_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "other human players" to behave during this game?'
+    other_humans_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect other human players to behave during this game?'
                                              ) 
 
-    computer_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "the computer" to behave during this game?'
+    computer_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect other human players who have an AI assistant to behave during this game?'
                                          ) 
 
-    AI_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect "the AI" to behave during this game?'
+    AI_cooperativeness = likert_var('On a scale of 1-5 with 1 being not cooperative, and 5 being highly cooperative, how do you expect AI decision-makers to behave during this game?'
                                    ) 
     
     attention_check = models.StringField(

@@ -11,16 +11,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
-    #panel, #flip {
+    #panel, #flip, #flipHistoryTab, #historyPanel {
         padding: 5px;
         text-align: center;
-        background-color: #e5eecc;
-        border: solid 1px #c3c3c3;
+        background-color: lightblue;
+        border: solid 1px black;
         color: black;
     }
-    #panel {
+    #panel, #historyPanel {
         padding: 50px;
         display: none;
+        background-color: whitesmoke;
         color: black;
     }
     .buttonFlip {
@@ -69,6 +70,9 @@
         position: absolute;
         cursor: pointer;
     }
+    #outline_table td{
+        padding: 50px 50px 50px 50px;
+    }
 </style>
 
 {% endblock %}
@@ -106,6 +110,8 @@
 
     function disable_hide_other_buttons (e){
         $(':button').hide();
+        $('.labels').hide();
+        $('.un_labels').show();
         $(':button').prop('disabled', true); //disable all buttons
         //$(e).prop('disabled', false); //re-enable button the user selected (this is just for display since disabled buttons are greyed out) n
     } //disables user buttons so they can't change choice
@@ -208,6 +214,9 @@
         $("#flip").click(function(){ //toggles instruction bar
             $("#panel").slideToggle("slow");
         });
+        $("#flipHistoryTab").click(function(){ //toggles instruction bar
+            $("#historyPanel").slideToggle("slow");
+        });
         $("button").click(function(){ // when any button is clicked (only participant choices are visible, so any button is a player's choice)
 
             net_choice = log_user_choice(this);
@@ -230,82 +239,106 @@
 {% block content %}
 <body style="background-color: lightgray; color: black">
     <h2 align="center">Round: {{player.round_number}} </h2>
-    <table align="center">
-        <th>
-            <tr>
-                <th>
-                    <div id="player">
-                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Rock" autocomplete="off">
-                            <i class="far fa-hand-rock fa-3x"></i><br>Rock  
-                        </button>
-                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Paper"  autocomplete="off">
-                            <i class="far fa-hand-paper fa-3x"></i><br>Paper  
-                        </button>
-                        <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
-                            <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i><br>Scissors
-                        </button>
-                        <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
+    <table frame="box" align="center" id="outline_table" style="background-color: white"><tr><td>
+        <div  class="labels" align="center"><b>Choose wisely:</b></div><br>
+        <table align="center">
+
+            <th>
+                <tr>
+                    <th>
+                        <div id="player"> 
+                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Rock" autocomplete="off">
+                                <i class="far fa-hand-rock fa-3x"></i><br>Rock  
+                            </button>
+                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Paper"  autocomplete="off">
+                                <i class="far fa-hand-paper fa-3x"></i><br>Paper  
+                            </button>
+                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
+                                <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i><br>Scissors
+                            </button>
+                            <div style="display: none"  align="center" class="un_labels">
+                                <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
+                                </div>
+                                You
+                            </div>
                         </div>
-                    </div>
-                </th>
-                <th>
-                    <div id="adversary">
-                        <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
+                    </th>
+                    <th>
+                        <div id="adversary">
+                            <div style="display: none" align="center" class="un_labels">
+                                <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
+                                Adversary
+                            </div>
+                        </div>
+                    </th>
+                </tr>
 
-                    </div>
-                </th>
-            </tr>
-
-        </th>
-    </table>
-
-
-
-    <div id="overlay" onclick="off()">
-        <div id="overlay_text">Overlay Text</div>
-    </div>
-    <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
-    <input type="hidden" name="advisor_choice" id="advisor_choice_value">
-    <br>
-    <div align="center">
-        <table>
-
-            <tr>
-                <th>
-                    <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
-                        <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI
-                    </button> 
-                </th>
-                <th>
-                    <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
-                        <i class="fas fa-user fa-3x"></i><br>Human Expert
-                    </button>
-                </th>
-            </tr>
+            </th>
         </table>
-    </div>
+
+
+
+        <div id="overlay" onclick="off()">
+            <div id="overlay_text">Overlay Text</div>
+        </div>
+        <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
+        <input type="hidden" name="advisor_choice" id="advisor_choice_value">
+        <br>
+        <div align="center">
+            <div class="labels">
+                <b>or,</b><br><br>
+                <b>Trust one of your expert advisors:</b>
+                <br>
+                <br>
+            </div>
+            <table>
+                <tr> 
+                    <th>
+                        <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
+                            <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI
+                        </button> 
+                    </th> 
+                    <th>
+                        <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
+                            <i class="fas fa-user fa-3x"></i><br>Human
+                        </button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+        </td></tr></table>
     <hr>
     <!-- Table history of choices for player and adversary 1 -->
-    <div align="center">
+    <div id="flipHistoryTab" align="center">Click for Results of Previous Rounds</div>
+    <div id="historyPanel" align="center">
+        <table border=1 class="inlineTable table-bordered text-center" style="width: auto; margin: auto; vertical-align: middle">
+            <tr><th>Colors</th></tr>
+            <tr><td style="background-color: green">You Won</td></tr>
+            <tr><td style="background-color: red">You Lost</td></tr>
+            <tr><td>Draw</td></tr>
+
+        </table>
         <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-            <th>Round</th><th>You</th><th>Competitor</th><th>Advisor</th>
+            <th>Round</th><th>You Played</th><th>Competitor</th><th>Advisor</th>
             {% for key,value in history_list.items %}
-                {%if key == player.round_number %}
-                {% else %}
-                <tr>
-                    <td style="background-color: {% if value.3 == "player" %}green{% elif value.3 == "adversary" %}red{% endif %}">{{key}}</td>
-                    {% for i in value|slice:":-1" %}
-                        <td>
-                            {{i}} 
-                        </td>
-                    {% endfor %}
-                </tr>
-                {% endif %}
+            {%if key == player.round_number %}
+            {% else %}
+            <tr>
+                <td style="background-color: {% if value.3 == "player" %}green{% elif value.3 == "adversary" %}red{% endif %}">{{key}}</td>
+                {% for i in value|slice:":-1" %}
+                <td>
+                    {{i}} 
+                </td>
+                {% endfor %}
+            </tr>
+            {% endif %}
             {% endfor %}
         </table>
     </div>
+
     <hr>
-    <div id="flip">Click for a reminder on Instructions</div> 
+    <div id="flip" align="center">Click for Instructions</div> 
     <div id="panel">{% include Constants.instructions_template %}</div>
     {{ form.advisor_choice.errors }}
 </body>

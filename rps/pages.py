@@ -96,7 +96,8 @@ class Decision(Page):
         me.set_payoff()
         
 #class ResultsWaitPage(WaitPage):
-    
+#    def is_displayed(self):
+#        return random.random() >= 0.9;
 #    def sim_wait(self):
 #        self.set_payoff()
     
