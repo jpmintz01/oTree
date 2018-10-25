@@ -1,0 +1,90 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Informed Consent
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<style>
+</style>
+{% endblock %}
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //        $("#exit").width($("#continue").width());
+    })
+</script>
+
+
+
+{% endblock %}
+{% block content %}
+<p> 
+    Thank you for volunteering to participate in this study. 
+</p>
+<p>
+    <b>1. WHO IS DOING THE STUDY?</b><br>
+    John Paul F. Mintz, School of Advanced Air and Space Studies (SAASS), 901-800-7613<br>
+    Dr. David C. Benson, SAASS, 334-953-9485
+</p>
+<p>
+    <b>2. WHAT IS THE PURPOSE OF THE STUDY?</b>
+    To study decision-making against various opponents in a strategic game environment.
+</p>
+<p>
+    <b>3. WHAT WILL YOU BE ASKED TO DO?</b>
+    On this computer, you will be asked to: a) conduct a background questionnaire, b) play a few rounds in simple games, and c) answer a post-game questionnaire.   No one other than the research team will be observing your responses and there is no video or audio recording.  You will play by yourself. 
+</p>
+<p>
+    If you volunteer to take part in this study, you will be one of about 50 people to do so. After playing the game, you will be asked to answer a few questions about your experience.
+</p>
+<p>
+    <b>4. HOW LONG WILL IT LAST?</b> Approximately ten minutes. 
+</p>
+<p>
+    <b>5. WHAT ARE THE POSSIBLE RISKS AND DISCOMFORTS?</b>
+    To the best of our knowledge, the things you will be doing have no more risk of harm than you would experience in everyday life. Your answers will not be personally identifiable, so there is no risk of personal embarrassment or harm.
+
+    During your participation in the game, you may not have full and accurate access to all information you would like to make your decisions.  Upon completion of your participation, you will be debriefed on these items as they apply to this study.
+</p>
+<p>
+    <b>6. DO YOU HAVE TO TAKE PART IN THE STUDY?</b> No
+</p>
+<p>
+    <b>7. CAN YOUR TAKING PART IN THE STUDY END EARLY?</b>
+    Yes, you may decide at any time that you no longer want to continue. 
+</p>
+<p>
+    <b>8. IF YOU DON’T WANT TO TAKE PART IN THE STUDY, ARE THERE OTHER CHOICES?</b> You may choose not to participate.
+</p>
+<p>
+    <b>9. WILL YOU RECEIVE ANY REWARDS OR PAYMENT FOR TAKING PART IN THIS STUDY?</b>  No
+</p>
+<p>
+    <b>10. WHO WILL SEE THE INFORMATION THAT YOU GIVE?</b>
+    This study is anonymous. That means that no one, not even members of the research team, will know which information you give came from you. USAF Surgeon General’s Research Oversight and Compliance Division (AFMSA/SGE-C) and other DoD personnel may inspect the study's records, but will not be able to identify you.
+</p>
+<p>
+    <b>11. WHAT IF YOU HAVE QUESTIONS, SUGGESTIONS, CONCERNS OR COMPLAINTS?</b>
+    Before you decide whether to continue, please ask any questions you have. Later, if you have questions, suggestions, concerns, or complaints about the study, you can contact the investigator, Lt Col Mintz at 901-800-7613 or johnpaul.mintz@us.af.mil. If you have questions about your rights as a volunteer in this research or believe you were harmed as a result of participation, contact the AFRL IRB Administrator at (937) 904-8100 (DSN: 312-674-8100) or at AFRL.IR.ProtocolManagement@us.af.mil.
+</p>
+<p>
+    Please click continue to indicate your willingness to participate in this research study. 
+</p>
+<div align="center">
+    <button align="center" style="background-color: green; border-color: black;" class="btn btn-secondary active" id="continue" autocomplete="off">
+        <i class="fas fa-arrow-circle-right fa-2x"></i><br>I wish to participate in this study 
+    </button>
+</div>
+<hr>
+<div align="center">
+    <button align="center" style="background-color: red; border-color: black;" class="btn btn-secondary active" id="exit" autocomplete="off">
+        <i class="fas fa-times-circle fa-2x"></i><br>I do <b>NOT</b> wish to participate in this study.
+    </button>
+</div>
+{% endblock %}

@@ -15,6 +15,7 @@ class Constants(BaseConstants):
     name_in_url = 'post_game_survey'
     players_per_group = None
     num_rounds = 1
+    number_of_pages = 2
 
 
 class Subsession(BaseSubsession):
@@ -36,7 +37,7 @@ class Player(BasePlayer):
         label='What was your strategy(ies) in the Peace-War game(i.e. "I always played Peace with the humans and War against the AI","I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")'
     )
     play_different_prisoner = models.StringField(
-        label='In the Peace-War game, why did your strategy between the players (if at all)?'
+        label='In the Peace-War game, why did your choose differently between players (if at all)?'
     )
     chicken_strategy = models.StringField(
         label='What was your betting strategy(ies) in the Chicken game?(i.e. "I bet on the human because he/she had something to lose.  The AI didn’t", "I bet on the AI because I thought it would know best.", "I bet essentially randomly because I did not really understand the game")'
@@ -49,6 +50,24 @@ class Player(BasePlayer):
     )
     play_different_rps = models.StringField(
         label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?'
+    )
+    comments_human_players = models.StringField(
+        label='What comments do you have about the other human players who did not have AI to help them in the games?'
+    )
+    comments_human_advisors = models.StringField(
+        label='What comments do you have about the other human advisors who did not have AI to help them in the games?'
+    )
+    comments_human_AI_players = models.StringField(
+        label='What comments do you have about the other human players who had AI to help them in the games?'
+    )
+#    comments_human_AI_advisors = models.StringField(
+#        label='What comments do you have about the other human advisors who had AI to help them in the games?'
+#    )
+    comments_AI_players = models.StringField(
+        label='What comments do you have about the AI players in the games?'
+    )
+    comments_AI_advisors = models.StringField(
+        label='What comments do you have about the AI advisors in the games?'
     )
     various_comments = models.StringField(
         label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?'

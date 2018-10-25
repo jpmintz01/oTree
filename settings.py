@@ -17,24 +17,40 @@ SESSION_CONFIG_DEFAULTS = {
 BROWSER_COMMAND = 'Safari'
 
 SESSION_CONFIGS = [
+
+    {
+        'name': 'informed_consent',
+        'display_name': "Informed Consent",
+        'num_demo_participants': 1,
+        'app_sequence': ['informed_consent'],
+    },
+    {
+        'name': 'survey',
+        'display_name': "Pre-Game Questionnaire",
+        'num_demo_participants': 1,
+        'app_sequence': ['survey'],
+    },
+    {
+        'name': 'post_game_survey',
+        'display_name': "Post-Game Questionnaire",
+        'num_demo_participants': 1,
+        'app_sequence': ['post_game_survey'],
+    },
+
     #    {
-    #        'name': 'survey',
-    #        'num_demo_participants': 1,
-    #        'app_sequence': ['survey'],
+    #        'name': 'prisoner',
+    #        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
+    #        'num_demo_participants': 2,
+    #        'app_sequence': ['prisoner', 'payment_info'],
     #    },
-#    {
-#        'name': 'prisoner',
-#        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
-#        'num_demo_participants': 2,
-#        'app_sequence': ['prisoner', 'payment_info'],
-#    },
     #    {
     #        'name': 'prisoner_w_comms',
     #        'display_name': "Prisoner's Dilemma (one-shot with Discrete Comms) (not working)",
     #        'num_demo_participants': 2,
     #        'app_sequence': ['prisoner_w_comms'],
     #    },
-        {
+
+    {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",
         'num_demo_participants': 2,
@@ -55,7 +71,6 @@ SESSION_CONFIGS = [
         ],
     },
 
-
     {
         'name': 'prisoner_multiplayer',
         'display_name': "Prisoner's Dilemma (multiplayer strategic no chat)",
@@ -71,6 +86,7 @@ SESSION_CONFIGS = [
         'num_rounds': 10,
         'app_sequence': ['rps',],# 'payment_info'],
     },
+
     {
         'name': 'multi_game_test',
         'display_name': "Game Example",
@@ -149,6 +165,13 @@ INSTALLED_APPS = ['otree']
 
 # inactive session configs
 #    {
+#        'name': 'trust',
+#        'display_name': "Trust Game",
+#        'num_demo_participants': 2,
+#        'num_rounds': 10,
+#        'app_sequence': ['trust'],# 'payment_info'],
+#    },
+#    {
 #        'name': 'ultimatum_non_strategy',
 #        'display_name': "Ultimatum (direct response treatment)",
 #        'num_demo_participants': 2,
@@ -162,13 +185,20 @@ INSTALLED_APPS = ['otree']
 #        'app_sequence': ['ultimatum',],#, 'payment_info'],
 #        'use_strategy_method': True,
 #    },
+
+#    {
+#        'name': 'trust_simple',
+#        'display_name': "Trust Game (simple version from tutorial)",
+#        'num_demo_participants': 2,
+#        'num_rounds': 10,
+#        'app_sequence': ['trust_simple'],
+#    },
 #    {
 #        'name': 'dictator',
 #        'display_name': "Dictator Game",
 #        'num_demo_participants': 2,
 #        'app_sequence': ['dictator',],# 'payment_info'],
 #    },
-
 #    {
 #        'name': 'ultimatum',
 #        'display_name': "Ultimatum (randomized: strategy vs. direct response)",
@@ -203,12 +233,7 @@ INSTALLED_APPS = ['otree']
 ##        'app_sequence': ['public_goods', 'payment_info'],
 ##    },
 
-### {
-###     'name': 'trust',
-###     'display_name': "Trust Game",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust', 'payment_info'],
-### },
+
 ### {
 ###     'name': 'prisoner',
 ###     'display_name': "Prisoner's Dilemma",
@@ -313,9 +338,4 @@ INSTALLED_APPS = ['otree']
 ###     'num_demo_participants': 3,
 ###     'app_sequence': ['public_goods_simple', 'payment_info'],
 ### },
-### {
-###     'name': 'trust_simple',
-###     'display_name': "Trust Game (simple version from tutorial)",
-###     'num_demo_participants': 2,
-###     'app_sequence': ['trust_simple'],
-### },
+

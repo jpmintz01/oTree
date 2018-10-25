@@ -27,7 +27,8 @@ class Experience(Page):
     form_fields = ['years_military_experience',
                    'game_theory_experience',
                    'machine_learning_experience',
-                   'attention_check'
+                   'attention_check',
+                   'experiment_contamination'
                   ]
     def vars_for_template(self):
         return {
@@ -54,6 +55,6 @@ page_sequence = [
     Introduction,
     Demographics,
     Experience,
-    Expectations,
-    GameIntro,
+#    Expectations,
+#    GameIntro,
 ]

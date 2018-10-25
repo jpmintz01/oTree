@@ -32,6 +32,7 @@ class Constants(BaseConstants):
     # payoff if both players cooperate or both defect
     both_swerve_payoff = c(0)
     loser_payoff = c(-1)
+    initial_points = crash_payoff*10
 
 class Subsession(BaseSubsession):
     pass
@@ -40,46 +41,10 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     pass
 
-class Adversary:  ## not used in this version - didn't work with oTree
-    adv_decision = models.StringField(
-        choices=['Cooperate', 'Defect'],
-        doc="""Adversary decision""",
-        widget=widgets.RadioSelect
-    )
-    player_decision = models.StringField(
-        choices=['Cooperate', 'Defect'],
-        doc="""Adversary decision""",
-        widget=widgets.RadioSelect
-    )
-    adv_payoff = models.CurrencyField(
-        choices=currency_range(c(0), c(3), c(1)),
-        initial=c(0)
-    )
-    player_payoff = models.CurrencyField(
-        choices=currency_range(c(0), c(3), c(1)),
-        initial=c(0)
-    )
-    adv_type = models.StringField(
-        choices=['human','AI'],
-        doc="""Adversary type""",
-        widget=widgets.RadioSelect
-    )
-    round_number = models.IntegerField(initial=1)
-
-    def adv_choice_function(adversary, self, player_choice_last_round):
-        choice_list = ['Cooperate','Defect']
-        if adversary.adv_type == 'human': #if adv = human
-            adversary.adv_decision = random.choice(choice_list)#define human strategy (random choice)
-        else: # this is the AI 'TFT
-            if adversary.round_number == 1: # cooperate in round one (can change)
-                adversary.adv_decision = 'Cooperate'
-            else:
-                if player_choice_last_round == 'Defect': #no max arg needed because it's nested if that isn't round 1
-                   adversary.adv_decision = 'Defect' #if player defects, adv defects
-                else:
-                    adversary.adv_decision = 'Cooperate'
-
 class Player(BasePlayer):
+    player_bet = models.CurrencyField (
+        initial=c(0)
+    )
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Straight', 'Swerve'],

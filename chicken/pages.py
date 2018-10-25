@@ -142,5 +142,5 @@ page_sequence = [
     Decision,
     #ResultsWaitPage,
     Results,
-    EndGame,
+#    EndGame,
 ]

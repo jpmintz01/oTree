@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Pre-Experiment Questionnaire
+    Pre-game Questionnaire (Page {{ page_num}} of {{ Constants.number_of_pages }})
 {% endblock %}
 
 {% block content %}
@@ -11,6 +11,6 @@
         {% formfield field %}
     {% endfor %}
 
-    {% next_button %}
-
+    {% next_button %}   
+    
 {% endblock %}

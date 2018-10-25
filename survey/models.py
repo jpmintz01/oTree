@@ -10,7 +10,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     instructions_template = 'survey/Instructions.html'
-    number_of_pages = 3
+    number_of_pages = 2
 
 
 class Subsession(BaseSubsession):
@@ -51,7 +51,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
     
     years_military_experience = models.IntegerField(
-        label='How many years of military experience do you have? (include time in a military academy)',
+        label='How many years of military experience do you have? (include time in a military academy or ROTC)',
         min=0, max=50)
 
     major = models.StringField(
@@ -88,4 +88,7 @@ class Player(BasePlayer):
         choices=['Texas', 'Austria', 'Tennessee', 'Georgia', 'Other'],
         label='What state is Atlanta in?',
         widget=widgets.RadioSelect)
+    
+    experiment_contamination = models.StringField(
+        label='What have you heard about this experiment from other participants, if anything? If nothing, write "nothing".')
 
