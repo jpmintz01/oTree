@@ -4,12 +4,24 @@
 
 Go to https://still-falls-66166.herokuapp.com/
 
-Click on any app.
+To see the experiment in action, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.  
 
-To see the experiment in action, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.
+Notes:
+- This is still a dev version - participant will see something different.
+- This link is a series of apps.
 
-This is still a dev version - participant will see something different.
+To do:
+- Add counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).
+-- (PW,RPS-H,RPS-A), (RPS-H,RPS-A,PW), (RPS-A,RPS-H,PW), (PW,RPS-A,RPS-H)
+- Remove flying F-16 (or fix animation)
+- remove "what type of algorithm were you playing against?"
+- Change/update/add immediate feedback on decisions
+- change/update/add post-game feedback
 
+
+
+
+Otherwise, click on any app.
 For 1-Participant games, select the bottom link to open the game in a new tab.
 
 For 2-participant games, select the link just below "open in split screen."
