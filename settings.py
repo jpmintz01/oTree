@@ -38,7 +38,6 @@ SESSION_CONFIGS = [
     },
 
 
-
     {
         'name': 'prisoner_multiplayer',
         'display_name': "Peace-War (multiplayer strategic no chat)",
