@@ -7,7 +7,7 @@ Go to https://still-falls-66166.herokuapp.com/
 To see the experiment in action, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.  
 
 Notes:
-- Apps Version: 0.2.1
+- Apps Version: 0.2.2
 - Readme Version 0.2.2
 - This is still a dev version - participant will see something different.
 - This link is a series of apps.
