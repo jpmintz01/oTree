@@ -33,6 +33,10 @@ class Constants(BaseConstants):
     # payoff if both players Peace or both War
     both_Peace_payoff = c(2)
     both_War_payoff = c(1)
+    human_choices = {0: 'Peace', 1: 'Peace', 2: 'War', 3: 'Peace', 4: 'War', 5: 'War', 6: 'War', 7: 'Peace', 8: 'Peace', 9: 'War', 10: 'Peace', 11: 'Peace', 12: 'War', 13: 'Peace', 14: 'Peace', 15: 'Peace', 16: 'Peace', 17: 'Peace', 18: 'War', 19: 'War', 20: 'War', 21: 'War', 22: 'War', 23: 'Peace', 24: 'Peace', 25: 'Peace', 26: 'War', 27: 'Peace', 28: 'War', 29: 'Peace', 30: 'Peace', 31: 'War', 32: 'Peace', 33: 'Peace', 34: 'War', 35: 'Peace', 36: 'Peace', 37: 'War', 38: 'Peace', 39: 'Peace', 40: 'War', 41: 'War', 42: 'War', 43: 'Peace', 44: 'War', 45: 'War', 46: 'War', 47: 'Peace', 48: 'Peace', 49: 'War'}
+    human_ai_choices = {0: 'Peace', 1: 'War', 2: 'Peace', 3: 'Peace', 4: 'War', 5: 'Peace', 6: 'Peace', 7: 'Peace', 8: 'Peace', 9: 'War', 10: 'Peace', 11: 'Peace', 12: 'War', 13: 'Peace', 14: 'Peace', 15: 'War', 16: 'War', 17: 'War', 18: 'War', 19: 'Peace', 20: 'War', 21: 'War', 22: 'Peace', 23: 'Peace', 24: 'Peace', 25: 'Peace', 26: 'Peace', 27: 'War', 28: 'Peace', 29: 'War', 30: 'Peace', 31: 'Peace', 32: 'War', 33: 'Peace', 34: 'War', 35: 'Peace', 36: 'Peace', 37: 'War', 38: 'Peace', 39: 'Peace', 40: 'Peace', 41: 'War', 42: 'Peace', 43: 'Peace', 44: 'Peace', 45: 'War', 46: 'Peace', 47: 'Peace', 48: 'Peace', 49: 'Peace'}
+    ai_choices = {0: 'War', 1: 'War', 2: 'War', 3: 'Peace', 4: 'Peace', 5: 'War', 6: 'War', 7: 'War', 8: 'Peace', 9: 'War', 10: 'Peace', 11: 'Peace', 12: 'Peace', 13: 'War', 14: 'Peace', 15: 'War', 16: 'War', 17: 'Peace', 18: 'War', 19: 'Peace', 20: 'Peace', 21: 'War', 22: 'Peace', 23: 'Peace', 24: 'Peace', 25: 'War', 26: 'War', 27: 'Peace', 28: 'War', 29: 'War', 30: 'War', 31: 'War', 32: 'War', 33: 'War', 34: 'Peace', 35: 'Peace', 36: 'Peace', 37: 'Peace', 38: 'War', 39: 'War', 40: 'War', 41: 'Peace', 42: 'Peace', 43: 'Peace', 44: 'War', 45: 'Peace', 46: 'Peace', 47: 'Peace', 48: 'Peace', 49: 'War'}
+    
 
 class Subsession(BaseSubsession):
     pass

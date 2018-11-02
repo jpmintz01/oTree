@@ -53,21 +53,14 @@ SESSION_CONFIGS = [
         'num_rounds': 50,
         'app_sequence': ['rps',],# 'payment_info'],
     },
-
-    {
+{
         'name': 'multi_game_test',
         'display_name': "Experiment Start to Finish",
         'num_demo_participants': 1,
         'num_rounds': 10,
         'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','post_game_survey'],
-        #'app_sequence':random.shuffle(['prisoner_multiplayer', 'chicken']),
-        #['survey','prisoner_multiplayer',],#'closing_comments'],
-        'use_browser_bots': False,
-        'use_strategy_method': True,
-        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
-        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
-        'swerve_death_chance': 50, #1 in 50 chance of death
     },
+
 ]
 # see the end of this file for the inactive session configs
 
@@ -131,6 +124,20 @@ SECRET_KEY = '(92a15wamnlz#lnupw5agxu)s*cu^uh&ro27o9+onw)8kl@ub9'
 INSTALLED_APPS = ['otree']
 
 # inactive session configs
+#    {
+#        'name': 'multi_game_test',
+#        'display_name': "Experiment Start to Finish",
+#        'num_demo_participants': 1,
+#        'num_rounds': 10,
+#        'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','post_game_survey'],
+#        #'app_sequence':random.shuffle(['prisoner_multiplayer', 'chicken']),
+#        #['survey','prisoner_multiplayer',],#'closing_comments'],
+#        'use_browser_bots': False,
+#        'use_strategy_method': True,
+#        'crash_death_chance': 3, #1 in 3 chance of death in head-on crash
+#        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
+#        'swerve_death_chance': 50, #1 in 50 chance of death
+#    },
     #    {
     #        'name': 'prisoner',
     #        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
