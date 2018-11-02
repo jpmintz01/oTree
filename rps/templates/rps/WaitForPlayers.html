@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %} {% load otree static %}
+
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block title %}
+Gathering participants
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<script>
+    function playerOne(){
+        $("#progressBar").html("One Participant joined.");
+        $("#progressBar").css("width","60%");
+
+    }
+    function playerTwo(){
+        $("#progressBar").html("Second Participant joined.");
+        $("#progressBar").css("width","90%");
+    }
+    function activateAI(){
+        $("#progressBar").html("Activating AI.");
+        $("#progressBar").css("width","100%");
+    }
+    $(document).ready(function(){
+        setTimeout(function(){playerOne();}, 3000);
+        setTimeout(function(){playerTwo();}, 9000);
+        setTimeout(function(){activateAI();}, 10000);
+        setTimeout(function() { $('form').submit(); }, 12000);
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<body style="background-color: lightgray; color: black">
+    <div class="card bg-light instructions">
+        <div class="container">
+            <h2>Forming Game</h2>
+            <p>Waiting for <b>2</b> participants...</p> 
+            <div class="progress">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width:20%">Request sent...</div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

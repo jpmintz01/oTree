@@ -48,7 +48,13 @@ class Introduction(Page):
     def is_displayed(self):
         return self.round_number <= 1
 
-        
+
+class WaitForPlayers(Page):
+    def is_displayed(self):
+        return self.round_number <= 1
+    pass
+    
+    
 class Decision(Page):
     def is_displayed(self):
         return self.round_number <= self.session.config['num_rounds']
@@ -119,8 +125,8 @@ class Decision(Page):
 
         me.set_payoff()
         
-#class ResultsWaitPage(WaitPage):
-    
+class ResultsWaitPage(WaitPage):
+    pass
 #    def sim_wait(self):
 #        self.set_payoff()
     
@@ -166,8 +172,9 @@ class EndGame(Page):
     
 page_sequence = [
     Introduction,
+    WaitForPlayers,
     Decision,
-    #ResultsWaitPage,
+    ResultsWaitPage,
     Results,
 #    EndGame
 ]

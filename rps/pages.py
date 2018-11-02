@@ -23,7 +23,11 @@ def adversary_choice(self):
 class Introduction(Page):
     def is_displayed(self):
         return self.round_number == 1
-
+    
+class WaitForPlayers(Page):
+    def is_displayed(self):
+        return self.round_number <= 1
+    pass
         
 class Decision(Page):
     def is_displayed(self):
@@ -143,6 +147,7 @@ class EndGame(Page):
     
 page_sequence = [
     Introduction,
+    WaitForPlayers,
     Decision,
     #ResultsWaitPage,
     Results,

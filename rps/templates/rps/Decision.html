@@ -55,24 +55,17 @@
         -ms-transform: translate(-50%,-50%);
     }
     #adv_bounce, #player_bounce {
+/*        padding: 20px;*/
+    }
 
-        padding: 20px;
-    }
-    #button1 {
-        display:inline-block;
-    }
-    .button_pre_bounce { 
-        position:relative;
-        margin: 0 auto;
-    }
     #buttonbounce {
-
         position: absolute;
-        cursor: pointer;
+
     }
-    #outline_table td{
+    #outline_table td {
         padding: 50px 50px 50px 50px;
     }
+    
 </style>
 
 {% endblock %}
@@ -81,8 +74,8 @@
 <script>
     var human_advice = "{{ human_advice_v_adv_1 }}";
     var AI_advice = "{{ AI_advice_v_adv_1 }}";
-//    console.log("human advice = "+human_advice);
-//    console.log("AI advice = " + AI_advice);
+    //    console.log("human advice = "+human_advice);
+    //    console.log("AI advice = " + AI_advice);
     function log_user_choice (e){ //logs user's button click (rock/paper/scissors/AI/human), then returns R/P/S based on user click or choice of advisor.  
 
         console.log("user_button_choice"+$(e).attr("id"));
@@ -109,21 +102,25 @@
     } //logs the user's choice
 
     function disable_hide_other_buttons (e){
+        $(':button').prop('disabled', true); //disable all buttons
         $(':button').hide();
         $('.labels').hide();
         $('.un_labels').show();
-        $(':button').prop('disabled', true); //disable all buttons
+        $("#adv_bounce").show();
+        $("#player_bounce").show();
+
         //$(e).prop('disabled', false); //re-enable button the user selected (this is just for display since disabled buttons are greyed out) n
     } //disables user buttons so they can't change choice
     function bounce_fists (){
-        $("#adv_bounce").show();
-        $("#player_bounce").show();
+
         $("#adv_bounce").effect("bounce", { times:1 }, 400);
         $("#player_bounce").effect("bounce", { times:1 }, 400);
         $("#adv_bounce").effect("bounce", { times:1 }, 400);
         $("#player_bounce").effect("bounce", { times:1 }, 400);
+        console.log("3"+$("#outline_table").css("width"));
         $("#adv_bounce").effect("bounce", { times:1 }, 400);
-        $("#player_bounce").effect("bounce", { times:1 }, 400);  
+        $("#player_bounce").effect("bounce", { times:1 }, 400); 
+        console.log("4"+$("#outline_table").css("width"));
         $("#adv_bounce").effect("bounce", { times:1 }, 400);
         $("#player_bounce").effect("bounce", { times:1 }, 400);
     } // bounces the fists like in real RPS
@@ -173,27 +170,27 @@
         //$("#adv_button").removeClass("buttonFlip");
         if (w == "adversary") { //adversary won
             //            $(e).css("background-color", "gray");
-            $("#adv_bounce").css("color", "red");
-            $("#adv_bounce").css("border", "solid");
+            $("#adversary").css("color", "red");
+            $("#adversary").css("border", "solid");
 
             //$("#player_bounce").addClass("bg-danger")
-            $("#player_bounce").css('color','grey');
+            $("#player").css('color','grey');
             document.getElementById("overlay_text").innerHTML="You lost!";
             $("#overlay").css('background-color', 'rgba(200,0,0,0.8)');
             //setTimeout(function (){document.getElementById("overlay").style.display = "block"},1000); //delays before showing overlay
 
         } else if (w == "player") { //player won
-            $("#player_bounce").css('color','green');
+            $("#player").css('color','green');
             //$("#player_bounce").addClass("bg-success")
 
-            $("#player_bounce").css("border", "solid");
-            $("#adv_bounce").css("color", "grey");
+            $("#player").css("border", "solid");
+            $("#adversary").css("color", "grey");
             $("#overlay").css('background-color', 'rgba(0,155,0,0.8)');
             document.getElementById("overlay_text").innerHTML="You won!";
         } else { //draw
 
-            $("#adv_bounce").css("color", "grey");
-            $("#player_bounce").css('color','grey');
+            $("#adversary").css("color", "grey");
+            $("#player").css('color','grey');
             $("#overlay").css('background-color', 'rgba(0,0,0,0.8)');
             document.getElementById("overlay_text").innerHTML="It's a draw.";
         }
@@ -239,10 +236,9 @@
 {% block content %}
 <body style="background-color: lightgray; color: black">
     <h2 align="center">Round: {{player.round_number}} </h2>
-    <table frame="box" align="center" id="outline_table" style="background-color: white"><tr><td>
+    <table class="whitebox" frame="box" align="center" id="outline_table" style="background-color: white"><tr><td>
         <div  class="labels" align="center"><b>Choose wisely:</b></div><br>
         <table align="center">
-
             <th>
                 <tr>
                     <th>
@@ -259,7 +255,7 @@
                             <div style="display: none"  align="center" class="un_labels">
                                 <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
                                 </div>
-                                You<br>
+                                You<br>Player {{ participant.id}}
                             </div>
                         </div>
                     </th>
@@ -267,7 +263,7 @@
                         <div id="adversary">
                             <div style="display: none" align="center" class="un_labels">
                                 <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
-                                Adversary<br>(Player <b>uf74jd2</b>)
+                                Adversary<br>(Player <b>uf74jd</b>)
                             </div>
                         </div>
                     </th>
@@ -295,19 +291,20 @@
                 <tr> 
                     <th>
                         <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
-                            <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI
+                            <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI<br>Advisor
                         </button> 
                     </th> 
                     <th>
                         <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
-                            <i class="fas fa-user fa-3x"></i><br>Human
+                            <i class="fas fa-user fa-3x"></i><br>Human<br>Player h7dm4i
                         </button>
                     </th>
                 </tr>
             </table>
         </div>
 
-        </td></tr></table>
+        </td></tr>
+    </table>
     <hr>
     <!-- Table history of choices for player and adversary 1 -->
     <div id="flipHistoryTab" align="center">Click for Results of Previous Rounds</div>
