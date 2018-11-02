@@ -29,17 +29,19 @@ Fixed in this version:
 -- does python's random function provide enough true randomness?<br>
 -- lists came from the following code which I ran for 50 rounds :<br>
 ________________
+<pre>
 import random
 
-print('Enter number of rounds:')<br>
-num_rounds = input()<br>
-choice_dict = {}<br>
-for i in range(int(num_rounds)):<br><p>
-    choice = random.choice(['Rock', 'Paper', 'Scissors'])<br>
-    print(str(i+1)+": " +choice)<br>
-    choice_dict[i]=choice<br></p>
+print('Enter number of rounds:')
+num_rounds = input()
+choice_dict = {}
+for i in range(int(num_rounds)):
+    choice = random.choice(['Rock', 'Paper', 'Scissors'])
+    print(str(i+1)+": " +choice)
+    choice_dict[i]=choice
     
 print(choice_dict)
+</pre>
 ________________
 
 Fixed in recent versions: 
