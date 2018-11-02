@@ -8,8 +8,10 @@ To see the experiment in action, select "Experiment Start to Finish." then follo
 
 Notes:
 - Apps Version: 0.2
+- Readme Version 0.2.1
 - This is still a dev version - participant will see something different.
 - This link is a series of apps.
+
 
 To do:
 - create room & list of participant id's
@@ -24,7 +26,8 @@ To do:
 Fixed in this version:
 - added possibility of fixed decisions for various players in RPS<br>
 -- added lists in rps models.py under Constants<br>
--- lists came from the following code which I ran for 50 rounds 
+-- does python's random function provide enough true randomness?<br>
+-- lists came from the following code which I ran for 50 rounds :<br>
 ________________
 import random
 
