@@ -34,10 +34,10 @@ import random
 print('Enter number of rounds:')<br>
 num_rounds = input()<br>
 choice_dict = {}<br>
-for i in range(int(num_rounds)):<br>
+for i in range(int(num_rounds)):<br><p>
     choice = random.choice(['Rock', 'Paper', 'Scissors'])<br>
     print(str(i+1)+": " +choice)<br>
-    choice_dict[i]=choice<br>
+    choice_dict[i]=choice<br></p>
     
 print(choice_dict)
 ________________
