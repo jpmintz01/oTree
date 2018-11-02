@@ -7,15 +7,19 @@ Go to https://still-falls-66166.herokuapp.com/
 To see the experiment in action, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.  
 
 Notes:
-- Version: 0.1
+- Apps Version: 0.1
 - This is still a dev version - participant will see something different.
 - This link is a series of apps.
 
 To do:
+- create room & list of participant id's
+- add possibility of fixed decisions for various players
 - Add counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
 -- (PW,RPS-H,RPS-A), (RPS-H,RPS-A,PW), (RPS-A,RPS-H,PW), (PW,RPS-A,RPS-H)
-- Change/update/add immediate feedback on decisions
+- Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
+- block browser commands (back/reload/keyboard/etc)
+- 
 
 Fixed:
 - Removed flying F-16 (or fix animation)
