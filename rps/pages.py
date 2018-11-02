@@ -8,7 +8,7 @@ def adversary_choice(self):
     choice_list = ['Rock','Paper','Scissors']
     #if me.adv_1_type == 'human': #if adv = human
         
-    me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
+    me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #define human strategy (random choice)
 #    else: # this is the AI 'TFT
 #        if me.round_number == 1: #
 #            me.decision_of_adv_1 = random.choice(choice_list)
@@ -19,7 +19,21 @@ def adversary_choice(self):
 #                me.decision_of_adv_1 = 'Scissors'
 #            else:
 #                me.decision_of_adv_1 = 'Rock'
-                    
+
+def ai_advice_adv_1(self): #actually AI and human advice.
+    me = self.player
+    last_round = max(0, self.round_number-1)
+#    if me.round_number == 1: #
+#        return random.choice(['Rock','Paper','Scissors'])
+#    else: 
+#        if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
+#            return 'Paper' #beat his last move
+#        elif me.in_round(last_round).decision_vs_adv_1 == 'Paper':
+#            return 'Scissors'
+#        else:
+#            return 'Rock'
+    return Constants.advice_choices[self.round_number-1]
+    
 class Introduction(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -47,17 +61,7 @@ class Decision(Page):
         me = self.player
         last_round = max(0, self.round_number-1)
  
-                    
-        def ai_advice_adv_1(self):
-            if me.round_number == 1: #
-                return random.choice(['Rock','Paper','Scissors'])
-            else:
-                if me.in_round(last_round).decision_vs_adv_1 == 'Rock':
-                    return 'Paper' #beat his last move
-                elif me.in_round(last_round).decision_vs_adv_1 == 'Paper':
-                    return 'Scissors'
-                else:
-                    return 'Rock'
+    
                 
         
         adversary_choice(self);
@@ -65,7 +69,7 @@ class Decision(Page):
         for p in me.in_all_rounds():
             history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
         return {
-            'human_advice_v_adv_1': random.choice(['Rock','Paper','Scissors']),
+            'human_advice_v_adv_1': ai_advice_adv_1(self),
             'AI_advice_v_adv_1': ai_advice_adv_1(self),
             'my_decision_adv_1': me.decision_vs_adv_1,
             'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
