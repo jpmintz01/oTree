@@ -5,9 +5,6 @@ import random
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-
-
-
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
@@ -20,44 +17,46 @@ SESSION_CONFIGS = [
 
     {
         'name': 'informed_consent',
-        'display_name': "Informed Consent",
+        'display_name': "1. Informed Consent",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent'],
     },
     {
         'name': 'survey',
-        'display_name': "Pre-Game Questionnaire",
+        'display_name': "2. Pre-Game Questionnaire",
         'num_demo_participants': 1,
-        'app_sequence': ['survey'],
+        'app_sequence': ['informed_consent','survey'],
     },
-    {
-        'name': 'post_game_survey',
-        'display_name': "Post-Game Questionnaire",
-        'num_demo_participants': 1,
-        'app_sequence': ['post_game_survey'],
-    },
-
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "Peace-War (multiplayer strategic no chat)",
+        'display_name': "3/4. Peace-War (multiplayer strategic no chat)",
         'num_demo_participants': 1,
-        'app_sequence': ['prisoner_multiplayer'],
+        'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
-        'num_rounds': 50,
+        'num_PW_rounds': 50,
     },
     {
         'name': 'rps',
-        'display_name': "Rock Paper Scissors (with advisors)",
+        'display_name': "3/4. Rock Paper Scissors (with advisors)",
         'num_demo_participants': 1,
-        'num_rounds': 50,
-        'app_sequence': ['rps',],# 'payment_info'],
+        'dev_game': True,
+        'num_RPS_rounds': 50,
+        'app_sequence': ['informed_consent','rps'],# 'payment_info'],
+    },
+        {
+        'name': 'post_game_survey',
+        'display_name': "5. Post-Game Questionnaire",
+        'num_demo_participants': 1,
+        'app_sequence': ['informed_consent','post_game_survey'],
     },
 {
         'name': 'multi_game_test',
-        'display_name': "Experiment Start to Finish",
+        'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
         'num_rounds': 10,
+        'num_RPS_rounds': 10,
+        'num_PW_rounds': 5,
         'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','post_game_survey'],
     },
 
@@ -112,9 +111,9 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
 DEMO_PAGE_INTRO_HTML = """
-Here are various games implemented with 
-oTree. These games are open
-source, and you can modify them as you wish.
+Click an app, then the bottom link on the next page.
+<br><br>
+The 'Experiment Start to Finish' is what a participant will see.
 """
 
 # don't share this with anybody.

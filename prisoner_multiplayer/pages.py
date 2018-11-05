@@ -48,18 +48,18 @@ def adversary_choice(self):
     
 class Introduction(Page):
     def is_displayed(self):
-        return self.round_number <= 1
+        return ((self.round_number <= 1) and (self.participant.vars['consent']))
 
 
 class WaitForPlayers(Page):
     def is_displayed(self):
-        return self.round_number <= 1
+        return ((self.round_number <= 1)and (self.participant.vars['consent']))
     pass
     
     
 class Decision(Page):
     def is_displayed(self):
-        return self.round_number <= self.session.config['num_rounds']
+        return ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']))
     form_model = 'player'
 #    def get_form_fields(self):
 #        fields = []
@@ -76,7 +76,7 @@ class Decision(Page):
         last_round = max(0,self.round_number-1)
         history_adv_1 = {}
         history_adv_2 = {}
-        history_adv_3= {}
+        history_adv_3 = {}
             
         for p in me.in_all_rounds():
             history_adv_1[p.round_number]=[p.decision_vs_adv_1, p.payoff_vs_adv_1, p.decision_of_adv_1, p.payoff_of_adv_1]
@@ -139,7 +139,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == self.session.config['num_rounds']
+        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']))
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
@@ -170,13 +170,13 @@ class EndGame(Page):
     form_model = 'player'
     form_fields = ['player_guess_adv_1_type']
     def is_displayed(self):
-        return self.round_number == self.session.config['num_rounds']
+        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']))
     
 page_sequence = [
     Introduction,
     WaitForPlayers,
     Decision,
-    ResultsWaitPage,
+#    ResultsWaitPage,
     Results,
 #    EndGame
 ]

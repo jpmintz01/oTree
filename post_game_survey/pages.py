@@ -4,6 +4,8 @@ from .models import Constants
 
 
 class PlayExperience(Page):
+    def is_displayed(self):
+        return (self.participant.vars['consent'])
     form_model = 'player'
     form_fields = [
         'prisoner_strategy',
@@ -19,6 +21,8 @@ class PlayExperience(Page):
         }
 
 class Comments(Page):
+    def is_displayed(self):
+        return (self.participant.vars['consent'])
     form_model = 'player'
     form_fields = [
         'comments_human_players',
@@ -34,6 +38,8 @@ class Comments(Page):
         }
 
 class Debrief(Page):
+    def is_displayed(self):
+        return (self.participant.vars['consent'])
     form_model = 'player'
     form_fields = ['agree']
 

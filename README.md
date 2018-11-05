@@ -9,14 +9,13 @@ To see the experiment start to finish, select "Experiment Start to Finish." then
 To work with individual apps, click the app, then the bottom link.
 
 Notes:
-- Apps Version: 0.2.3
-- Readme Version 0.2.4
+- Apps Version: 0.2.5
+- Readme Version 0.2.5
 - This is still a dev version - participant will see something different.
 - This link is a series of apps.
 
 To do before experiment:
 - create room & list of participant id's
-- separate number of rounds for P-W and RPS
 - Add counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
 -- (PW,RPS-H,RPS-A), (RPS-H,RPS-A,PW), (RPS-A,RPS-H,PW), (PW,RPS-A,RPS-H)
 - Change/update/add immediate visual feedback on decisions
@@ -25,17 +24,15 @@ To do before experiment:
 
 To do later:
 - Clean up code (low priority as long as it works)
+-- Move styles and such to global page
 - Comment code (before publishing)
 
 
 
 Fixed in this version:
-- added possibility of fixed decisions for various players in P-W (same technique as RPS - see below)
-
--- added lists in rps models.py under Constants<br>
--- does python's random function provide enough true randomness?<br>
--- lists came from the following code which I ran for 50 rounds :<br>
-
+- separated number of rounds for P-W and RPS
+- informed consent now a) lets you play or b) sends you to end
+- updatd demo readme on demo page
 
 Fixed in recent versions: 
 - Removed flying F-16 (or fix animation)
@@ -43,7 +40,11 @@ Fixed in recent versions:
 - Added other participant IDs & wait pages.
 - fixed html formatting errors
 - started version tracking
+- added possibility of fixed decisions for various players in P-W (same technique as RPS - see below)
 - added possibility of fixed decisions for various players in RPS<br>
+-- added lists in rps models.py under Constants<br>
+-- does python's random function provide enough true randomness?<br>
+-- lists came from the following code which I ran for 50 rounds :<br>
 ________________
 <pre>
 import random

@@ -3,10 +3,15 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+    
 class Introduction(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
     pass
 
 class Demographics(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
     form_model = 'player'
     form_fields = ['age',
                    'gender',
@@ -23,6 +28,8 @@ class Demographics(Page):
         }
 
 class Experience(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
     form_model = 'player'
     form_fields = ['years_military_experience',
                    'game_theory_experience',
@@ -36,6 +43,8 @@ class Experience(Page):
         }
 
 class Expectations(Page): 
+    def is_displayed(self):
+        return self.participant.vars['consent']
     form_model = 'player'
     form_fields = ['self_cooperativeness',
                    'other_humans_cooperativeness',

@@ -77,14 +77,15 @@ Informed Consent
     Please click continue to indicate your willingness to participate in this research study. 
 </p>
 <div align="center">
-    <button align="center" style="background-color: green; border-color: black;" class="btn btn-secondary active" id="continue" autocomplete="off">
+    <button align="center" style="background-color: green; border-color: black;" class="btn btn-secondary active" name="agree_to_participate" value="True" autocomplete="off">
         <i class="fas fa-arrow-circle-right fa-2x"></i><br>I wish to participate in this study 
     </button>
 </div>
 <hr>
 <div align="center">
-    <button align="center" style="background-color: red; border-color: black;" class="btn btn-secondary active" id="exit" autocomplete="off">
+    <button align="center" style="background-color: red; border-color: black;" class="btn btn-secondary active" name="agree_to_participate" value="False" autocomplete="off">
         <i class="fas fa-times-circle fa-2x"></i><br>I do <b>NOT</b> wish to participate in this study.
     </button>
 </div>
+ {{ form.agree_to_participate.errors }}
 {% endblock %}

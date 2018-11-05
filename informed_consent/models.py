@@ -26,5 +26,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    agree_to_participate = models.BooleanField()
-    
+    agree_to_participate = models.StringField()
+    def consent_check (self):
+        self.participant.vars['consent'] = True

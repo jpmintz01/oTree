@@ -5,6 +5,7 @@ from otree.api import (
 import random
 
 
+
 class Constants(BaseConstants):
     name_in_url = 'survey'
     players_per_group = None
@@ -26,6 +27,7 @@ def likert_var(label):
         label=label,
         widget=widgets.RadioSelectHorizontal,
     )
+
 
 class Player(BasePlayer):
 

@@ -5,24 +5,9 @@
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+
 
 <style>
-    #panel, #flip {
-        padding: 5px;
-        text-align: center;
-        background-color: #e5eecc;
-        border: solid 1px #c3c3c3;
-        color: black
-    }
-
-    #panel {
-        text-align: inherit;
-        padding: 50px;
-        display: none;
-        color: black;
-    }
 
     .highlight-row-on-hover:hover td {
         background-color: #fcf8e3;
@@ -165,7 +150,7 @@
         <tr class="underlineCell">
             <td align="center">
                 <div align="center">
-                    <i class="fas fa-user-circle fa-4x"><br><div align="center" style="font-size: 30%">You</div></i>
+                    <i class="fas fa-user-circle fa-4x"><br><div align="center" style="font-size: 30%">You <br>(Player {{ session.code }})</div></i>
                 </div>
                 Current score: {{ my_total_payoff }}
             </td>
@@ -220,7 +205,7 @@
             <td align="center">
                 <div align="center">
                     <button class="btn btn-primary btn-large  adv_1_DecisionIndicator" style="visibility: hidden">
-                        <i class="fas fa-user fa-4x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Player xqf37d</div></i></button>
+                        <i class="fas fa-user fa-4x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Player xqf37d5r</div></i></button>
                 </div>
 
 
@@ -270,7 +255,7 @@
                 <div>
                     <button class="btn btn-primary btn-large  adv_2_DecisionIndicator" style="visibility: hidden">
 
-                        <i class="fas fa-user fa-4x" style="visibility: visible"><i class="fas fa-laptop-code" style="visibility: visible"></i><br><div align="center" style="font-size: 30%">Player ms75ks (w/AI)</div></i>
+                        <i class="fas fa-user fa-4x" style="visibility: visible"><i class="fas fa-laptop-code" style="visibility: visible"></i><br><div align="center" style="font-size: 30%">Player ms75k2ws (w/AI)</div></i>
                     </button>
                 </div>
             </td>

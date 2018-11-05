@@ -9,8 +9,7 @@ author = 'Spear'
 doc = """
 An electronic example of the questions in the post-game questionnaire/interview
 """
-
-
+    
 class Constants(BaseConstants):
     name_in_url = 'post_game_survey'
     players_per_group = None
@@ -32,7 +31,11 @@ def likert_var(label):
         widget=widgets.RadioSelectHorizontal,
     )
 
+#if self.session.configs['dev_game']:
+#    self.participant.vars['consent'] = True
+    
 class Player(BasePlayer):
+    
     prisoner_strategy = models.StringField(
         label='What was your strategy(ies) in the Peace-War game(i.e. "I always played Peace with the humans and War against the AI","I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")'
     )

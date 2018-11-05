@@ -36,16 +36,16 @@ def ai_advice_adv_1(self): #actually AI and human advice.
     
 class Introduction(Page):
     def is_displayed(self):
-        return self.round_number == 1
+        return ((self.round_number == 1)and (self.participant.vars['consent']))
     
 class WaitForPlayers(Page):
     def is_displayed(self):
-        return self.round_number <= 1
+        return ((self.round_number <= 1)and (self.participant.vars['consent']))
     pass
         
 class Decision(Page):
     def is_displayed(self):
-        return self.round_number <= self.session.config['num_rounds']
+        return ((self.round_number <= self.session.config['num_RPS_rounds'])and (self.participant.vars['consent']))
     
     form_model = 'player'
     def get_form_fields(self):
@@ -116,7 +116,7 @@ class Decision(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == self.session.config['num_rounds']
+        return ((self.round_number == self.session.config['num_RPS_rounds'])and (self.participant.vars['consent']))
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
@@ -147,7 +147,7 @@ class EndGame(Page):
     form_model = 'player'
     form_fields = ['player_guess_adv_1_type']    
     def is_displayed(self):
-        return self.round_number == self.session.config['num_rounds']
+        return ((self.round_number == self.session.config['num_RPS_rounds'])and (self.participant.vars['consent']))
     
 page_sequence = [
     Introduction,
