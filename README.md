@@ -4,19 +4,19 @@
 
 Go to https://still-falls-66166.herokuapp.com/
 
-To see the experiment in action, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.  
+To see the experiment start to finish, select "Experiment Start to Finish." then follow select the bottom link to open the experiment.  
+
+To work with individual apps, click the app, then the bottom link.
 
 Notes:
-- Apps Version: 0.2.2
-- Readme Version 0.2.2
+- Apps Version: 0.2.3
+- Readme Version 0.2.3
 - This is still a dev version - participant will see something different.
 - This link is a series of apps.
-
 
 To do:
 - create room & list of participant id's
 - separate number of rounds for P-W and RPS
-- add possibility of fixed decisions for various players in P-W
 - Add counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
 -- (PW,RPS-H,RPS-A), (RPS-H,RPS-A,PW), (RPS-A,RPS-H,PW), (PW,RPS-A,RPS-H)
 - Change/update/add immediate visual feedback on decisions
@@ -24,10 +24,20 @@ To do:
 - block browser commands (back/reload/keyboard/etc)
 
 Fixed in this version:
-- added possibility of fixed decisions for various players in RPS<br>
+- added possibility of fixed decisions for various players in P-W (same technique as RPS - see below)
+
 -- added lists in rps models.py under Constants<br>
 -- does python's random function provide enough true randomness?<br>
 -- lists came from the following code which I ran for 50 rounds :<br>
+
+
+Fixed in recent versions: 
+- Removed flying F-16 (or fix animation)
+- removed "what type of algorithm were you playing against?"
+- Added other participant IDs & wait pages.
+- fixed html formatting errors
+- started version tracking
+- added possibility of fixed decisions for various players in RPS<br>
 ________________
 <pre>
 import random
@@ -44,18 +54,6 @@ print(choice_dict)
 </pre>
 ________________
 
-Fixed in recent versions: 
-- Removed flying F-16 (or fix animation)
-- removed "what type of algorithm were you playing against?"
-- Added other participant IDs & wait pages.
-- fixed html formatting errors
-- started version tracking
-
-
-Otherwise, click on any app.
-For 1-Participant games, select the bottom link to open the game in a new tab.
-
-For 2-participant games, select the link just below "open in split screen."
 
 ##
 

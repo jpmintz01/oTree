@@ -6,41 +6,43 @@ import random
 def adversary_choice(self):
     me = self.player
     last_round = max(1, self.round_number-1)
-    me = self.player
     choice_list = ['Peace','War']
-    if ((me.adv_1_type == 'human') or (me.adv_1_type == 'human+AI')): #if adv = human
-        me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
-    else: # this is the AI 'TFT
-        if me.round_number == 1: # Peace in round one (can change)
-            me.decision_of_adv_1 = 'Peace'
-        else:
-            if me.in_round(last_round).decision_vs_adv_1 == 'War': #no max arg needed because it's nested if that isn't round 1
-                me.decision_of_adv_1 = 'War' #if player Wars, adv Wars
-            else:
-                me.decision_of_adv_1 = 'Peace'
-
-
-    if ((me.adv_2_type == 'human') or (me.adv_2_type == 'human+AI')): #if adv = human
-        me.decision_of_adv_2 = random.choice(choice_list)#define human strategy (random choice)
-    else: # this is the AI 'TFT
-        if me.round_number == 1: # Peace in round one (can change)
-            me.decision_of_adv_2 = 'Peace'
-        else:
-            if me.in_round(last_round).decision_vs_adv_2 == 'War': #no max arg needed because it's nested if that isn't round 1
-                me.decision_of_adv_2 = 'War' #if player Wars, adv Wars
-            else:
-                me.decision_of_adv_2 = 'Peace'
-
-    if ((me.adv_3_type == 'human') or (me.adv_3_type == 'human+AI')): #if adv = human
-        me.decision_of_adv_3 = random.choice(choice_list)#define human strategy (random choice)
-    else: # this is the AI 'TFT
-        if me.round_number == 1: # Peace in round one (can change)
-            me.decision_of_adv_3 = 'Peace'
-        else:
-            if me.in_round(last_round).decision_vs_adv_3 == 'War': #no max arg needed because it's nested if that isn't round 1
-                me.decision_of_adv_3 = 'War' #if player Wars, adv Wars
-            else:
-                me.decision_of_adv_3 = 'Peace'
+    me.decision_of_adv_1 = Constants.human_choices[self.round_number-1] #minus 1 since dictionary starts with zero
+    me.decision_of_adv_2 = Constants.human_ai_choices[self.round_number-1]
+    me.decision_of_adv_3 = Constants.ai_choices[self.round_number-1] 
+#    if ((me.adv_1_type == 'human') or (me.adv_1_type == 'human+AI')): #if adv = human
+#        me.decision_of_adv_1 = random.choice(choice_list)#define human strategy (random choice)
+#    else: # this is the AI 'TFT
+#        if me.round_number == 1: # Peace in round one (can change)
+#            me.decision_of_adv_1 = 'Peace'
+#        else:
+#            if me.in_round(last_round).decision_vs_adv_1 == 'War': #no max arg needed because it's nested if that isn't round 1
+#                me.decision_of_adv_1 = 'War' #if player Wars, adv Wars
+#            else:
+#                me.decision_of_adv_1 = 'Peace'
+#
+#
+#    if ((me.adv_2_type == 'human') or (me.adv_2_type == 'human+AI')): #if adv = human
+#        me.decision_of_adv_2 = random.choice(choice_list)#define human strategy (random choice)
+#    else: # this is the AI 'TFT
+#        if me.round_number == 1: # Peace in round one (can change)
+#            me.decision_of_adv_2 = 'Peace'
+#        else:
+#            if me.in_round(last_round).decision_vs_adv_2 == 'War': #no max arg needed because it's nested if that isn't round 1
+#                me.decision_of_adv_2 = 'War' #if player Wars, adv Wars
+#            else:
+#                me.decision_of_adv_2 = 'Peace'
+#
+#    if ((me.adv_3_type == 'human') or (me.adv_3_type == 'human+AI')): #if adv = human
+#        me.decision_of_adv_3 = random.choice(choice_list)#define human strategy (random choice)
+#    else: # this is the AI 'TFT
+#        if me.round_number == 1: # Peace in round one (can change)
+#            me.decision_of_adv_3 = 'Peace'
+#        else:
+#            if me.in_round(last_round).decision_vs_adv_3 == 'War': #no max arg needed because it's nested if that isn't round 1
+#                me.decision_of_adv_3 = 'War' #if player Wars, adv Wars
+#            else:
+#                me.decision_of_adv_3 = 'Peace'
 
     
     

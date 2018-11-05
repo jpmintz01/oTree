@@ -8,7 +8,7 @@ def adversary_choice(self):
     choice_list = ['Rock','Paper','Scissors']
     #if me.adv_1_type == 'human': #if adv = human
         
-    me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #define human strategy (random choice)
+    me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #set the choice to the control
 #    else: # this is the AI 'TFT
 #        if me.round_number == 1: #
 #            me.decision_of_adv_1 = random.choice(choice_list)
