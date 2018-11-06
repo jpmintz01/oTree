@@ -39,6 +39,7 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         adv_choices = ['Human','AI']
         for p in self.get_players():
+            p.participant.vars['RPS_played'] = "True"
             if self.session.config['counterbalancing'] in (1,2):
                 # demo mode
                 p.first_adv = 'Human'

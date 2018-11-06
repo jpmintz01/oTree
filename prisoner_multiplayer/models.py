@@ -39,13 +39,28 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    pass
-
-
+    def creating_session(self):
+        for p in self.get_players():
+            try:
+                if p.participant.vars['RPS_played']:
+                    rps_played = True
+            except:
+                rps_played = False
+                
+            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
+                # demo mode
+                p.play_pw = True
+            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
+                p.play_pw = False
+            else:
+                # (randomizes)
+                p.play_pw = random.choice([True,False])
+                
 class Group(BaseGroup):
     pass
 
 class Adversary:  ## not used in this version - didn't work with oTree
+
     adv_decision = models.StringField(
         choices=['Peace', 'War'],
         doc="""Adversary decision""",
@@ -85,6 +100,7 @@ class Adversary:  ## not used in this version - didn't work with oTree
                     adversary.adv_decision = 'Peace'
 
 class Player(BasePlayer):
+    play_pw = models.BooleanField() #play this game this time
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Peace', 'War'],

@@ -68,7 +68,7 @@ class WaitForPlayers(Page):
         #need to change number of players based on whether two humans or one
     def vars_for_template (self):
         return {'adversary_id': adversary_id(self)}
-    pass
+   
         
 class Decision(Page):
     def is_displayed(self):
@@ -181,5 +181,5 @@ page_sequence = [
     Decision,
     #ResultsWaitPage,
     Results,
-    EndGame
+#    EndGame
 ]
