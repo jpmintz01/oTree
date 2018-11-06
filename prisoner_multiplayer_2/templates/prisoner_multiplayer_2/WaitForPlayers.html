@@ -3,7 +3,8 @@
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -15,13 +16,13 @@ Gathering participants
 {% block scripts %}
 
 <script>
-    
     function playerOne(){
         $("#progressBar").html("One Participant joined.");
         $("#progressBar").css("width","60%");
+
     }
-    function allPlayers(){
-        $("#progressBar").html("All Participants joined.");
+    function playerTwo(){
+        $("#progressBar").html("Second Participant joined.");
         $("#progressBar").css("width","90%");
     }
     function activateAI(){
@@ -29,15 +30,10 @@ Gathering participants
         $("#progressBar").css("width","100%");
     }
     $(document).ready(function(){
-        var adversary_type = "{{ adversary_id }}";
-        if (adversary_type != "AI"){
-            setTimeout(function(){playerOne();}, 3000);
-            $("#num_participants").html("Waiting for <b>2</b> participants...");
-        };
-//        Math.floor(Math.random() * 1000) + 500 // would use to randomize timing of simulated players joining
-        setTimeout(function(){allPlayers();}, 9000);
-        setTimeout(function(){activateAI();}, 10000);
-        setTimeout(function() { $('form').submit(); }, 12000);
+        setTimeout(function(){playerOne();}, 4000);
+        setTimeout(function(){playerTwo();}, 10000);
+        setTimeout(function(){activateAI();}, 11000);
+        setTimeout(function() { $('form').submit(); }, 13000);
     });
 </script>
 {% endblock %}
@@ -47,7 +43,7 @@ Gathering participants
     <div class="card bg-light instructions">
         <div class="container">
             <h2>Forming Game</h2>
-            <div id="num_participants">Waiting for <b>1</b> participant...</div>
+            <p>Waiting for <b>2</b> participants...</p> 
             <div class="progress">
                 <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width:20%">Request sent...</div>
             </div>

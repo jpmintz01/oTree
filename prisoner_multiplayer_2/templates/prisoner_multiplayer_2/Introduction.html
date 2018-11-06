@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Multiplayer Peace-War Game
+{% endblock %}
+
+{% block content %}
+
+    {% include Constants.instructions_template %}
+
+    {% next_button %}
+
+{% endblock %}

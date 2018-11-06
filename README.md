@@ -9,18 +9,37 @@ To see the experiment start to finish, select "Experiment Start to Finish." then
 To work with individual apps, click the app, then the bottom link.
 
 Notes:
-- Apps Version: 0.2.5
-- Readme Version 0.2.5
-- This is still a dev version - participant will see something different.
-- This link is a series of apps.
+- Apps Versions:
+-- PW 0.2.6
+-- RPS 0.2.7
+-- settings 0.2.7
+- Readme Version 0.2.7
+- The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- test server
+- test data collection
+- switch to postgresql?
+- runserver prodserver vs devserver
+- check peace-war payoffs (war-war should be negative...)
+- add adversary type and icon to RPS:
+-- instructions
+-- decision & win page
+-- results page
 - create room & list of participant id's
+-- Do I need to split them up by AU College?
 - Add counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
--- (PW,RPS-H,RPS-A), (RPS-H,RPS-A,PW), (RPS-A,RPS-H,PW), (PW,RPS-A,RPS-H)
+-- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
+-- 2. RPS-(H/A),PW2<br>
+-- 3. RPS-(A/H),PW2<br>
+-- 4. PW,RPS-(A/H) <br>
+-- Means (PW, RPS, PW2) <br>
+-- create RPS-(A or H) from RPS and PW2 from PW
+--- randomize adversary player id
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
 - block browser commands (back/reload/keyboard/etc)
+-
 
 To do later:
 - Clean up code (low priority as long as it works)
@@ -28,11 +47,13 @@ To do later:
 - Comment code (before publishing)
 
 
-
 Fixed in this version:
 - separated number of rounds for P-W and RPS
 - informed consent now a) lets you play or b) sends you to end
 - updatd demo readme on demo page
+- created RPS-(A or H) from RPS
+-- randomized adversary & advisor player id in RPS
+- fix CSS for moving progress bar
 
 Fixed in recent versions: 
 - Removed flying F-16 (or fix animation)

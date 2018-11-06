@@ -254,7 +254,7 @@
                             <div style="display: none"  align="center" class="un_labels">
                                 <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
                                 </div>
-                                You<br>Player {{ participant.id}}
+                                You<br>Player {{ player.id}}
                             </div>
                         </div>
                     </th>
@@ -262,7 +262,7 @@
                         <div id="adversary">
                             <div style="display: none" align="center" class="un_labels">
                                 <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
-                                Adversary<br>(Player <b>uf74jd3c</b>)
+                                Adversary<br>({{ adversary_id }})
                             </div>
                         </div>
                     </th>
@@ -295,7 +295,7 @@
                     </th> 
                     <th>
                         <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
-                            <i class="fas fa-user fa-3x"></i><br>Human<br>Player h7d0jm4i
+                            <i class="fas fa-user fa-3x"></i><br>Person<br>({{ human_advisor_id}})
                         </button>
                     </th>
                 </tr>

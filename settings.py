@@ -30,34 +30,55 @@ SESSION_CONFIGS = [
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "3/4. Peace-War (multiplayer strategic no chat)",
+        'display_name': "3. Peace-War (ver 0.2.6) (multiplayer strategic no chat)",
+        'num_demo_participants': 1,
+        'app_sequence': ['informed_consent','prisoner_multiplayer'],
+        'use_browser_bots': False,
+        'num_PW_rounds': 50,
+    },
+
+    {
+        'name': 'rps',
+        'display_name': "4/5. Rock Paper Scissors (with advisors)",
+        'num_demo_participants': 1,
+        'dev_game': True,
+        'num_RPS_rounds': 2,
+        'counterbalancing': 3,#enter None or 1, 2, 3, or 4
+        #defines the counterbalance order
+#        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
+#        -- 2. RPS-(H/A),PW2<br>
+#        -- 3. RPS-(A/H),PW2<br>
+#        -- 4. PW,RPS-(A/H) <br>
+        'app_sequence': ['informed_consent','rps'],# 'payment_info'],
+    },
+    {
+        'name': 'prisoner_multiplayer_2',
+        'display_name': "5. Peace-War (ver 0.2.6) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
         'num_PW_rounds': 50,
     },
     {
-        'name': 'rps',
-        'display_name': "3/4. Rock Paper Scissors (with advisors)",
-        'num_demo_participants': 1,
-        'dev_game': True,
-        'num_RPS_rounds': 50,
-        'app_sequence': ['informed_consent','rps'],# 'payment_info'],
-    },
-        {
         'name': 'post_game_survey',
-        'display_name': "5. Post-Game Questionnaire",
+        'display_name': "6. Post-Game Questionnaire",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent','post_game_survey'],
     },
-{
+    {
         'name': 'multi_game_test',
         'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
-        'num_rounds': 10,
-        'num_RPS_rounds': 10,
-        'num_PW_rounds': 5,
-        'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','post_game_survey'],
+        'num_rounds': 1,
+        'num_RPS_rounds': 1,
+        'num_PW_rounds': 1,
+        'counterbalancing': 1, #enter None or 1, 2, 3, or 4
+        #defines the counterbalance order
+#        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
+#        -- 2. RPS-(H/A),PW2<br>
+#        -- 3. RPS-(A/H),PW2<br>
+#        -- 4. PW,RPS-(A/H) <br>
+        'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','prisoner_multiplayer_2','post_game_survey'],
     },
 
 ]
@@ -78,10 +99,15 @@ ROOMS = [
     #        'participant_label_file': '_rooms/econ101.txt',
     #    },
     {
-        'name': 'USAFA',
-        'display_name': 'USAFA',
-        'participant_label_file': '_rooms/USAFA.txt',
+        'name': 'AU',
+        'display_name': 'Air University',
+        'participant_label_file': '_rooms/AU.txt',
     },
+    #    {
+    #        'name': 'USAFA',
+    #        'display_name': 'USAFA',
+    #        'participant_label_file': '_rooms/USAFA.txt',
+    #    },
     #    {
     #        'name': 'live_demo',
     #        'display_name': 'Room for live demo (no participant labels)',
@@ -137,18 +163,18 @@ INSTALLED_APPS = ['otree']
 #        'doc': """ Edit the 'crash_death_chance' to a 1 in X number. If you want the chances of a crash death to be 1 in 1 (100%), enter 1.  If you want it to be 1 in 10, enter 10. to change the factor to that of the death payoff (usually negative).  Edit the 'swerve_death_chance' to a 1 in X number. If you want the chances of a swerve death to be 1 in 1000, enter 1000. It will randomly change the factor by which crash payoff (usually negative) is multiplied to that of the death_payoff.""",
 #        'swerve_death_chance': 50, #1 in 50 chance of death
 #    },
-    #    {
-    #        'name': 'prisoner',
-    #        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
-    #        'num_demo_participants': 2,
-    #        'app_sequence': ['prisoner', 'payment_info'],
-    #    },
-    #    {
-    #        'name': 'prisoner_w_comms',
-    #        'display_name': "Prisoner's Dilemma (one-shot with Discrete Comms) (not working)",
-    #        'num_demo_participants': 2,
-    #        'app_sequence': ['prisoner_w_comms'],
-    #    },
+#    {
+#        'name': 'prisoner',
+#        'display_name': "Prisoner's Dilemma (one-shot w/chat)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['prisoner', 'payment_info'],
+#    },
+#    {
+#        'name': 'prisoner_w_comms',
+#        'display_name': "Prisoner's Dilemma (one-shot with Discrete Comms) (not working)",
+#        'num_demo_participants': 2,
+#        'app_sequence': ['prisoner_w_comms'],
+#    },
 
 #    {
 #        'name': 'prisoner',
