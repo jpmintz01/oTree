@@ -12,12 +12,14 @@ Notes:
 - Apps Versions:<br>
 -- PW 0.2.8<br>
 -- RPS 0.2.8<br>
--- settings.py 0.2.8<br>
+-- settings.py 0.2.8.1<br>
 -- questionnaires 0.2.8
-- Readme Version 0.2.8
+- Readme Version 0.2.9
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- check fixed advice and adversary choices to see win/lose percentage -> should be near 50%?
+- automate counterbalancing by participant id's
 - fix post-game questions<br>
 -- remove chicken <br>
 -- change questions to "Why did you choose the strategy you did?"
@@ -45,12 +47,42 @@ To do later:
 
 
 Fixed in this version:
+- created random participant id generator (with last character 1-4 indicating counterbalancing treatment)
+________________
+<pre>
+import random
+import string
+
+print('Enter number of participants:')
+num_rounds = input()
+
+print('Enter number of characters per participant ID:')
+num_chars = input()
+
+print('Enter filename')
+filename = input()
+f=open(filename, "w+")
+
+participants = []
+for i in range(int(num_rounds)):
+    participants.append('')
+    
+    for j in range (int(num_chars)-1):
+        choice = random.choice(string.ascii_lowercase + string.digits)
+        participants[i] += choice
+        
+    participants[i] += str(random.choice([1,2,3,4])) #adds random character 1-4
+    f.write(participants[i]+"\n")
+    
+f.close()
+</pre>
+________________
 - separated number of rounds for P-W and RPS
 - informed consent now a) lets you play or b) sends you to end
 - updatd demo readme on demo page
 - created RPS-(A or H) from RPS<br>
 -- randomized adversary & advisor player id in RPS
-- fix CSS for moving progress bar
+- fix CSS for animated progress bar
 - Added counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
 -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
 -- 2. RPS-(H/A),PW2<br>

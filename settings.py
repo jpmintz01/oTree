@@ -69,7 +69,7 @@ SESSION_CONFIGS = [
         'name': 'multi_game_test',
         'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
-        'num_rounds': 1,
+#        'num_rounds': 1,
         'num_RPS_rounds': 1,
         'num_PW_rounds': 1,
         'counterbalancing': 1, #enter None or 1, 2, 3, or 4
@@ -79,6 +79,7 @@ SESSION_CONFIGS = [
 #        -- 3. RPS-(A/H),PW2<br>
 #        -- 4. PW,RPS-(A/H) <br>
         'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','prisoner_multiplayer_2','post_game_survey'],
+        'doc': """ Counterbalancing (1-4):enter None or 1, 2, 3, or 4 - defines the counterbalance order: <br>-- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>-- 2. RPS-(H/A),PW2<br>-- 3. RPS-(A/H),PW2<br>-- 4. PW,RPS-(A/H) <br>.""",
     },
 
 ]
