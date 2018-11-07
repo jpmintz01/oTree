@@ -3,6 +3,8 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
+#version 0.2.9
+
 def adversary_choice(self):
     me = self.player
     last_round = max(1, self.round_number-1)
@@ -47,7 +49,28 @@ def adversary_choice(self):
     
     
 class Introduction(Page):
-    def is_displayed(self):
+    
+    def is_displayed(self): #overrides Subsession.creating_session
+
+        play_now = True
+        try:
+            if self.participant.vars['RPS_played']:
+                rps_played = True
+        except:
+            rps_played = False
+            
+        try:
+            play_first = any([self.participant.label.endswith("4"),self.participant.label.endswith("1")])
+            play_second = any([self.participant.label.endswith("2"),self.participant.label.endswith("3")])
+            if (play_first and rps_played) or (play_second and not rps_played): #if playing this version first and rps has been played
+                play_now = False
+            else:
+                play_now = True 
+        except:
+            pass 
+        
+        for i in self.player.in_all_rounds():
+            i.play_pw = play_now
         return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_pw)
 
 

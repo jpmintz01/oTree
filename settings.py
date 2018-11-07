@@ -5,6 +5,9 @@ import random
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
+
+#Version 0.2.9
+
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
@@ -30,8 +33,9 @@ SESSION_CONFIGS = [
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "3. Peace-War (ver 0.2.6) (multiplayer strategic no chat)",
+        'display_name': "3. Peace-War (ver 0.2.9) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
+        'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
         'num_PW_rounds': 50,
@@ -39,7 +43,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'rps',
-        'display_name': "4/5. Rock Paper Scissors (with advisors)",
+        'display_name': "4/5. Rock Paper Scissors  (ver 0.2.8) (with advisors)",
         'num_demo_participants': 1,
         'dev_game': True,
         'num_RPS_rounds': 2,
@@ -53,8 +57,9 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'prisoner_multiplayer_2',
-        'display_name': "5. Peace-War (ver 0.2.6) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
+        'display_name': "5. Peace-War (ver 0.2.8) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
+        'counterbalancing': 2,#needs to be 2 or 3 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
         'num_PW_rounds': 50,
