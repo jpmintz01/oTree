@@ -11,8 +11,13 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
+  var adversary_id = "{{ adversary_id }}"
   $(document).ready(function() {
-
+    if (adversary_id = 'AI'){
+      $("#adversary_description").html('Adversary: {{ adversary_id }} - <i class="fas fa-laptop-code fa-2x"></i>')
+    } else if (adversary_id = 'human+AI'){
+      $("#adversary_description").html('Adversary: Person (Player {{ Constants.human_ai_adversary_id }}) plus AI <i class="far fa-user fa-2x"><i align="center" class="fas fa-laptop-code"></i></i>!')
+    }
   });
 </script>
 
@@ -24,8 +29,13 @@
   <body style="background-color: lightgray; color: black">
     {% load otree static %}
     <div class="card bg-light instructions">
-      <div class="card-body" align="center">
-        <p> In this game, you are playing Rock-Paper-Scissors against another person, <br>but there's a twist!</p>
+      <div class="card-body">    
+        <div> In this game, you are playing Rock-Paper-Scissors against another player,<br>but there's a twist!</div><br>
+        <b>Players:</b>
+        <ul>
+          <li>You: <i align="center" class="fas fa-user-circle fa-2x"></i></li>
+          <li id = "adversary_description">Adversary: Person (Player {{ Constants.human_adversary_id }}) <i  align="center" class="far fa-user fa-2x"></i> </li>
+        </ul>
         <p> Like any command situation, <br>you may make the choice yourself <b>OR</b> you may ask one of your trusted advisors to choose for you. </p>
         <p><u> To choose for yourself</u>, click <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
           <i class="far fa-hand-rock fa-lg"></i><br><small>Rock</small>

@@ -10,7 +10,7 @@ author = 'Spear'
 doc = """
 This is a repeated Rock-Paper-Scissors game. 
 """
-
+#version 0.3b
 
 class Constants(BaseConstants):
     name_in_url = 'rps'
@@ -27,9 +27,11 @@ class Constants(BaseConstants):
     win_payoff = c(1)
     draw_payoff = c(0)
     lose_payoff = c(-1)
-    human_advisor_1_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
-    human_advisor_2_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
-    human_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+    num_chars_player_id = 5  #ideally should pull this from the participant label file, but can't do that in models.py (I think...)
+    human_advisor_1_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_advisor_2_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_ai_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
     adversary_choices = {0: 'Scissors', 1: 'Paper', 2: 'Paper', 3: 'Scissors', 4: 'Scissors', 5: 'Paper', 6: 'Paper', 7: 'Paper', 8: 'Scissors', 9: 'Rock', 10: 'Scissors', 11: 'Scissors', 12: 'Paper', 13: 'Rock', 14: 'Scissors', 15: 'Paper', 16: 'Scissors', 17: 'Paper', 18: 'Paper', 19: 'Rock', 20: 'Scissors', 21: 'Scissors', 22: 'Rock', 23: 'Paper', 24: 'Scissors', 25: 'Paper', 26: 'Scissors', 27: 'Paper', 28: 'Rock', 29: 'Scissors', 30: 'Scissors', 31: 'Paper', 32: 'Scissors', 33: 'Paper', 34: 'Rock', 35: 'Scissors', 36: 'Rock', 37: 'Scissors', 38: 'Scissors', 39: 'Rock', 40: 'Scissors', 41: 'Rock', 42: 'Scissors', 43: 'Scissors', 44: 'Scissors', 45: 'Paper', 46: 'Scissors', 47: 'Paper', 48: 'Scissors', 49: 'Paper'} #adversary choices are the same, regardless of "adversary type" so first adversary's first choice is always scissors.
     advice_choices = {0: 'Rock', 1: 'Paper', 2: 'Scissors', 3: 'Paper', 4: 'Paper', 5: 'Rock', 6: 'Paper', 7: 'Paper', 8: 'Paper', 9: 'Paper', 10: 'Rock', 11: 'Paper', 12: 'Scissors', 13: 'Scissors', 14: 'Rock', 15: 'Rock', 16: 'Paper', 17: 'Rock', 18: 'Paper', 19: 'Scissors', 20: 'Paper', 21: 'Scissors', 22: 'Rock', 23: 'Rock', 24: 'Rock', 25: 'Rock', 26: 'Scissors', 27: 'Paper', 28: 'Rock', 29: 'Scissors', 30: 'Paper', 31: 'Paper', 32: 'Scissors', 33: 'Scissors', 34: 'Paper', 35: 'Paper', 36: 'Rock', 37: 'Rock', 38: 'Scissors', 39: 'Rock', 40: 'Scissors', 41: 'Scissors', 42: 'Scissors', 43: 'Paper', 44: 'Paper', 45: 'Paper', 46: 'Rock', 47: 'Paper', 48: 'Rock', 49: 'Scissors'} #ai and human advice is the same, so clicking either advice button produces the same choice.  Will need to change this if advice button changes to "show" the advice instead of making the choice for the user
     

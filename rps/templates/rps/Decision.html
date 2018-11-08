@@ -54,7 +54,7 @@
         -ms-transform: translate(-50%,-50%);
     }
     #adv_bounce, #player_bounce {
-/*        padding: 20px;*/
+        /*        padding: 20px;*/
     }
 
     #buttonbounce {
@@ -62,9 +62,12 @@
 
     }
     #outline_table td {
-        padding: 50px 50px 50px 50px;
+        padding: 20px 30px 15px 30px;
     }
-    
+    #small_table td {
+        padding: 10px 10px 10px 10px;
+    }
+
 </style>
 
 {% endblock %}
@@ -206,6 +209,7 @@
     function color_winner (){
 
     }
+    var adversary_id = "{{ adversary_id }}"
     $(document).ready(function () { 
         $("#flip").click(function(){ //toggles instruction bar
             $("#panel").slideToggle("slow");
@@ -213,6 +217,11 @@
         $("#flipHistoryTab").click(function(){ //toggles instruction bar
             $("#historyPanel").slideToggle("slow");
         });
+        if (adversary_id = 'AI'){
+            $("#adversary_identifier").html('<i class="fas fa-laptop-code fa-2x"></i><br> AI')
+        } else if (adversary_id = 'human+AI'){
+            $("#adversary_identifier").html('<i class="far fa-user fa-2x"><i align="center" class="fas fa-laptop-code"></i></i><br> Player {{ Constants.human_ai_adversary_id }}) w/AI')
+        }
         $("button").click(function(){ // when any button is clicked (only participant choices are visible, so any button is a player's choice)
 
             net_choice = log_user_choice(this);
@@ -234,75 +243,95 @@
 
 {% block content %}
 <body style="background-color: lightgray; color: black">
-    <h2 align="center">Round: {{player.round_number}} </h2>
-    <table class="whitebox" frame="box" align="center" id="outline_table" style="background-color: white"><tr><td>
-        <div  class="labels" align="center"><b>Choose wisely:</b></div><br>
-        <table align="center">
-            <th>
-                <tr>
-                    <th>
-                        <div id="player"> 
-                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Rock" autocomplete="off">
-                                <i class="far fa-hand-rock fa-3x"></i><br>Rock  
-                            </button>
-                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Paper"  autocomplete="off">
-                                <i class="far fa-hand-paper fa-3x"></i><br>Paper  
-                            </button>
-                            <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
-                                <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i><br>Scissors
-                            </button>
-                            <div style="display: none"  align="center" class="un_labels">
-                                <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
-                                </div>
-                                You<br>Player {{ player.id}}
-                            </div>
-                        </div>
-                    </th>
-                    <th>
-                        <div id="adversary">
-                            <div style="display: none" align="center" class="un_labels">
-                                <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
-                                Adversary<br>({{ adversary_id }})
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-
+    <h2 align="center"> </h2>
+    <table class="whitebox" frame="box" align="center" id="small_table" style="background-color: white">      
+        <tr>
+            <th colspan="3" align="center">
+                <h2 align="center">Round: {{player.round_number}}</h2>
             </th>
-        </table>
+        </tr>
+        <tr>
+            <td>
+                <i align="center" class="fas fa-user-circle fa-2x"></i><br>You
+            </td>
+            <td align="center">
+                vs:</td>
+            <td id="adversary_identifier" align="center">
+                <i  align="center" class="far fa-user fa-2x"></i> <br>Player {{ Constants.human_adversary_id }}
+            </td>
 
-
-
-        <div id="overlay" onclick="off()">
-            <div id="overlay_text">Overlay Text</div>
-        </div>
-        <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
-        <input type="hidden" name="advisor_choice" id="advisor_choice_value">
-        <br>
-        <div align="center">
-            <div class="labels">
-                <b>or,</b><br><br>
-                <b>Trust one of your expert advisors:</b>
-                <br>
-                <br>
-            </div>
-            <table>
-                <tr> 
+        </tr>
+    </table>
+    <table class="whitebox" frame="box" align="center" id="outline_table" style="background-color: white">
+        <tr>
+            <td>
+                <div  class="labels" align="center"><b>Choose wisely:</b></div><br>
+                <table align="center">
                     <th>
-                        <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
-                            <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI<br>Advisor
-                        </button> 
-                    </th> 
-                    <th>
-                        <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
-                            <i class="fas fa-user fa-3x"></i><br>Person<br>({{ human_advisor_id}})
-                        </button>
+                        <tr>
+                            <th>
+                                <div id="player"> 
+                                    <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Rock" autocomplete="off">
+                                        <i class="far fa-hand-rock fa-3x"></i><br>Rock  
+                                    </button>
+                                    <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active" id="Paper"  autocomplete="off">
+                                        <i class="far fa-hand-paper fa-3x"></i><br>Paper  
+                                    </button>
+                                    <button align="center" type="button" style="border-color: black;" class="btn btn-secondary active"  id="Scissors" autocomplete="off">
+                                        <i class="far fa-hand-scissors fa-3x fa-flip-horizontal"></i><br>Scissors
+                                    </button>
+                                    <div style="display: none"  align="center" class="un_labels">
+                                        <div style="display: none;" id="player_bounce"><i class="far fa-hand-rock fa-7x fa-rotate-90"></i>
+                                        </div>
+                                        You<br>Player {{ player.id}}
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div id="adversary">
+                                    <div style="display: none" align="center" class="un_labels">
+                                        <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
+                                        Adversary<br>({{ adversary_id }})
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+
                     </th>
-                </tr>
-            </table>
-        </div>
+                </table>
 
-        </td></tr>
+
+
+                <div id="overlay" onclick="off()">
+                    <div id="overlay_text">Overlay Text</div>
+                </div>
+                <input type="hidden" name="decision_vs_adv_1" id="my_hidden_value">
+                <input type="hidden" name="advisor_choice" id="advisor_choice_value">
+                <br>
+                <div align="center">
+                    <div class="labels">
+                        <b>or,</b><br><br>
+                        <b>Trust one of your expert advisors:</b>
+                        <br>
+                        <br>
+                    </div>
+                    <table>
+                        <tr> 
+                            <th>
+                                <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
+                                    <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI<br>Advisor
+                                </button> 
+                            </th> 
+                            <th>
+                                <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
+                                    <i class="fas fa-user fa-3x"></i><br>Person<br>({{ human_advisor_id}})
+                                </button>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+
+            </td></tr>
     </table>
     <hr>
     <!-- Table history of choices for player and adversary 1 -->
