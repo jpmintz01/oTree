@@ -13,14 +13,16 @@ Notes:
 -- PW 0.3<br>
 -- RPS 0.2.8<br>
 -- settings.py 0.2.9<br>
--- questionnaires 0.2.5
+-- questionnaires 0.2.5<br>
 -- informed consent 0.3
 - Readme Version 0.3
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- do I need to have the same adversaries for both RPS and P-W?  i.e. human & AI or human & human+AI, or human & human+AI & AI
+- Should I add a game that's the actual prisoner's dilemma with: a) the same payoffs, b) an ethical dilemma, or c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming...
 - explain AI better?
-- insert "now you're playing" in RPS
+- insert "now you're playing [human or AI]" in RPS
 - if time, add P-W animation (handshake or jet-explosion)
 - <b>check fixed advice and adversary choices to see win/lose percentage -> should be near 50%?</b>
 - fix post-game questions<br>
@@ -50,7 +52,7 @@ To do later:
 
 
 Fixed in this version:
-- <b>automate counterbalancing by participant id's</b>
+- automated counterbalancing by participant id's
 - created random participant id generator (with last character 1-4 indicating counterbalancing treatment)
 ________________
 <pre>
@@ -81,10 +83,10 @@ for i in range(int(num_rounds)):
 f.close()
 </pre>
 ________________
-- separated number of rounds for P-W and RPS
-- informed consent now a) lets you play or b) sends you to end
+- separated number of rounds for P-W and RPS (adjustable in settings.py CONFIGS)
+- informed consent now a) lets you play if yes or b) sends you to end if no
 - updatd demo readme on demo page
-- created RPS-(A or H) from RPS<br>
+- created RPS-(A or H) from RPS so RPS can play vs human and AI (or AI then human)<br>
 -- randomized adversary & advisor player id in RPS
 - fix CSS for animated progress bar
 - Added counterbalancing (will do this by repeating apps then hiding unused ones.  Probably a better way to do this, but will only explore if I have time.  Either way, results will be the same).<br>
