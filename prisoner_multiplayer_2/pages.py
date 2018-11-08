@@ -3,6 +3,8 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
+#version 0.2.9
+
 def adversary_choice(self):
     me = self.player
     last_round = max(1, self.round_number-1)
@@ -47,19 +49,21 @@ def adversary_choice(self):
     
     
 class Introduction(Page):
-    def is_displayed(self):
-        return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_pw)
+    
+    def is_displayed(self): #overrides Subsession.creating_session
+        
+        return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now())
 
 
 class WaitForPlayers(Page):
     def is_displayed(self):
-        return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_pw)
+        return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_now())
     pass
     
     
 class Decision(Page):
     def is_displayed(self):
-        return ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_pw)
+        return ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now())
     form_model = 'player'
 #    def get_form_fields(self):
 #        fields = []
@@ -139,7 +143,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def is_displayed(self):
-        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_pw)
+        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now())
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
@@ -170,7 +174,7 @@ class EndGame(Page):
     form_model = 'player'
     form_fields = ['player_guess_adv_1_type']
     def is_displayed(self):
-        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_pw)
+        return ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now())
     
 page_sequence = [
     Introduction,

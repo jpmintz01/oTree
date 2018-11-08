@@ -4,7 +4,7 @@ from otree.api import (
 )
 import random
 
-#version 0.2.9
+#version 0.3
 
 author = 'Spear'
 
@@ -30,7 +30,6 @@ class Constants(BaseConstants):
     # payoff if 1 player Wars and the other Peaces""",
     betray_payoff = c(3)
     betrayed_payoff = c(0)
-    
     # payoff if both players Peace or both War
     both_Peace_payoff = c(2)
     both_War_payoff = c(1)
@@ -40,21 +39,22 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        for p in self.get_players():
-            try:
-                if p.participant.vars['RPS_played']:
-                    rps_played = True
-            except:
-                rps_played = False
-            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
-                # demo mode
-                p.play_pw = True
-            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
-                p.play_pw = False
-            else:
-                # (randomizes)
-                p.play_pw = random.choice([True,False])
+#    def creating_session(self):
+#        for p in self.get_players():
+#            try:
+#                if p.participant.vars['RPS_played']:
+#                    rps_played = True
+#            except:
+#                rps_played = False
+#            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
+#                # demo mode
+#                p.play_pw = True
+#            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
+#                p.play_pw = False
+#            else:
+#                # (randomizes)
+#                p.play_pw = random.choice([True,False])
+    pass
                 
 class Group(BaseGroup):
     pass
@@ -99,8 +99,41 @@ class Group(BaseGroup):
 #                else:
 #                    adversary.adv_decision = 'Peace'
 
+    
 class Player(BasePlayer):
-    play_pw = models.BooleanField() #play this game this time
+    
+#    play_pw = models.BooleanField() #play this game this time
+    def play_now (self): #this function determines whether to play P-W this round, or after the participant plays RPS.  It returns True to pages.py (where it's called) if pages.py should display the pages for P-W and False if it shoudl skip them.
+        
+        try: #find out if they've already played RPS
+            if self.participant.vars['RPS_played']:
+                rps_played = True
+        except:
+            rps_played = False
+        print("rps_played: "+str(rps_played))
+                    
+        try: #find out the pw_order (first or second)
+            if self.participant.vars['pw_order'] == 2:
+                pw_first = False
+            else: #if it's "1" then pw_first 
+                pw_first = True
+            print("pw_first try: "+str(pw_first))
+        except: #if there's no participant.vars, then check the session.config it to True
+            try:
+                if (self.session.config['counterbalancing'] in (2,3)):
+                    pw_first = False
+                else:
+                    pw_first = True
+                print("pw_first 2 try: "+str(pw_first))
+            except:
+                pw_first = True
+                print("pw_first except: "+str(pw_first))
+
+        
+        print("not rps_played and pw_first: "+str(not (rps_played == pw_first)))
+        return not (rps_played == pw_first) # not(==) is XOR
+            
+            
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Peace', 'War'],

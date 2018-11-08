@@ -10,16 +10,19 @@ To work with individual apps, click the app, then the bottom link.
 
 Notes:
 - Apps Versions:<br>
--- PW 0.2.8<br>
+-- PW 0.3<br>
 -- RPS 0.2.8<br>
 -- settings.py 0.2.9<br>
 -- questionnaires 0.2.8
-- Readme Version 0.2.9
+-- informed consent 0.3
+- Readme Version 0.3
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- explain AI better?
+- insert "now you're playing" in RPS
 - if time, add P-W animation (handshake or jet-explosion)
-- check fixed advice and adversary choices to see win/lose percentage -> should be near 50%?
+- <b>check fixed advice and adversary choices to see win/lose percentage -> should be near 50%?</b>
 - fix post-game questions<br>
 -- remove chicken <br>
 -- change questions to "Why did you choose the strategy you did?"
@@ -37,7 +40,7 @@ To do before experiment:
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
 - block browser commands (back/reload/keyboard/etc)
-- <b>automate counterbalancing by participant id's</b>
+
 
 To do later:
 - Clean up code (low priority as long as it works)<br>
@@ -47,6 +50,7 @@ To do later:
 
 
 Fixed in this version:
+- <b>automate counterbalancing by participant id's</b>
 - created random participant id generator (with last character 1-4 indicating counterbalancing treatment)
 ________________
 <pre>

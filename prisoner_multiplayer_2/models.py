@@ -4,6 +4,8 @@ from otree.api import (
 )
 import random
 
+#version 0.3
+
 author = 'Spear'
 
 doc = """
@@ -13,7 +15,6 @@ payoffs.
 
 At each "turn", the player must make a play (Peace or War) with all other players.
 """
-
 
 class Constants(BaseConstants):
     name_in_url = 'prisoner_multiplayer_2'
@@ -25,11 +26,10 @@ class Constants(BaseConstants):
     #num_AI_adv = 2
     #num_human_adv = 2
     # 
-    instructions_template = 'prisoner_multiplayer_2/Instructions.html'
+    instructions_template = 'prisoner_multiplayer_2/Instructions.html' #can I use just one for this?
     # payoff if 1 player Wars and the other Peaces""",
     betray_payoff = c(3)
     betrayed_payoff = c(0)
-    
     # payoff if both players Peace or both War
     both_Peace_payoff = c(2)
     both_War_payoff = c(1)
@@ -39,69 +39,101 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        for p in self.get_players():
-            try:
-                if p.participant.vars['RPS_played']:
-                    rps_played = True
-            except:
-                rps_played = False
+#    def creating_session(self):
+#        for p in self.get_players():
+#            try:
+#                if p.participant.vars['RPS_played']:
+#                    rps_played = True
+#            except:
+#                rps_played = False
+#            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
+#                # demo mode
+#                p.play_pw = True
+#            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
+#                p.play_pw = False
+#            else:
+#                # (randomizes)
+#                p.play_pw = random.choice([True,False])
+    pass
                 
-            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
-                # demo mode
-                p.play_pw = True
-            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
-                p.play_pw = False
-            else:
-                # (randomizes)
-                p.play_pw = random.choice([True,False])
-
-
 class Group(BaseGroup):
     pass
 
-class Adversary:  ## not used in this version - didn't work with oTree
+#class Adversary:  ## not used in this version - didn't work with oTree
+#
+#    adv_decision = models.StringField(
+#        choices=['Peace', 'War'],
+#        doc="""Adversary decision""",
+#        widget=widgets.RadioSelect
+#    )
+#    player_decision = models.StringField(
+#        choices=['Peace', 'War'],
+#        doc="""Adversary decision""",
+#        widget=widgets.RadioSelect
+#    )
+#    adv_payoff = models.CurrencyField(
+#        choices=currency_range(c(0), c(3), c(1)),
+#        initial=c(0)
+#    )
+#    player_payoff = models.CurrencyField(
+#        choices=currency_range(c(0), c(3), c(1)),
+#        initial=c(0)
+#    )
+#    adv_type = models.StringField(
+#        choices=['human','AI'],
+#        doc="""Adversary type""",
+#        widget=widgets.RadioSelect
+#    )
+#    round_number = models.IntegerField(initial=1)
+#
+#    def adv_choice_function(adversary, self, player_choice_last_round):
+#        choice_list = ['Peace','War']
+#        if adversary.adv_type == 'human': #if adv = human
+#            adversary.adv_decision = random.choice(choice_list)#define human strategy (random choice)
+#        else: # this is the AI 'TFT
+#            if adversary.round_number == 1: # Peace in round one (can change)
+#                adversary.adv_decision = 'Peace'
+#            else:
+#                if player_choice_last_round == 'War': #no max arg needed because it's nested if that isn't round 1
+#                   adversary.adv_decision = 'War' #if player Wars, adv Wars
+#                else:
+#                    adversary.adv_decision = 'Peace'
 
-    adv_decision = models.StringField(
-        choices=['Peace', 'War'],
-        doc="""Adversary decision""",
-        widget=widgets.RadioSelect
-    )
-    player_decision = models.StringField(
-        choices=['Peace', 'War'],
-        doc="""Adversary decision""",
-        widget=widgets.RadioSelect
-    )
-    adv_payoff = models.CurrencyField(
-        choices=currency_range(c(0), c(3), c(1)),
-        initial=c(0)
-    )
-    player_payoff = models.CurrencyField(
-        choices=currency_range(c(0), c(3), c(1)),
-        initial=c(0)
-    )
-    adv_type = models.StringField(
-        choices=['human','AI'],
-        doc="""Adversary type""",
-        widget=widgets.RadioSelect
-    )
-    round_number = models.IntegerField(initial=1)
-
-    def adv_choice_function(adversary, self, player_choice_last_round):
-        choice_list = ['Peace','War']
-        if adversary.adv_type == 'human': #if adv = human
-            adversary.adv_decision = random.choice(choice_list)#define human strategy (random choice)
-        else: # this is the AI 'TFT
-            if adversary.round_number == 1: # Peace in round one (can change)
-                adversary.adv_decision = 'Peace'
-            else:
-                if player_choice_last_round == 'War': #no max arg needed because it's nested if that isn't round 1
-                   adversary.adv_decision = 'War' #if player Wars, adv Wars
-                else:
-                    adversary.adv_decision = 'Peace'
-
+    
 class Player(BasePlayer):
-    play_pw = models.BooleanField() #play this game this time
+    
+#    play_pw = models.BooleanField() #play this game this time
+    def play_now (self): #this function determines whether to play P-W this round, or after the participant plays RPS.  It returns True to pages.py (where it's called) if pages.py should display the pages for P-W and False if it shoudl skip them.
+        
+        try: #find out if they've already played RPS
+            if self.participant.vars['RPS_played']:
+                rps_played = True
+        except:
+            rps_played = False
+        print("rps_played: "+str(rps_played))
+                    
+        try: #find out the pw_order (first or second)
+            if self.participant.vars['pw_order'] == 2:
+                pw_first = False
+            else: #if it's "1" then pw_first 
+                pw_first = True
+            print("pw_first try: "+str(pw_first))
+        except: #if there's no participant.vars, then check the session.config it to True
+            try:
+                if (self.session.config['counterbalancing'] in (2,3)):
+                    pw_first = False
+                else:
+                    pw_first = True
+                print("pw_first 2 try: "+str(pw_first))
+            except:
+                pw_first = True
+                print("pw_first except: "+str(pw_first))
+
+        
+        print("not rps_played and pw_first: "+str(not (rps_played == pw_first)))
+        return not (rps_played == pw_first) # not(==) is XOR
+            
+            
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
         choices=['Peace', 'War'],
