@@ -13,7 +13,7 @@ Notes:
 -- PW 0.3<br>
 -- RPS 0.2.8<br>
 -- settings.py 0.2.9<br>
--- questionnaires 0.2.8
+-- questionnaires 0.2.5
 -- informed consent 0.3
 - Readme Version 0.3
 - The experiment apps are set to dev version - participant will see something different.
