@@ -75,8 +75,8 @@ SESSION_CONFIGS = [
         'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
 #        'num_rounds': 1,
-        'num_RPS_rounds': 1,
-        'num_PW_rounds': 1,
+        'num_RPS_rounds': 5,
+        'num_PW_rounds': 5,
         'counterbalancing': 1, #enter None or 1, 2, 3, or 4
         #defines the counterbalance order
 #        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
