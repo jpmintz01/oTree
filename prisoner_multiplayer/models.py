@@ -105,10 +105,11 @@ class Player(BasePlayer):
 #    play_pw = models.BooleanField() #play this game this time
     def play_now (self): #this function determines whether to play P-W this round, or after the participant plays RPS.  It returns True to pages.py (where it's called) if pages.py should display the pages for P-W and False if it shoudl skip them.
         
-        try: #find out if they've already played RPS
-            if self.participant.vars['RPS_played']:
+        try: #find out if they've already played RPS by checking participant.vars
+            if self.participant.vars['RPS_played']: #why is this showing true?
+                print("part.vars: "+ str(self.participant.vars['RPS_played']))
                 rps_played = True
-        except:
+        except: #If no participant.vars, then set rps_played = false.
             rps_played = False
         print("rps_played: "+str(rps_played))
                     

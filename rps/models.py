@@ -10,7 +10,7 @@ author = 'Spear'
 doc = """
 This is a repeated Rock-Paper-Scissors game. 
 """
-#version 0.3b
+#version 0.3.1
 
 class Constants(BaseConstants):
     name_in_url = 'rps'
@@ -38,20 +38,20 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        adv_choices = ['Human','AI']
-        for p in self.get_players():
-            p.participant.vars['RPS_played'] = "True"
-            if self.session.config['counterbalancing'] in (1,2):
-                # demo mode
-                p.first_adv = 'Human'
-            elif self.session.config['counterbalancing'] in (3,4):
-                p.first_adv = 'AI'
-            else:
-                # (randomizes)
-                p.first_adv = random.choice(adv_choices)
-                # need to find out if it creates unbalanced treatment groups
-
+#    def creating_session(self):
+#        adv_choices = ['Human','AI']
+#        for p in self.get_players():
+#            p.participant.vars['RPS_played'] = "True"
+#            if self.session.config['counterbalancing'] in (1,2):
+#                # demo mode
+#                p.first_adv = 'Human'
+#            elif self.session.config['counterbalancing'] in (3,4):
+#                p.first_adv = 'AI'
+#            else:
+#                # (randomizes)
+#                p.first_adv = random.choice(adv_choices)
+#                # need to find out if it creates unbalanced treatment groups
+    pass
 
 class Group(BaseGroup):
     pass

@@ -11,7 +11,7 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - Apps Versions:<br>
 -- PW 0.3<br>
--- RPS 0.3b<br>
+-- RPS 0.3.1<br>
 -- settings.py 0.2.9<br>
 -- questionnaires 0.2.5<br>
 -- informed consent 0.3
