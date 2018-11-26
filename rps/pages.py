@@ -21,12 +21,12 @@ def adversary_id (self):
     else:
         return second_adv
     
-def adversary_choice(self):
+def adversary_choice(self): #provides adversary's choice to the page BEFORE player's choice
     me = self.player
     choice_list = ['Rock','Paper','Scissors']
-    #if me.adv_1_type == 'human': #if adv = human
-        
     me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #set the choice to the control
+    
+    
 #    else: # this is the AI 'TFT
 #        if me.round_number == 1: #
 #            me.decision_of_adv_1 = random.choice(choice_list)
@@ -77,10 +77,11 @@ class Decision(Page):
     
     form_model = 'player'
     def get_form_fields(self):
-        fields = []
-        for i in (1, Constants.num_adversaries):
-            fields.append('decision_vs_adv_{}'.format(i))
-        fields.append('advisor_choice')
+        fields = ['decision_vs_adv_1', 'decision_of_adv_1','advisor_choice']
+        #fields = []
+        #for i in (1, Constants.num_adversaries):
+        #    fields.append('decision_vs_adv_{}'.format(i))
+        #fields.append('advisor_choice')
         return fields
             #form_fields = ['decision_vs_adv_1', 'decision_vs_adv_2']
         
@@ -88,11 +89,16 @@ class Decision(Page):
     def vars_for_template(self):
         me = self.player
         last_round = max(0, self.round_number-1)
-        adversary_choice(self);
+
         history = {}
+        if not (self.session.config['control_RPS_score']): #this should be a boolean variable that is session-configurable to tell the function to return not a choice, but a number.  If this variable is false, then run the adversary_choice function
+            adversary_choice(self); #provides the adversary's choice to the template (global function above)
+                
         for p in me.in_all_rounds():
             history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
         return {
+            'control_RPS_score': self.session.config['control_RPS_score'],
+            'target_RPS_score': self.session.config['target_RPS_score'],
             'human_advice_v_adv_1': ai_advice_adv_1(self),
             'AI_advice_v_adv_1': ai_advice_adv_1(self),
             'my_decision_adv_1': me.decision_vs_adv_1,
@@ -102,7 +108,8 @@ class Decision(Page):
             'my_payoff_adv_1': me.payoff_vs_adv_1,
             'adv_1_decision': me.decision_of_adv_1,
             'adv_1_payoff': me.payoff_of_adv_1,
-            'my_total_payoff': me.round_payoff,
+            #'my_total_payoff': me.round_payoff,
+            'my_total_payoff': sum([p.round_payoff for p in me.in_all_rounds()]),
             'history_list': history,
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),

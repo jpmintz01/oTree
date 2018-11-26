@@ -46,7 +46,9 @@ SESSION_CONFIGS = [
         'display_name': "4/5. Rock Paper Scissors  (ver 0.2.8) (with advisors)",
         'num_demo_participants': 1,
         'dev_game': True,
-        'num_RPS_rounds': 2,
+        'num_RPS_rounds': 20,
+        'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
+        'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
         'counterbalancing': 3,#enter None or 1, 2, 3, or 4
         #defines the counterbalance order
 #        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
@@ -77,6 +79,8 @@ SESSION_CONFIGS = [
 #        'num_rounds': 1,
         'num_RPS_rounds': 5,
         'num_PW_rounds': 5,
+        'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
+        'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
         'counterbalancing': 1, #enter None or 1, 2, 3, or 4
         #defines the counterbalance order
 #        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
