@@ -5,7 +5,7 @@ import random
 
 #version 0.2.9
 
-def adversary_choice(self):
+def adversary_choice(self): # function for the adversary (and advisor) choices.  called by instances of the page class - see below
     me = self.player
     last_round = max(1, self.round_number-1)
     choice_list = ['Peace','War']
@@ -50,14 +50,14 @@ def adversary_choice(self):
     
 class Introduction(Page):
     
-    def is_displayed(self): #overrides Subsession.creating_session
+    def is_displayed(self): #determines whether this is shown or not - only shows in round 1 AND if player has consented (session variable is set in informed consent). overrides Subsession.creating_session when applicable (demo vs production)
         
-        return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now())
+        return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now())#returns True if I want to show the page
 
 
 class WaitForPlayers(Page):
-    def is_displayed(self):
-        return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_now())
+    def is_displayed(self): #only shows in round 1 AND if player has consented (session variable is set in informed consent)
+        return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_now()) #returns True if I want to show the page
     pass
     
     
