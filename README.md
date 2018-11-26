@@ -19,6 +19,7 @@ Notes:
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- control participant win/lose ratio or score by "faking it" vs controlling adversary's choices?
 - Make results pages better
 - add who participant is playing AGAINST to the wait pages
 - fix participant player number in RPS
