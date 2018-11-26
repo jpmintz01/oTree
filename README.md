@@ -11,8 +11,8 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
--- PW 0.3<br>
--- RPS 0.3.1<br>
+-- PW 0.3.2<br>
+-- RPS 0.3.2<br>
 -- settings.py 0.2.9<br>
 -- Pre-Game questionnaires 0.2.5<br>
 -- Post-Game questionnaires 0.2.5<br>
@@ -60,7 +60,6 @@ To do before experiment:
 To do later:
 - Clean up code (low priority as long as it works)<br>
 -- so clunky, but it works<br>
--- Move styles and such to global page
 - Comment code (before publishing)
 
 
@@ -70,6 +69,7 @@ Fixed in this version:
 
 
 Fixed in recent versions: 
+- Moved styles and such to global page (mostly)
 - inserted "now you're playing [human or AI]" in RPS
 - automated counterbalancing by participant id's
 - created random participant id generator (with last character 1-4 indicating counterbalancing treatment)
