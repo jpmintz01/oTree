@@ -15,7 +15,7 @@ Notes:
 -- RPS 0.3.3<br>
 -- settings.py 0.2.9<br>
 -- Pre-Game questionnaires 0.2.5<br>
--- Post-Game questionnaires 0.2.5<br>
+-- Post-Game questionnaires 0.3<br>
 -- informed consent 0.3
 - Readme Version 0.3.2
 - The experiment apps are set to dev version - participant will see something different.
@@ -29,11 +29,15 @@ To do before experiment:
 - Fix counterbalancing in demo version (if required)
 - update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 - add "learning epochs" to AIs?
-- Add third game where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something?
-
+- Add third game? Maybe:
+-- where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something? <br>
+--  the actual prisoner's dilemma with: <br>
+--- a) the same payoffs, <br>
+--- b) an ethical dilemma (target the terrorists with X chance of blowing up the baby milk factory) or, <br>
+--- c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming... <br>
 - fix post-game questionnaire, page 2: add bold to make questions more clear
 - do I need to have the same adversaries for both RPS and P-W?  i.e. human & AI or human & human+AI, or human & human+AI & AI
-- Should I add a game that's the actual prisoner's dilemma with: a) the same payoffs, b) an ethical dilemma, or c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming...
+
 - explain AI better?
 
 - if time, add P-W animation (handshake or jet-explosion)

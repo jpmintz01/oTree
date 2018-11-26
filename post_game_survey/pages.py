@@ -10,8 +10,6 @@ class PlayExperience(Page):
     form_fields = [
         'prisoner_strategy',
         'play_different_prisoner',
-        'chicken_strategy',
-        'play_different_chicken',
         'rps_strategy',
         'play_different_rps'
     ]
@@ -25,11 +23,11 @@ class Comments(Page):
         return (self.participant.vars['consent'])
     form_model = 'player'
     form_fields = [
-        'comments_human_players',
         'comments_human_advisors',
+        'comments_AI_advisors',
+        'comments_human_players',
         'comments_human_AI_players',
         'comments_AI_players',
-        'comments_AI_advisors',
         'various_comments'
     ]    
     def vars_for_template(self):

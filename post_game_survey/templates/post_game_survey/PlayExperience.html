@@ -10,11 +10,11 @@
     <p>
         Please answer the following questions.
     </p>
-
+    {% autoescape off %}
     {% for field in form %}
         {% formfield field %}
     {% endfor %}
 
     {% next_button %}
-
+    {% endautoescape %}
 {% endblock %}
