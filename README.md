@@ -23,7 +23,7 @@ Notes:
 To do before experiment:
 - control participant win/lose ratio or score by "faking it" vs controlling adversary's choices?
 - Make results pages better
-- add who participant is playing AGAINST to the wait pages
+- add who participant is playing AGAINST to the wait page in RPS
 - fix participant player number in RPS
 - fix advisor player number in RPS
 - Fix counterbalancing in demo version (if required)
@@ -66,6 +66,7 @@ To do later:
 
 Fixed in this version:
 - Fix post-game questionnaire, page 1: remove chicken
+- added who participant is playing AGAINST to the wait page in P-W 1
 
 
 Fixed in recent versions: 
