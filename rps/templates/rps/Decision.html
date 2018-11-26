@@ -218,9 +218,9 @@
             $("#historyPanel").slideToggle("slow");
         });
         if (adversary_id = 'AI'){
-            $("#adversary_identifier").html('<i class="fas fa-laptop-code fa-2x"></i><br> AI')
+            $("#adversary_identifier").html('<i class="fas fa-laptop-code fa-3x"></i><br> AI')
         } else if (adversary_id = 'human+AI'){
-            $("#adversary_identifier").html('<i class="far fa-user fa-2x"><i align="center" class="fas fa-laptop-code"></i></i><br> Player {{ Constants.human_ai_adversary_id }}) w/AI')
+            $("#adversary_identifier").html('<i class="far fa-user fa-3x"><i align="center" class="fas fa-laptop-code"></i></i><br> Player {{ Constants.human_ai_adversary_id }}) w/AI')
         }
         $("button").click(function(){ // when any button is clicked (only participant choices are visible, so any button is a player's choice)
 
@@ -252,12 +252,12 @@
         </tr>
         <tr>
             <td>
-                <i align="center" class="fas fa-user-circle fa-2x"></i><br>You
+                <i align="center" class="fas fa-user-circle fa-3x"></i><br>You
             </td>
             <td align="center">
                 vs:</td>
             <td id="adversary_identifier" align="center">
-                <i  align="center" class="far fa-user fa-2x"></i> <br>Player {{ Constants.human_adversary_id }}
+                <i  align="center" class="far fa-user fa-3x"></i> <br>Player {{ Constants.human_adversary_id }}
             </td>
 
         </tr>
