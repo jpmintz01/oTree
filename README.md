@@ -29,7 +29,7 @@ To do before experiment:
 - update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 - add "learning epochs" to AIs?
 - Add third game where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something?
-- Fix post-game questionnaire, page 1: remove chicken
+
 - fix post-game questionnaire, page 2: add bold to make questions more clear
 - do I need to have the same adversaries for both RPS and P-W?  i.e. human & AI or human & human+AI, or human & human+AI & AI
 - Should I add a game that's the actual prisoner's dilemma with: a) the same payoffs, b) an ethical dilemma, or c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming...
@@ -64,6 +64,10 @@ To do later:
 
 
 Fixed in this version:
+- Fix post-game questionnaire, page 1: remove chicken
+
+
+Fixed in recent versions: 
 - inserted "now you're playing [human or AI]" in RPS
 - automated counterbalancing by participant id's
 - created random participant id generator (with last character 1-4 indicating counterbalancing treatment)
@@ -110,8 +114,6 @@ ________________
 -- Means (PW, RPS, PW2) <br>
 -- create RPS-(A or H) from RPS and PW2 from PW<br>
 --- randomize adversary player id (not required)
-
-Fixed in recent versions: 
 - Removed flying F-16 (or fix animation)
 - removed "what type of algorithm were you playing against?"
 - Added other participant IDs & wait pages.
