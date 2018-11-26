@@ -42,12 +42,12 @@ class Player(BasePlayer):
     play_different_prisoner = models.StringField(
         label='In the Peace-War game, why did your choose differently between players (if at all)?'
     )
-    chicken_strategy = models.StringField(
-        label='What was your betting strategy(ies) in the Chicken game?(i.e. "I bet on the human because he/she had something to lose.  The AI didn’t", "I bet on the AI because I thought it would know best.", "I bet essentially randomly because I did not really understand the game")'
-    )
-    play_different_chicken = models.StringField(
-        label='In the Chicken game, why did your strategy differ between players (if at all)?'
-    )
+#    chicken_strategy = models.StringField(
+#        label='What was your betting strategy(ies) in the Chicken game?(i.e. "I bet on the human because he/she had something to lose.  The AI didn’t", "I bet on the AI because I thought it would know best.", "I bet essentially randomly because I did not really understand the game")'
+#    )
+#    play_different_chicken = models.StringField(
+#        label='In the Chicken game, why did your strategy differ between players (if at all)?'
+#    )
     rps_strategy = models.StringField(
         label='What was your strategy in the Rock-Paper-Scissors game? (i.e. "I always relied on the AI because it was best", "I chose myself because I did not trust either advisor", "I played essentially randomly because I did not really understand the game")'
     )
@@ -55,22 +55,22 @@ class Player(BasePlayer):
         label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?'
     )
     comments_human_players = models.StringField(
-        label='What comments do you have about the other human players who did not have AI to help them in the games?'
+        label='What comments do you have about the other human PLAYERS who did not have AI to help them in the games?'
     )
     comments_human_advisors = models.StringField(
-        label='What comments do you have about the other human advisors who did not have AI to help them in the games?'
+        label='What comments do you have about your human ADVISORS who DID NOT have AI to help them in the games?'
     )
     comments_human_AI_players = models.StringField(
-        label='What comments do you have about the other human players who had AI to help them in the games?'
+        label='What comments do you have about the other human PLAYERS who DID have AI to help them in the games?'
     )
 #    comments_human_AI_advisors = models.StringField(
 #        label='What comments do you have about the other human advisors who had AI to help them in the games?'
 #    )
     comments_AI_players = models.StringField(
-        label='What comments do you have about the AI players in the games?'
+        label='What comments do you have about the AI PLAYERS in the games?'
     )
     comments_AI_advisors = models.StringField(
-        label='What comments do you have about the AI advisors in the games?'
+        label='What comments do you have about the AI ADVISORS in the games?'
     )
     various_comments = models.StringField(
         label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?'
