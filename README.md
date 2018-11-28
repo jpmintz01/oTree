@@ -17,33 +17,19 @@ Notes:
 -- Pre-Game questionnaires 0.2.5<br>
 -- Post-Game questionnaires 0.3<br>
 -- informed consent 0.3
-- Readme Version 0.3.2
+- Readme Version 0.3.4
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
-- (DONE but need feedback) control participant win/lose ratio or score by "faking it" vs controlling adversary's choices?
+- Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win) & maybe make it a session variable. 
 - Make results pages better
-- add who participant is playing AGAINST to the wait page in RPS
 - fix participant player number in RPS
 - fix advisor player number in RPS
 - Fix counterbalancing in demo version (if required)
-- update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 - add "learning epochs" to AIs?
-- Add third game? Maybe:
--- where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something? <br>
---  the actual prisoner's dilemma with: <br>
---- a) the same payoffs, <br>
---- b) an ethical dilemma (target the terrorists with X chance of blowing up the baby milk factory) or, <br>
---- c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming... <br>
-- fix post-game questionnaire, page 2: add bold to make questions more clear
 - do I need to have the same adversaries for both RPS and P-W?  i.e. human & AI or human & human+AI, or human & human+AI & AI
-
 - explain AI better?
-
-- if time, add P-W animation (handshake or jet-explosion)
-- <b>check fixed advice and adversary choices to see win/lose percentage -> should be near 50%?</b>
 - fix post-game questions<br>
--- remove chicken <br>
 -- change questions to "Why did you choose the strategy you did?"
 - test server
 - test data collection
@@ -51,28 +37,39 @@ To do before experiment:
 - runserver prodserver vs devserver
 - check peace-war payoffs (war-war should be negative...)
 - add adversary type and icon to RPS:<br>
--- instructions<br>
--- decision & win page<br>
--- results page
+-- results page <br>
+-- maybe wait page <br>
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
 - block browser commands (back/reload/keyboard/etc)
-
+- Add third game? Maybe:
+-- where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something? <br>
+--  the actual prisoner's dilemma with: <br>
+--- a) the same payoffs, <br>
+--- b) an ethical dilemma (target the terrorists with X chance of blowing up the baby milk factory) or, <br>
+--- c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming... <br>
 
 To do later:
 - Clean up code (low priority as long as it works)<br>
 -- so clunky, but it works<br>
 - Comment code (before publishing)
+- if time, add P-W animation (handshake or jet-explosion)
 
 
 Fixed in this version:
+- add adversary type and icon to RPS:<br>
+-- decision & win page<br>
+- fix post-game questionnaire, page 2: add bold to make questions more clear
+-  control participant win/lose ratio or score by "faking it" vs controlling adversary's choices?
+- add who participant is playing AGAINST to the wait page in RPS
 - Fix post-game questionnaire, page 1: remove chicken
 - added who participant is playing AGAINST to the wait page in P-W 1
-
+- update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 
 Fixed in recent versions: 
+
 - Moved styles and such to global page (mostly)
 - inserted "now you're playing [human or AI]" in RPS
 - automated counterbalancing by participant id's
