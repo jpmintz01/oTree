@@ -68,8 +68,31 @@ Fixed in this version:
 - added who participant is playing AGAINST to the wait page in P-W 1
 - update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 
-Fixed in recent versions: 
+##
 
+# oTree
+
+oTree is a Python framework that lets you build:
+
+- Multiplayer strategy games, like the prisoner's dilemma, public goods game, and auctions
+- Controlled behavioral experiments in economics, psychology, and related fields
+- Surveys and quizzes
+
+## Homepage
+
+http://www.otree.org/
+
+## Docs
+
+http://otree.readthedocs.org
+
+## Related repositories
+
+The oTree core libraries are [here](https://github.com/oTree-org/otree-core).
+
+## old bugs fixed / changes made
+
+Fixed in recent versions: 
 - Moved styles and such to global page (mostly)
 - inserted "now you're playing [human or AI]" in RPS
 - automated counterbalancing by participant id's
@@ -143,25 +166,3 @@ print(choice_dict)
 </pre>
 ________________
 
-
-##
-
-# oTree
-
-oTree is a Python framework that lets you build:
-
-- Multiplayer strategy games, like the prisoner's dilemma, public goods game, and auctions
-- Controlled behavioral experiments in economics, psychology, and related fields
-- Surveys and quizzes
-
-## Homepage
-
-http://www.otree.org/
-
-## Docs
-
-http://otree.readthedocs.org
-
-## Related repositories
-
-The oTree core libraries are [here](https://github.com/oTree-org/otree-core).
