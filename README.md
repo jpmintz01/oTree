@@ -21,6 +21,11 @@ Notes:
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- move most pre-game questions to end
+- adjust post-game questions based on Prahl and Swol 2017?
+-- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
+-- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
+    
 - Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win) & maybe make it a session variable. 
 - Make results pages better
 - fix participant player number in RPS
