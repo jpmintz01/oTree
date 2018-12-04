@@ -3,23 +3,43 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
+def counterbalance_adversary (self):
+    self.player.first_adv = self.participant.vars['first_rps_adv']
+    self.player.second_adv = self.participant.vars['second_rps_adv']
+    self.player.third_adv = self.participant.vars['third_rps_adv']
+        
+    
+    
 def human_advisor_id (self):
-    if self.round_number <= self.session.config['num_RPS_rounds']:
+    if self.round_number <= self.session.config['num_RPS_rounds']: #if during the first treatment section
         return Constants.human_advisor_1_id
-    else:
+    elif self.round_number <= (self.session.config['num_RPS_rounds']*2):#if during the second treatment section
         return Constants.human_advisor_2_id
+    else: #if during the third treatment section
+        return Constants.human_advisor_3_id
 
-def adversary_id (self):
+    
+    
+    
+def adversary_id (self): #only need to call this once
     if self.player.first_adv == 'Human':
-        first_adv = "Player " + Constants.human_adversary_id
-        second_adv = "AI"
+        first_adversary_id = "Player " + Constants.human_adversary_id
+    if self.player.second_adv == 'Human':
+        second_adversary_id = "Player " + Constants.human_adversary_id
+    if
     else: 
         first_adv = "AI"
         second_adv = "Player " + Constants.human_adversary_id
+        
     if self.round_number <= self.session.config['num_RPS_rounds']:
-        return first_adv
+        
+        return first_adversary_id
+    elif self.round_number <= (self.session.config['num_RPS_rounds']*2):
+        return second_adversary_id
     else:
-        return second_adv
+        return third_adv
+    
+    
     
 def adversary_choice(self): #provides adversary's choice to the page BEFORE player's choice
     me = self.player
@@ -38,6 +58,7 @@ def adversary_choice(self): #provides adversary's choice to the page BEFORE play
 #            else:
 #                me.decision_of_adv_1 = 'Rock'
 
+
 def ai_advice_adv_1(self): #actually used for both AI and human advice.
     me = self.player
     last_round = max(0, self.round_number-1)
@@ -52,11 +73,34 @@ def ai_advice_adv_1(self): #actually used for both AI and human advice.
 #            return 'Rock'
     return Constants.advice_choices[self.round_number-1]
     
+    
 class Introduction(Page):
+
     def is_displayed(self):
 
-        return (((self.round_number == 1) or (self.round_number == (self.session.config['num_RPS_rounds']+1))) and (self.participant.vars['consent'])) #show the intro if it's round 1 or the first round of treatment 2 (the second half)
+        if (self.participant.vars['consent']): #if you have consent
+            if (self.round_number == 1): #if the first treatment section
+                self.player.counterbalance_rps()
+                counterbalance_adversary (self)
+                print("self.participant.vars['rps_order']= ")
+                print(self.participant.vars['rps_order'])
+                print("self.participant.vars['first_rps_adv']= ")
+                print(self.participant.vars['first_rps_adv'])
+                print("self.player.first_adv= ")
+                print(self.player.first_adv)
+                return True
+            elif (self.round_number == (self.session.config['num_RPS_rounds']+1)): #if second treatment section
+                return True
+            elif (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1)): #if third treatment section
+                return True
+            else:
+                return False
+        else: #if you don't have consent, skip this page
+            return False
+#                return (((self.round_number == 1) or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent'])) #show the intro if it's round 1 or the first round of treatment 2 (the second half)
+    
     def vars_for_template (self):
+
         return {
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
@@ -64,7 +108,7 @@ class Introduction(Page):
     
 class WaitForPlayers(Page):
     def is_displayed(self):
-        return (((self.round_number <= 1)  or (self.round_number == (self.session.config['num_RPS_rounds']+1))) and (self.participant.vars['consent'])) #show the player match page if it's round 1 or the first round of treatment 2 (the second half)
+        return (((self.round_number <= 1)  or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent'])) #show the player match page if it's round 1 or the first round of treatment 2 (the second half)
         #need to change number of players based on whether two humans or one
     def vars_for_template (self):
         return {'adversary_id': adversary_id(self)}
@@ -73,7 +117,7 @@ class WaitForPlayers(Page):
 class Decision(Page):
     def is_displayed(self):
 
-        return ((self.round_number <= (self.session.config['num_RPS_rounds']*2)) and (self.participant.vars['consent'])) #show the decision page if still in rounds that are part of treatment 1 or 2
+        return ((self.round_number <= (self.session.config['num_RPS_rounds']*3)) and (self.participant.vars['consent'])) #show the decision page if still in rounds that are part of treatment 1 or 2 or 3
     
     form_model = 'player'
     def get_form_fields(self):

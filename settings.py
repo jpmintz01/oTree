@@ -12,6 +12,20 @@ SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
     'doc': "",
+    'counterbalancing': 1,  #enter None or 1, 2, 3, or 4
+        #defines the counterbalance order
+#        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
+#        -- 2. RPS-(H/A),PW2<br>
+#        -- 3. RPS-(A/H),PW2<br>
+#        -- 4. PW,RPS-(A/H) <br>
+    'pw_counterbalance': '1', #if this number is odd, play PW first. If even, play it after RPS
+    'rps_counterbalance': '2' # a list 1-6 of orders to play the adversaries
+    #1 - H,HAI,AI (123)
+    #2 - H, AI, HAI (132)
+    #3 - HAI, AI, H (231)
+    #4 - HAI, H, AU (213)
+    #5 - AI, H, HAI (312)
+    #6 - AI, HAI, H (321)
 }
 
 BROWSER_COMMAND = 'Safari'
@@ -49,13 +63,7 @@ SESSION_CONFIGS = [
         'num_RPS_rounds': 20,
         'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
         'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
-        'counterbalancing': 3,#enter None or 1, 2, 3, or 4
-        #defines the counterbalance order
-#        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
-#        -- 2. RPS-(H/A),PW2<br>
-#        -- 3. RPS-(A/H),PW2<br>
-#        -- 4. PW,RPS-(A/H) <br>
-        'app_sequence': ['informed_consent','rps'],# 'payment_info'],
+        'app_sequence': ['informed_consent','rps']
     },
     {
         'name': 'prisoner_multiplayer_2',
