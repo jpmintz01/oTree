@@ -7,7 +7,27 @@ def counterbalance_adversary (self):
     self.player.first_adv = self.participant.vars['first_rps_adv']
     self.player.second_adv = self.participant.vars['second_rps_adv']
     self.player.third_adv = self.participant.vars['third_rps_adv']
+    if self.player.first_adv == 'Human':
+        self.player.first_adversary_id = "Player " + Constants.human_adversary_id
+    elif self.player.second_adv == 'Human':
+        self.player.second_adversary_id = "Player " + Constants.human_adversary_id
+    else:
+        self.player.third_adversary_id = "Player " + Constants.human_adversary_id
         
+    if self.player.first_adv == 'Human+AI':
+        self.player.first_adversary_id = "Player " + Constants.human_ai_adversary_id + " w/AI"
+    elif self.player.second_adv == 'Human':
+        self.player.second_adversary_id = "Player " + Constants.human_ai_adversary_id + " w/AI"
+    else:
+        self.player.third_adversary_id = "Player " + Constants.human_ai_adversary_id  + " w/AI"
+        
+    if self.player.first_adv == 'AI':
+        self.player.first_adversary_id = "AI"
+    elif self.player.second_adv == 'AI':
+        self.player.second_adversary_id = "AI"
+    else:
+        self.player.third_adversary_id = "AI"
+    
     
     
 def human_advisor_id (self):
@@ -21,23 +41,21 @@ def human_advisor_id (self):
     
     
     
+    
+    
 def adversary_id (self): #only need to call this once
-    if self.player.first_adv == 'Human':
-        first_adversary_id = "Player " + Constants.human_adversary_id
-    if self.player.second_adv == 'Human':
-        second_adversary_id = "Player " + Constants.human_adversary_id
-    if
-    else: 
-        first_adv = "AI"
-        second_adv = "Player " + Constants.human_adversary_id
+
         
     if self.round_number <= self.session.config['num_RPS_rounds']:
         
-        return first_adversary_id
+        return self.player.first_adversary_id
     elif self.round_number <= (self.session.config['num_RPS_rounds']*2):
-        return second_adversary_id
+        return self.player.second_adversary_id
     else:
-        return third_adv
+        return self.player.third_adversary_id
+    
+    
+    
     
     
     

@@ -241,19 +241,21 @@
     function color_winner (){
 
     }
-    var adversary_id = "{{ adversary_id }}"
     $(document).ready(function () { 
+        var adversary_id = "{{ adversary_id }}"
         $("#flip").click(function(){ //toggles instruction bar
             $("#panel").slideToggle("slow");
         });
         $("#flipHistoryTab").click(function(){ //toggles instruction bar
             $("#historyPanel").slideToggle("slow");
         });
-        if (adversary_id = 'AI'){
+        if (adversary_id == 'AI'){ 
             $("#adversary_identifier").html('<i class="fas fa-laptop-code fa-3x"></i><br> AI')
-        } else if (adversary_id = 'human+AI'){
+            alert("1")
+        } else if (adversary_id == 'Human+AI'){
             $("#adversary_identifier").html('<i class="far fa-user fa-3x"><i align="center" class="fas fa-laptop-code"></i></i><br> Player {{ Constants.human_ai_adversary_id }}) w/AI')
-        }
+            alert("2")
+        } else {}
         $("button").click(function(){ // when any button is clicked (only participant choices are visible, so any button is a player's choice)
 
             net_choice = log_user_choice(this);

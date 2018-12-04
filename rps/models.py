@@ -68,6 +68,9 @@ class Player(BasePlayer):
         choices=['Human','Human+AI','AI'],
         doc="""Participant's first adversary"""
     )
+    first_adversary_id = models.StringField()
+    second_adversary_id = models.StringField()
+    third_adversary_id = models.StringField()
     second_adv = models.StringField( #order in which participant plays the adversaries
         choices=['Human','Human+AI','AI'],
         doc="""Participant's second adversary"""
