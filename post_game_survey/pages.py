@@ -35,17 +35,48 @@ class Comments(Page):
             'page_num': 2,
         }
 
+class Demographics(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
+    form_model = 'player'
+    form_fields = ['age',
+                   'gender',
+                   'school',
+                   'service',
+                   'rank',
+                   'major',
+                   'minor',
+                   'post_grad',
+                  ]
+    def vars_for_template(self):
+        return {
+            'page_num': 3,
+        }
+
+class Experience(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
+    form_model = 'player'
+    form_fields = ['years_military_experience',
+                   'game_theory_experience',
+                   'machine_learning_experience',
+                  ]
+    def vars_for_template(self):
+        return {
+            'page_num': 4,
+        }
+#
+
 class Debrief(Page):
     def is_displayed(self):
         return (self.participant.vars['consent'])
     form_model = 'player'
     form_fields = ['agree']
 
-    
-
-
 page_sequence = [
     PlayExperience, 
     Comments,
+    Demographics,
+    Experience,
     Debrief
 ]

@@ -14,19 +14,21 @@ Notes:
 -- PW 0.3.2<br>
 -- RPS 0.3.3<br>
 -- settings.py 0.2.9<br>
--- Pre-Game questionnaires 0.2.5<br>
--- Post-Game questionnaires 0.3<br>
+-- Pre-Game questionnaires 0.3<br>
+-- Post-Game questionnaires 0.3.1<br>
 -- informed consent 0.3
-- Readme Version 0.3.4
+- Readme Version 0.3.5
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
-- move most pre-game questions to end
+
+- give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - adjust post-game questions based on Prahl and Swol 2017?
 -- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
 -- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
     
-- Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win) & maybe make it a session variable. 
+- Make win/lose a session variable in RPS (already a local var)
+- control P-W score
 - Make results pages better
 - fix participant player number in RPS
 - fix advisor player number in RPS
@@ -49,12 +51,7 @@ To do before experiment:
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
 - block browser commands (back/reload/keyboard/etc)
-- Add third game? Maybe:
--- where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something? <br>
---  the actual prisoner's dilemma with: <br>
---- a) the same payoffs, <br>
---- b) an ethical dilemma (target the terrorists with X chance of blowing up the baby milk factory) or, <br>
---- c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming... <br>
+
 
 To do later:
 - Clean up code (low priority as long as it works)<br>
@@ -64,6 +61,8 @@ To do later:
 
 
 Fixed in this version:
+- Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win)
+- move most pre-game questions to end
 - add adversary type and icon to RPS:<br>
 -- decision & win page<br>
 - fix post-game questionnaire, page 2: add bold to make questions more clear
@@ -73,6 +72,13 @@ Fixed in this version:
 - added who participant is playing AGAINST to the wait page in P-W 1
 - update Peace-War 2 templates to same version as P-W 1 (player nums are messed up)
 
+Ideas but not now:
+- Add third game? Maybe:
+-- where participant IS the advisor but has to pass-on AI or human advice? Maybe a percentage of probability of war or something? <br>
+--  the actual prisoner's dilemma with: <br>
+--- a) the same payoffs, <br>
+--- b) an ethical dilemma (target the terrorists with X chance of blowing up the baby milk factory) or, <br>
+--- c) add another Peace-War with an explicit "reminder: you're making decisions on people's lives, are you considering your options carefully?" - seems like priming... <br>
 ##
 
 # oTree

@@ -55,10 +55,10 @@ class Player(BasePlayer):
         label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?'
     )
     comments_AI_advisors = models.StringField(
-        label='What comments do you have about the <b>AI ADVISORS</b> in the games?'
+        label='What comments do you have about your <b>AI ADVISOR</b>?'
     )
     comments_human_advisors = models.StringField(
-        label='What comments do you have about your <b>human ADVISORS</b> to help them in the games?'
+        label='What comments do you have about your <b>human ADVISORS</b>?'
     )
     comments_human_players = models.StringField(
         label='What comments do you have about your <b>human competitors who did NOT have AI</b> to help them in the games?'
@@ -70,10 +70,62 @@ class Player(BasePlayer):
         label='What comments do you have about your <b>AI competitors</b> in the games?'
     )
 
-
     various_comments = models.StringField(
         label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?'
     )
+    
+    age = models.IntegerField(
+        label='In what year were you born?',
+        min=1900, max=2015)
+
+    gender = models.StringField(
+        choices=['Male', 'Female', 'Other'],
+        label='What is your gender?',
+        widget=widgets.RadioSelect)
+
+    service = models.StringField(
+        choices=['Air Force', 'Army', 'Navy', 'Marine', 'Other'],
+        label='What service are you a part of?',
+        widget=widgets.RadioSelect)
+    
+    rank = models.StringField(label='What is your rank?')
+
+    school = models.StringField(
+        choices=['SOS', 'ACSC', 'SAASS', 'AWC', 'Other'],
+        label='Which AU school are you attending?',
+        widget=widgets.RadioSelect)
+    
+    years_military_experience = models.IntegerField(
+        label='How many years of military experience do you have? (include time in a military academy or ROTC)',
+        min=0, max=50)
+
+    major = models.StringField(
+        label='What was/is your undergraduate major? (list all separated by comma)',
+    )
+
+    minor = models.StringField(
+        label='What was/is your undergraduate minor? (list all separated by comma, or "none")',
+    )
+
+    post_grad = models.StringField(
+        label='What post-graduate degrees do you have? (list all separated by comma, or "none". Ex. MS in Computer Engineering, MA in Military and Strategic Studies, PhD in English Literature)',
+    )
+
+    #Add an "I have heard of the prisoner's dilemma before
+    
+    #add an "I have studied game theory before
+    
+    game_theory_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I understand terms such as Nash equilibria and Pareto Optimal", what level of understanding do you have with Game Theory or Prisoners Dilemma?' # I should change this to a "Test" like "which definition of pareto-optimal is most true
+    )
+
+    # add a few AI-related test questions
+    # which computer language is most popular with machine learning developers Linux, C++, Python, HTML
+    # which of the following have AI researchers or engineers? (DeepMind, Future of Life Institute, Future of Humanity Institute, )
+    machine_learning_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I can code an AI using tensorflow", what level of understanding do you have with machine learning and/or artificial intelligence?' #
+    )
+    
     agree = models.BooleanField(
         label='Please select "Yes" to acknowledge you will not share information about or discuss this game with anyone until notified that it is ok to do so by the researcher.'
     )
+    
+    

@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Pre-game Questionnaire (Page {{ page_num}} of {{ Constants.number_of_pages }})
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please answer the following questions.
+    </p>
+
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+{% endblock %}
