@@ -14,6 +14,25 @@ class InformedConsent(Page):
         else:
             self.participant.vars['consent'] = False
 
+class Experience(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
+    form_model = 'player'
+    form_fields = ['experiment_contamination',
+                   'attention_check'
+                  ]
+    def vars_for_template(self): #is this needed or artifiact
+        return {
+            'page_num': 1,
+        }
+
+class Introduction(Page):
+    def is_displayed(self):
+        return self.participant.vars['consent']
+    pass
+#
 page_sequence = [
-    InformedConsent
+    InformedConsent,
+    Experience,
+    Introduction
 ]

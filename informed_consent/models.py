@@ -16,7 +16,7 @@ class Constants(BaseConstants):
     name_in_url = 'informed_consent'
     players_per_group = None
     num_rounds = 1
-
+    instructions_template = 'informed_consent/Instructions.html'
 
 class Subsession(BaseSubsession):
     pass
@@ -47,3 +47,15 @@ class Player(BasePlayer):
         
     def consent_check (self):
         self.participant.vars['consent'] = True
+        
+ 
+    experiment_contamination = models.StringField(
+        label='What have you heard about this experiment from other participants, if anything? If nothing, write "nothing" or leave this field blank.',
+        blank=True)
+    
+    attention_check = models.StringField(
+        choices=['Texas', 'Austria', 'Tennessee', 'Georgia', 'Other'],
+        label='What state is Atlanta in?',
+        widget=widgets.RadioSelect)
+    
+

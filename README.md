@@ -13,7 +13,7 @@ Notes:
 - Apps Versions:<br>
 -- PW 0.3.2<br>
 -- RPS 0.3.3<br>
--- settings.py 0.2.9<br>
+-- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.1<br>
 -- informed consent 0.3
@@ -61,6 +61,7 @@ To do later:
 
 
 Fixed in this version:
+- removed pre-game questionnaire app (combined two questions and instructions into informed consent app)
 - Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win)
 - move most pre-game questions to end
 - add adversary type and icon to RPS:<br>

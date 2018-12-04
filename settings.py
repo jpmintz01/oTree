@@ -1,12 +1,12 @@
 from os import environ
-import random
+#import random
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-#Version 0.2.9
+#Version 0.3
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
@@ -24,16 +24,16 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent'],
     },
-    {
-        'name': 'survey',
-        'display_name': "2. Pre-Game Questionnaire",
-        'num_demo_participants': 1,
-        'app_sequence': ['informed_consent','survey'],
-    },
+#    {
+#        'name': 'survey',
+#        'display_name': "2. Pre-Game Questionnaire",
+#        'num_demo_participants': 1,
+#        'app_sequence': ['informed_consent','survey'],
+#    },
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "3. Peace-War (ver 0.3.2) (multiplayer strategic no chat)",
+        'display_name': "2. Peace-War (ver 0.3.2) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
         'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
@@ -43,7 +43,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'rps',
-        'display_name': "4/5. Rock Paper Scissors  (ver 0.3.3) (with advisors)",
+        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.3) (with advisors)",
         'num_demo_participants': 1,
         'dev_game': True,
         'num_RPS_rounds': 20,
@@ -87,7 +87,7 @@ SESSION_CONFIGS = [
 #        -- 2. RPS-(H/A),PW2<br>
 #        -- 3. RPS-(A/H),PW2<br>
 #        -- 4. PW,RPS-(A/H) <br>
-        'app_sequence': ['informed_consent','survey','prisoner_multiplayer', 'rps','prisoner_multiplayer_2','post_game_survey'],
+        'app_sequence': ['informed_consent', 'prisoner_multiplayer', 'rps','prisoner_multiplayer_2','post_game_survey'],
         'doc': """ Counterbalancing (1-4):enter None or 1, 2, 3, or 4 - defines the counterbalance order: <br>-- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>-- 2. RPS-(H/A),PW2<br>-- 3. RPS-(A/H),PW2<br>-- 4. PW,RPS-(A/H) <br>.""",
     },
 
