@@ -26,14 +26,14 @@ Gathering participants
         $("#progressBar").css("width","90%");
     }
     function activateAI(){
-        $("#progressBar").html("Activating AI.");
+        $("#progressBar").html("Activating AI adversary.");
         $("#progressBar").css("width","100%");
     }
     $(document).ready(function(){
         setTimeout(function(){playerOne();}, 4000);
         setTimeout(function(){playerTwo();}, 10000);
-        setTimeout(function(){activateAI();}, 11000);
-        setTimeout(function() { $('form').submit(); }, 13000);
+        setTimeout(function(){activateAI();}, 11500);
+        setTimeout(function() { $('form').submit(); }, 13500);
     });
 </script>
 {% endblock %}
@@ -43,7 +43,7 @@ Gathering participants
     <div class="card bg-light instructions">
         <div class="container">
             <h2>Forming Game</h2>
-            <p>Waiting for <b>2</b> participants...</p> 
+            <p>Waiting for <b>2</b> participants (adversaries)...</p> 
             <div class="progress">
                 <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width:20%">Request sent...</div>
             </div>

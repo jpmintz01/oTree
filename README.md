@@ -12,12 +12,12 @@ Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
 -- PW 0.3.2<br>
--- RPS 0.3.5<br> 
+-- RPS 0.3.6<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.5<br>
 -- informed consent 0.3
-- Readme Version 0.3.6
+- Readme Version 0.3.7
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
@@ -54,6 +54,7 @@ To do later:
 
 
 Fixed in this version:
+- RPS wasn't logging when it played on participant.vars, hence P-W was always played before and after.
 - have the same adversaries for both RPS and P-W (i.e. human & AI or human & human+AI, or human & human+AI & AI)
 - add adversary type to RPS:<br>
 -- results page <br>

@@ -70,6 +70,7 @@ def ai_advice_adv_1(self): #actually used for both AI and human advice.
 class Introduction(Page):
 
     def is_displayed(self):
+        self.participant.vars['RPS_played'] = True
         counterbalance_adversary (self)
         if (self.participant.vars['consent']): #if you have consent
             if (self.round_number == 1): #if the first treatment section
