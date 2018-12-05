@@ -68,9 +68,7 @@ class Player(BasePlayer):
         choices=['Human','Human+AI','AI'],
         doc="""Participant's first adversary"""
     )
-    first_adversary_id = models.StringField()
-    second_adversary_id = models.StringField()
-    third_adversary_id = models.StringField()
+
     second_adv = models.StringField( #order in which participant plays the adversaries
         choices=['Human','Human+AI','AI'],
         doc="""Participant's second adversary"""
@@ -79,7 +77,11 @@ class Player(BasePlayer):
         choices=['Human','Human+AI','AI'],
         doc="""Participant's third adversary"""
     )
+    first_adversary_id = models.StringField()
+    second_adversary_id = models.StringField()
+    third_adversary_id = models.StringField()
     def counterbalance_rps (self): #called only by the Inroduction page on round 1
+
         try: #if there's a participant label, use it for counterbalancing
 
             rps_counterbalance_digit = int(self.participant.label[-1]) #last digit of participant label is rps counterbalance digit.
@@ -96,51 +98,60 @@ class Player(BasePlayer):
         
         if rps_counterbalance_digit == 1: #redundant with else
             self.participant.vars['rps_order'] = 123
-            self.participant.vars['first_rps_adv'] = "Human"
-            print('a')
-            self.participant.vars['second_rps_adv'] = "Human+AI"
-            self.participant.vars['third_rps_adv'] = "AI"
+            
         elif rps_counterbalance_digit == 2:
             self.participant.vars['rps_order'] = 132
-            self.participant.vars['first_rps_adv'] = "Human"
-            self.participant.vars['second_rps_adv'] = "AI"
-            self.participant.vars['third_rps_adv'] = "Human+AI"
-            print('b')
+    
         elif rps_counterbalance_digit == 3:
             self.participant.vars['rps_order'] = 231
-            self.participant.vars['first_rps_adv'] = "Human+AI"
-            self.participant.vars['second_rps_adv'] = "AI"
-            self.participant.vars['third_rps_adv'] = "Human"
-            print('c')
+
+  
         elif rps_counterbalance_digit == 4:
             self.participant.vars['rps_order'] = 213
-            self.participant.vars['first_rps_adv'] = "Human+AI"
-            self.participant.vars['second_rps_adv'] = "Human"
-            self.participant.vars['third_rps_adv'] = "AI"
-            print('d')
+
+
         elif rps_counterbalance_digit == 5:
             self.participant.vars['rps_order'] = 312
-            self.participant.vars['first_rps_adv'] = "AI"
-            self.participant.vars['second_rps_adv'] = "Human"
-            self.participant.vars['third_rps_adv'] = "Human+AI"
-            print('e')
+
+
         elif rps_counterbalance_digit == 6:
             self.participant.vars['rps_order'] = 321
-            self.participant.vars['first_rps_adv'] = "AI"
-            self.participant.vars['second_rps_adv'] = "Human+AI"
-            self.participant.vars['third_rps_adv'] = "Human"
-            print('f')
+
         else:
             self.participant.vars['rps_order'] = 123
-            self.participant.vars['first_rps_adv'] = "Human"
-            self.participant.vars['second_rps_adv'] = "Human+AI"
-            self.participant.vars['third_rps_adv'] = "AI"
-            print('g')
-    
+
+
         
-        print("2self.participant.vars['rps_order']= ")
-        print(self.participant.vars['rps_order'])
-    
+        rps_order_dict = {
+            1: "Human",
+            2: "Human+AI",
+            3: "AI"
+        }
+
+        adv_dict = {
+            1: "first_rps_adv",
+            2: "second_rps_adv",
+            3: "third_rps_adv"
+        }
+        
+        for key, value in adv_dict.items():
+            n = int(str(self.participant.vars['rps_order'])[key-1])
+            self.participant.vars[value] = rps_order_dict[n]
+            
+        self.first_adv = self.participant.vars['first_rps_adv']
+        self.second_adv = self.participant.vars['second_rps_adv']
+        self.third_adv = self.participant.vars['third_rps_adv']
+                
+        id_dict = {
+            "Human": "Player "+ Constants.human_adversary_id,
+            "Human+AI": "Player "+ Constants.human_ai_adversary_id + " w/AI",
+            "AI": "AI"
+        }
+        
+        self.first_adversary_id = id_dict[str(self.first_adv)]
+        self.second_adversary_id = id_dict[str(self.second_adv)]
+        self.third_adversary_id = id_dict[str(self.third_adv)]
+
 
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
     decision_vs_adv_1 = models.StringField( #my decision
