@@ -11,14 +11,15 @@ from os import environ
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 1.00,
     'participation_fee': 0.00,
-    'doc': "",
-    'counterbalancing': 1,  #enter None or 1, 2, 3, or 4
-        #defines the counterbalance order
-#        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
-#        -- 2. RPS-(H/A),PW2<br>
-#        -- 3. RPS-(A/H),PW2<br>
-#        -- 4. PW,RPS-(A/H) <br>
+#    'doc': "",
+#    'counterbalancing': 1,  #enter None or 1, 2, 3, or 4
+#        #defines the counterbalance order
+##        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
+##        -- 2. RPS-(H/A),PW2<br>
+##        -- 3. RPS-(A/H),PW2<br>
+##        -- 4. PW,RPS-(A/H) <br>
     'pw_counterbalance': '1', #if this number is odd, play PW first. If even, play it after RPS
+        #### NOTE: Don't set this to anything other than 1 if you want to play the individual app
     'rps_counterbalance': '2' # a list 1-6 of orders to play the adversaries
     #1 - H,HAI,AI (123)
     #2 - H, AI, HAI (132)
@@ -47,9 +48,9 @@ SESSION_CONFIGS = [
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "2. Peace-War (ver 0.3.2) (multiplayer strategic no chat)",
+        'display_name': "2. Peace-War (ver 0.3.5) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
-        'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
+#        'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
         'num_PW_rounds': 50,
@@ -57,9 +58,9 @@ SESSION_CONFIGS = [
 
     {
         'name': 'rps',
-        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.5) (with advisors)",
+        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.6) (with advisors)",
         'num_demo_participants': 1,
-        'dev_game': True,
+#        'dev_game': True,
         'num_RPS_rounds': 2,
         'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
         'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
@@ -67,16 +68,16 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'prisoner_multiplayer_2',
-        'display_name': "5. Peace-War (ver 0.2.8) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
+        'display_name': "5. Peace-War (ver 0.3.5) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
-        'counterbalancing': 2,#needs to be 2 or 3 or else it won't play
+#        'counterbalancing': 2,#needs to be 2 or 3 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
         'num_PW_rounds': 50,
     },
     {
         'name': 'post_game_survey',
-        'display_name': "6. Post-Game Questionnaire",
+        'display_name': "6. Post-Game Questionnaire (0.3.5)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent','post_game_survey'],
     },
@@ -84,19 +85,18 @@ SESSION_CONFIGS = [
         'name': 'multi_game_test',
         'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
-#        'num_rounds': 1,
-        'num_RPS_rounds': 5,
-        'num_PW_rounds': 5,
+        'num_RPS_rounds': 1,
+        'num_PW_rounds': 1,
         'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
         'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
-        'counterbalancing': 1, #enter None or 1, 2, 3, or 4
+#        'counterbalancing': 1, #enter None or 1, 2, 3, or 4
         #defines the counterbalance order
 #        -- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>
 #        -- 2. RPS-(H/A),PW2<br>
 #        -- 3. RPS-(A/H),PW2<br>
 #        -- 4. PW,RPS-(A/H) <br>
         'app_sequence': ['informed_consent', 'prisoner_multiplayer', 'rps','prisoner_multiplayer_2','post_game_survey'],
-        'doc': """ Counterbalancing (1-4):enter None or 1, 2, 3, or 4 - defines the counterbalance order: <br>-- 1. PW,RPS-(H/A) (using treatment within RPS to randomize A/H)<br>-- 2. RPS-(H/A),PW2<br>-- 3. RPS-(A/H),PW2<br>-- 4. PW,RPS-(A/H) <br>.""",
+        'doc': """if 'pw_counterbalance' is 1, play PW first. If 2, play it after RPS. #### NOTE: Don't set this to anything other than 1 if you want to play the individual app. <br>'rps_counterbalance': # a list 1-6 of orders to play the adversaries #1 - H,HAI,AI (123)<br>#2 - H, AI, HAI (132)<br>#3 - HAI, AI, H (231)<br>#4 - HAI, H, AI (213)<br>#5 - AI, H, HAI (312)<br>#6 - AI, HAI, H (321)""",
     },
 
 ]
@@ -119,7 +119,7 @@ ROOMS = [
     {
         'name': 'AU',
         'display_name': 'Air University',
-        'participant_label_file': '_rooms/AU.txt',
+        'participant_label_file': '_rooms/AU_test.txt',
     },
     #    {
     #        'name': 'USAFA',

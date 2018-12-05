@@ -11,7 +11,7 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
--- PW 0.3.2<br>
+-- PW 0.3.5<br>
 -- RPS 0.3.6<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>

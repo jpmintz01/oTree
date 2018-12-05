@@ -121,7 +121,7 @@ class Player(BasePlayer):
             print("pw_first try: "+str(pw_first))
         except: #if there's no participant.vars, then check the session.config it to True
             try:
-                if (self.session.config['counterbalancing'] in (2,3)):
+                if (self.session.config['pw_counterbalance'] == 2):
                     pw_first = False
                 else:
                     pw_first = True
