@@ -14,7 +14,7 @@ class Constants(BaseConstants):
     name_in_url = 'post_game_survey'
     players_per_group = None
     num_rounds = 1
-    number_of_pages = 2
+    number_of_pages = 5
 
 
 class Subsession(BaseSubsession):
@@ -37,10 +37,12 @@ def likert_var(label):
 class Player(BasePlayer):
     
     prisoner_strategy = models.StringField(
-        label='What was your strategy(ies) in the <b>Peace-War game</b>(i.e. "I always played Peace with the humans and War against the AI","I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")'
+        label='What was your strategy(ies) in the <b>Peace-War game</b>(i.e. "I always played Peace with the humans and War against the AI","I defected whenever the player defected in the last round," "I played essentially randomly because I did not really understand the game")',
+        blank=True
     )
     play_different_prisoner = models.StringField(
-        label='In the Peace-War game, why did you choose differently between players (if at all)?'
+        label='In the Peace-War game, why did you choose differently between players (if at all)?',
+        blank=True
     )
 #    chicken_strategy = models.StringField(
 #        label='What was your betting strategy(ies) in the Chicken game?(i.e. "I bet on the human because he/she had something to lose.  The AI didn’t", "I bet on the AI because I thought it would know best.", "I bet essentially randomly because I did not really understand the game")'
@@ -49,29 +51,37 @@ class Player(BasePlayer):
 #        label='In the Chicken game, why did your strategy differ between players (if at all)?'
 #    )
     rps_strategy = models.StringField(
-        label='What was your strategy in the <b>Rock-Paper-Scissors game</b>? (i.e. "I always relied on the AI because it was best", "I chose myself because I did not trust either advisor", "I played essentially randomly because I did not really understand the game")'
+        label='What was your strategy in the <b>Rock-Paper-Scissors game</b>? (i.e. "I always relied on the AI because it was best", "I chose myself because I did not trust either advisor", "I played essentially randomly because I did not really understand the game")',
+        blank=True
     )
     play_different_rps = models.StringField(
-        label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?'
+        label='In the Rock-Paper-Scissors game, why did you choose the strategy you did?',
+        blank=True
     )
     comments_AI_advisors = models.StringField(
-        label='What comments do you have about your <b>AI ADVISOR</b>?'
+        label='What comments do you have about your <b>AI ADVISOR</b>?',
+        blank=True
     )
     comments_human_advisors = models.StringField(
-        label='What comments do you have about your <b>human ADVISORS</b>?'
+        label='What comments do you have about your <b>human ADVISORS</b>?',
+        blank=True
     )
     comments_human_players = models.StringField(
-        label='What comments do you have about your <b>human competitors who did NOT have AI</b> to help them in the games?'
+        label='What comments do you have about your <b>human competitors who did NOT have AI</b> to help them in the games?',
+        blank=True
     )
     comments_human_AI_players = models.StringField(
-        label='What comments do you have about your <b>human competitors who DID have AI</b> to help them in the games?'
+        label='What comments do you have about your <b>human competitors who DID have AI</b> to help them in the games?',
+        blank=True
     )
     comments_AI_players = models.StringField(
-        label='What comments do you have about your <b>AI competitors</b> in the games?'
+        label='What comments do you have about your <b>AI competitors</b> in the games?',
+        blank=True
     )
 
     various_comments = models.StringField(
-        label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?'
+        label='Do you have any additional comments on what it was like to compete against both humans and artificial intelligence?',
+        blank=True
     )
     
     age = models.IntegerField(
@@ -101,14 +111,17 @@ class Player(BasePlayer):
 
     major = models.StringField(
         label='What was/is your undergraduate major? (list all separated by comma)',
+        blank=True
     )
 
     minor = models.StringField(
         label='What was/is your undergraduate minor? (list all separated by comma, or "none")',
+        blank=True
     )
 
     post_grad = models.StringField(
         label='What post-graduate degrees do you have? (list all separated by comma, or "none". Ex. MS in Computer Engineering, MA in Military and Strategic Studies, PhD in English Literature)',
+        blank=True
     )
 
     #Add an "I have heard of the prisoner's dilemma before

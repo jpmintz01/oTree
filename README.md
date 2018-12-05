@@ -15,7 +15,7 @@ Notes:
 -- RPS 0.3.5<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
--- Post-Game questionnaires 0.3.1<br>
+-- Post-Game questionnaires 0.3.5<br>
 -- informed consent 0.3
 - Readme Version 0.3.6
 - The experiment apps are set to dev version - participant will see something different.

@@ -6,26 +6,38 @@ Debrief
 {% endblock %}
 
 {% block content %}
-<p> 
-    Thank you for your participation in this experiment. 
-</p>
-<br>
-<p>As stated in the introduction, here’s a debrief on your competitors and advisors:</p>
-<ul>
-    <li>All other competitors and advisors used non-conditional strategies in order to control for variation which might have affected your decision-making in ways the experiment could not account for.</li>
-    <li>The human players and advisors were simulated by an algorithm which used non-conditional strategies.</li>
-    <li>The AI advisors and competitors were also algorithms which used non-conditional strategies.</li>
-</ul>
+<body style="background-color: lightgray; color: black">
+    <div class="card bg-light instructions">
+        <div class="card-body">    
+            <p> 
+                Thank you for your participation in this experiment. 
+            </p>
+            <br>
+            <p>As stated in the introduction, here’s a debrief on your competitors and advisors:</p>
+            <ul>
+                <li>In all games, all advisors and players were simulated.</li>
+            </ul>
 
-<p>Today, in real life, there ARE real artificial intelligence algorithms which can play such games very well and can advise decision-makers. In fact, they exhibit some very interesting and advanced, but very non-human, characteristics. If you are interested in learning more or playing against one of these artificial intelligence players, please let the proctor know.
-</p>
-<br>
-<p><b>Please do not share your experiences today with anyone </b>until told by the researcher that is ok to discuss. You can understand how a participant's prior knowledge of the information on this page would corrupt the experiment.  </p>
-<br>
-{% for field in form %}
-{% formfield field %}
-{% endfor %}
+            <ul>
+                <li>In the Peace-War Game: All competitors and advisors used non-conditional strategies in order to control for variation which might have affected your decision-making in ways the experiment could not account for.</li>
+            </ul>
+     
+            <ul>
+                <li>In the Rock-Paper-Scissors Game: All competitors and advisors used a conditional algorithm in order to control for variation in your score which might have affected your decision-making in ways the experiment could not account for.</li>
 
-{% next_button %}
+            </ul>
+            <br>
+            <p>Today, in real life, there ARE real artificial intelligence algorithms which can play such games very well and can advise decision-makers. In fact, they exhibit some very interesting and advanced, but very non-human, characteristics. If you are interested in learning more or playing against one of these artificial intelligence players, please let the proctor know.
+            </p>
+            <br>
+            <p><b>Please do not share your experiences today with anyone </b>until told by the researcher that is ok to discuss. You can understand how a participant's prior knowledge of the information on this page would corrupt the experiment.  </p>
+            <br>
+            {% for field in form %}
+            {% formfield field %}
+            {% endfor %}
 
+            {% next_button %}
+        </div>
+    </div>
+</body>
 {% endblock %}
