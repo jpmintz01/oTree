@@ -29,12 +29,15 @@ Gathering participants
         $("#progressBar").css("width","100%");
     }
     $(document).ready(function(){
-        var adversary_type = "{{ adversary_id }}";
-        if (adversary_type != "AI"){
+        var adversary_id = "{{ adversary_id }}";
+        if (adversary_id == "AI"){
             setTimeout(function(){playerOne();}, 3000);
             $("#num_participants").html("Waiting for <b>2</b> participants (Advisor and Adversary)...");
             $("#type_adversary").html('<h2>Forming game against <b style="text-decoration: underline">Human</b> adversary</h2>');
-            
+        } else if (adversary_id.endsWith("w/AI")) {
+            setTimeout(function(){playerOne();}, 3000);
+            $("#num_participants").html("Waiting for <b>2</b> participants (Advisor and Adversary)...");
+            $("#type_adversary").html('<h2>Forming game against <b style="text-decoration: underline">AI-assisted Human</b> adversary</h2>');
         };
 //        Math.floor(Math.random() * 1000) + 500 // would use to randomize timing of simulated players joining
         setTimeout(function(){allPlayers();}, 9000);

@@ -80,6 +80,7 @@ class Player(BasePlayer):
     first_adversary_id = models.StringField()
     second_adversary_id = models.StringField()
     third_adversary_id = models.StringField()
+    adversary_id = models.StringField()
     def counterbalance_rps (self): #called only by the Inroduction page on round 1
 
         try: #if there's a participant label, use it for counterbalancing
@@ -119,8 +120,6 @@ class Player(BasePlayer):
 
         else:
             self.participant.vars['rps_order'] = 123
-
-
         
         rps_order_dict = {
             1: "Human",

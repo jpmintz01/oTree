@@ -9,57 +9,64 @@ Results
 <link rel="stylesheet" type="text/css" href="{% static 'global/matrix.css' %}" />
 
 <style>
-    .highlight-row-on-hover:hover td {
-        background-color: #fcf8e3;
-    }
-    .invalid-blink {
-        background-color: gray;
-    }
 
     .highlight-selected {
         background-color: red;
     }
     .floatedTable {
-        float:left;
+        /*        float:left;*/
     }
-    .inlineTable {
-        display: inline-block;
-    }
+
 </style>
 
 {% endblock %}
 
 {% block content %}
+<body style="background-color: lightgray; color: black">
+    <div align="center">
+        <table border=1 class="floatedTable text-center" style="background-color: white">
+            <tr>
+                <td>Legend: </td>
+                <td style="background-color: green">Win</td>
+                <td style="background-color: red">Lose</td>
+                <td>Draw</td>
+            </tr>
+        </table>
+        <hr>
+        <table border="3"  class="text-center" style="background-color: white">
+            <th>Round</th>
+            <th>Your <br>Advisor</th>
+            <th>You <br>played</th>
 
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Round</b></td>
-    {% for num in list_of_round_nums   %}
-    <tr>
-        <td>{{ num }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>You</b></td>
-    {% for day in my_decision_adv_1_total   %}
-    <tr>
-        <td>{{ day }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto">
-    <td><b>Competitor #1 ({{ player.adv_1_type }})</b></td>
-    {% for night in adv_1_decision_total   %}
-    <tr>
-        <td>{{ night }}</td>
-    </tr>
-    {% endfor %}
-</table>
+            <th>Competitor<br> played</th>
+            <th>Competitor</th>
 
-<hr>
-My total payoff across rounds: {{ my_total_payoff }} <br>
-<hr>
-{% next_button %}
+            {% for key,value in history_list.items %}
+            {%if key == player.round_number %}
+            {% else %}
+            <tr>
+                <td style="background-color: {% if value.4 == "player" %}green{% elif value.4 == "adversary" %}red{% endif %}">{{key}}</td>
+                {% for i in value|slice:":-1" %}
+                <td>
+                    {{i}} 
+                </td>
+                {% endfor %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <br>
+    <div align="center">
+        <hr>
+        Your total score across rounds: {{ my_total_payoff }} <br>
+        <hr>
+        {% next_button %}
+    </div>
+</body>
 {% endblock %}
+
 
 

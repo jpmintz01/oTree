@@ -12,16 +12,16 @@ Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
 -- PW 0.3.2<br>
--- RPS 0.3.5b (ugh - needs work)<br> 
+-- RPS 0.3.5<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.1<br>
 -- informed consent 0.3
-- Readme Version 0.3.5
+- Readme Version 0.3.6
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
-
+- need a self.participant.vars dump for each app
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - adjust post-game questions based on Prahl and Swol 2017?
 -- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
@@ -29,12 +29,8 @@ To do before experiment:
     
 - Make win/lose a session variable in RPS (already a local var)
 - control P-W score
-- Make results pages better
-- fix participant player number in RPS
-- fix advisor player number in RPS
-- Fix counterbalancing in demo version (if required)
+- Make P-W results page better 
 - add "learning epochs" to AIs?
-- do I need to have the same adversaries for both RPS and P-W?  i.e. human & AI or human & human+AI, or human & human+AI & AI
 - explain AI better?
 - fix post-game questions<br>
 -- change questions to "Why did you choose the strategy you did?"
@@ -43,9 +39,6 @@ To do before experiment:
 - switch to postgresql?
 - runserver prodserver vs devserver
 - check peace-war payoffs (war-war should be negative...)
-- add adversary type and icon to RPS:<br>
--- results page <br>
--- maybe wait page <br>
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
 - Change/update/add immediate visual feedback on decisions
@@ -61,6 +54,13 @@ To do later:
 
 
 Fixed in this version:
+- have the same adversaries for both RPS and P-W (i.e. human & AI or human & human+AI, or human & human+AI & AI)
+- add adversary type to RPS:<br>
+-- results page <br>
+-- maybe wait page <br>
+- fix participant player number in RPS
+- fix advisor player number in RPS
+- Fix counterbalancing in demo version (if required)
 - removed pre-game questionnaire app (combined two questions and instructions into informed consent app)
 - Adjust participant control "win/lose" ratio to something statistically/logically possible (RPS shouldn't be much more than 33% win)
 - move most pre-game questions to end

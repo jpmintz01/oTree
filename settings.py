@@ -57,10 +57,10 @@ SESSION_CONFIGS = [
 
     {
         'name': 'rps',
-        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.3) (with advisors)",
+        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.5) (with advisors)",
         'num_demo_participants': 1,
         'dev_game': True,
-        'num_RPS_rounds': 20,
+        'num_RPS_rounds': 2,
         'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
         'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
         'app_sequence': ['informed_consent','rps']

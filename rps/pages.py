@@ -5,8 +5,7 @@ import random
 
 def counterbalance_adversary (self):
     self.player.counterbalance_rps()
-    
-    
+
     
 def human_advisor_id (self):
     if self.round_number <= self.session.config['num_RPS_rounds']: #if during the first treatment section
@@ -16,15 +15,22 @@ def human_advisor_id (self):
     else: #if during the third treatment section
         return Constants.human_advisor_3_id
 
-    
+
 def adversary_id (self): #only need to call this once
+    print("a11")
+    counterbalance_adversary(self)
     if self.round_number <= self.session.config['num_RPS_rounds']:
-        
+        self.player.adversary_id = self.player.first_adversary_id
+        print("self.player.first_adversary_id "+str(self.player.first_adversary_id))
         return self.player.first_adversary_id
     elif self.round_number <= (self.session.config['num_RPS_rounds']*2):
+        self.player.adversary_id = self.player.second_adversary_id
         return self.player.second_adversary_id
+        print("self.player.second_adversary_id "+str(self.player.second_adversary_id))
     else:
+        self.player.adversary_id = self.player.third_adversary_id
         return self.player.third_adversary_id
+        print("self.player.third_adversary_id   "+str(self.player.third_adversary_id))
     
     
     
@@ -64,19 +70,14 @@ def ai_advice_adv_1(self): #actually used for both AI and human advice.
 class Introduction(Page):
 
     def is_displayed(self):
-
+        counterbalance_adversary (self)
         if (self.participant.vars['consent']): #if you have consent
             if (self.round_number == 1): #if the first treatment section
-                self.player.counterbalance_rps()
-                counterbalance_adversary (self)
-                print("self.participant.vars['rps_order']= ")
-                print(self.participant.vars['rps_order'])
-                print("self.participant.vars['first_rps_adv']= ")
-                print(self.participant.vars['first_rps_adv'])
-                print("self.player.first_adv= ")
-                print(self.player.first_adv)
+#                
+                
                 return True
             elif (self.round_number == (self.session.config['num_RPS_rounds']+1)): #if second treatment section
+                
                 return True
             elif (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1)): #if third treatment section
                 return True
@@ -179,30 +180,23 @@ class Decision(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return ((self.round_number == (self.session.config['num_RPS_rounds']*2)) and (self.participant.vars['consent'])) #show the results if it's the last round and consent was given
+        return ((self.round_number == ((self.session.config['num_RPS_rounds']*3)+1)) and (self.participant.vars['consent'])) #show the results if it's the last round and consent was given
     def vars_for_template(self):
         me = self.player
         #opponent = me.other_player()
         last_round = max(0,self.round_number-1)
+        history = {}              
+        for p in me.in_all_rounds():
+            history[p.round_number]=[p.advisor_choice, p.decision_vs_adv_1, p.decision_of_adv_1, p.adversary_id,  p.winner]
         return {
-            'my_decision_adv_1': me.decision_vs_adv_1,
+#            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()],
+#            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()],
             'list_of_round_nums': [p.round_number for p in me.in_all_rounds()],
-            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()],
-            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()],
-            'my_payoff_adv_1': me.payoff_vs_adv_1,
-            'adv_1_decision': me.decision_of_adv_1,
-            'adv_1_payoff': me.payoff_of_adv_1,
-            
-#            'my_decision_adv_2': me.decision_vs_adv_2,
-#            'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()],
-#            'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()],
-#            'my_payoff_adv_2': me.payoff_vs_adv_2,
-#            'adv_2_decision': me.decision_of_adv_2,
-#            'adv_2_payoff': me.payoff_of_adv_2,
-            
+#            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
+#            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()[:-1]],
             'my_total_payoff': sum([p.round_payoff for p in me.in_all_rounds()]),
-            'human_advisor_id': human_advisor_id(self),
-            'adversary_id': adversary_id(self),
+            'history_list': history,
+
         }
 #        self.player.participant_vars_dump = str(self.participant.vars)
 
