@@ -11,16 +11,18 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
--- PW 0.3.5<br>
--- RPS 0.3.6<br> 
+-- PW 0.3.6<br>
+-- RPS 0.3.9<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
--- Post-Game questionnaires 0.3.5<br>
+-- Post-Game questionnaires 0.3.6<br>
 -- informed consent 0.3
-- Readme Version 0.3.8
+- Readme Version 0.3.9
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- remove "examples" from post-game questions like "i played randomly"
+- Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - cut down number of extra rounds or somehow set them to the config vars
 - cut down extra variables in player
 - figure out kiosk mode
@@ -29,12 +31,8 @@ To do before experiment:
 - adjust post-game questions based on Prahl and Swol 2017?
 -- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
 -- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
-    
-- Make win/lose a session variable in RPS (already a local var)
 - control P-W score
 - Make P-W results page better 
-- add "learning epochs" to AIs?
-- explain AI better?
 - fix post-game questions<br>
 -- change questions to "Why did you choose the strategy you did?"
 - test server
@@ -49,13 +47,19 @@ To do before experiment:
 
 
 To do later:
+- add "learning epochs" to AIs?
+- explain AI better?
 - Clean up code (low priority as long as it works)<br>
 -- so clunky, but it works<br>
 - Comment code (before publishing)
 - if time, add P-W animation (handshake or jet-explosion)
 
 
-Fixed in this version:
+Fixed:
+- add number of rounds to RPS instructions
+- add css animation to adversary type in RPS instructions
+- Remove undergraduate minor
+- Make controlled score a session variable in RPS (already done)
 - RPS wasn't logging when it played on participant.vars, hence P-W was always played before and after.
 - have the same adversaries for both RPS and P-W (i.e. human & AI or human & human+AI, or human & human+AI & AI)
 - add adversary type to RPS:<br>

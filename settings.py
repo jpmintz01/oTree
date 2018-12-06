@@ -48,17 +48,17 @@ SESSION_CONFIGS = [
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "2. Peace-War (ver 0.3.5) (multiplayer strategic no chat)",
+        'display_name': "2. Peace-War (ver 0.3.6) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
 #        'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
-        'num_PW_rounds': 50,
+        'num_PW_rounds': 20,
     },
 
     {
         'name': 'rps',
-        'display_name': "2/3/4. Rock Paper Scissors  (ver 0.3.6) (with advisors)",
+        'display_name': "2/3/4. Advised Rock Paper Scissors  (ver 0.3.6)",
         'num_demo_participants': 1,
 #        'dev_game': True,
         'num_RPS_rounds': 2,
@@ -73,7 +73,7 @@ SESSION_CONFIGS = [
 #        'counterbalancing': 2,#needs to be 2 or 3 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
         'use_browser_bots': False,
-        'num_PW_rounds': 50,
+        'num_PW_rounds': 20,
     },
     {
         'name': 'post_game_survey',

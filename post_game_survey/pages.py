@@ -9,9 +9,9 @@ class PlayExperience(Page):
     form_model = 'player'
     form_fields = [
         'prisoner_strategy',
-        'play_different_prisoner',
+#        'play_different_prisoner',
         'rps_strategy',
-        'play_different_rps'
+#        'play_different_rps'
     ]
     def vars_for_template(self):
         return {
@@ -45,7 +45,7 @@ class Demographics(Page):
                    'service',
                    'rank',
                    'major',
-                   'minor',
+#                   'minor',
                    'post_grad',
                   ]
     def vars_for_template(self):

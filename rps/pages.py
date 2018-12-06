@@ -93,6 +93,7 @@ class Introduction(Page):
         return {
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
+            'number_of_rounds': self.session.config['num_RPS_rounds']
         }
     
 class WaitForPlayers(Page):
