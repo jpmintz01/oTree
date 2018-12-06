@@ -17,10 +17,13 @@ Notes:
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.5<br>
 -- informed consent 0.3
-- Readme Version 0.3.7
+- Readme Version 0.3.8
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- cut down number of extra rounds or somehow set them to the config vars
+- cut down extra variables in player
+- figure out kiosk mode
 - need a self.participant.vars dump for each app
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - adjust post-game questions based on Prahl and Swol 2017?
@@ -36,8 +39,7 @@ To do before experiment:
 -- change questions to "Why did you choose the strategy you did?"
 - test server
 - test data collection
-- switch to postgresql?
-- runserver prodserver vs devserver
+- upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
 - check peace-war payoffs (war-war should be negative...)
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
