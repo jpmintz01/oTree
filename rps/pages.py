@@ -89,11 +89,10 @@ class Introduction(Page):
 #                return (((self.round_number == 1) or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent'])) #show the intro if it's round 1 or the first round of treatment 2 (the second half)
     
     def vars_for_template (self):
-
         return {
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
-            'number_of_rounds': self.session.config['num_RPS_rounds']
+#            'number_of_rounds': self.session.config['num_RPS_rounds'],
         }
     
 class WaitForPlayers(Page):
