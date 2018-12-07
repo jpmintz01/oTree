@@ -12,7 +12,7 @@ Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
 -- PW 0.3.6<br>
--- RPS 0.3.9<br> 
+-- RPS 0.3.9b<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.6<br>
@@ -21,6 +21,7 @@ Notes:
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+- Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - remove "examples" from post-game questions like "i played randomly"
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - cut down number of extra rounds or somehow set them to the config vars
