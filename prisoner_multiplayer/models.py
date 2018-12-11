@@ -14,6 +14,7 @@ This is a 'strategic' "Prisoner's Dilemma". There are three human players (inclu
 At each "turn", the player must make a play (Peace or War) with all other players.
 """
 
+
 class Constants(BaseConstants):
     name_in_url = 'prisoner_multiplayer'
     players_per_group = None
@@ -212,11 +213,11 @@ class Player(BasePlayer):
         initial='AI'
     )
     ######### end adversary #3
-    player_guess_adv_1_type = models.StringField(
-        choices=['Simple Algorithm', 'Artificial Intelligence'],
-        label='What type of machine were you just playing with?',
-        widget=widgets.RadioSelect
-    )
+#    player_guess_adv_1_type = models.StringField(
+#        choices=['Simple Algorithm', 'Artificial Intelligence'],
+#        label='What type of machine were you just playing with?',
+#        widget=widgets.RadioSelect
+#    )
     
     round_payoff = models.CurrencyField(
         choices=currency_range(c(-1000), c(1000), c(1)),
