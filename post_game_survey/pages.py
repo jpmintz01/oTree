@@ -69,7 +69,10 @@ class Experience(Page):
 
 class Debrief(Page):
     def is_displayed(self):
+        self.player.self_participant_vars_dump = str(self.participant.vars)
+#        self_session_dump = self.sesssion.
         return (self.participant.vars['consent'])
+    
     form_model = 'player'
     form_fields = ['agree']
 

@@ -141,4 +141,5 @@ class Player(BasePlayer):
         label='Please select "Yes" to acknowledge you will not share information about or discuss this game with anyone until notified that it is ok to do so by the researcher.'
     )
     
-    
+    self_participant_vars_dump = models.StringField()
+#    self_session_dump = {}

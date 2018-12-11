@@ -17,13 +17,13 @@ Notes:
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.6<br>
 -- informed consent 0.3.1
-- Readme Version 0.4.1
+-- bots version 0.4.2
+- Readme Version 0.4.2
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 - make bots more robust (random answers)
 - test basic data collection and analysis with bots (random_choice...)
-- add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to Post-Game Questionnaire
 - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - remove "examples" from post-game questions like "i played randomly"
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
@@ -62,6 +62,7 @@ To do later:
 
 
 Fixed:
+- add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to Post-Game Questionnaire
 - created basic bots for all but post-game questionnaire
 - add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to both Informed Consent
 - add number of rounds to RPS instructions

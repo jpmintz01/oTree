@@ -85,8 +85,8 @@ SESSION_CONFIGS = [
         'name': 'multi_game_test',
         'display_name': "---> Experiment Start to Finish",
         'num_demo_participants': 1,
-        'num_RPS_rounds': 1,
-        'num_PW_rounds': 1,
+        'num_RPS_rounds': 20,
+        'num_PW_rounds': 20,
         'target_RPS_score': 1, #this puts the player's target score at slightly better than average - could add a 'target_human_score and a target_vs_AI_adversary_score or a target_AI_advisor_score if needed/desired'
         'control_RPS_score': True, #this tells the app, 'yes, I'd lke to control the participant's score instead of using pre-set values and/or an actual algorithm
 #        'counterbalancing': 1, #enter None or 1, 2, 3, or 4

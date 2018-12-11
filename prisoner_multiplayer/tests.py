@@ -15,6 +15,6 @@ class PlayerBot(Bot):
         if ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now()): 
             
             yield Submission(pages.Decision, {'decision_vs_adv_1': "Peace", 'decision_vs_adv_2': "Peace", 'decision_vs_adv_3': "Peace"}, check_html=False)
-        elif ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now()):
+        if ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now()):
             yield Submission(pages.Results, check_html=False)
 
