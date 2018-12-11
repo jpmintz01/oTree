@@ -35,7 +35,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'informed_consent',
-        'display_name': "1. Informed Consent",
+        'display_name': "1. Informed Consent (ver 0.3.1)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent'],
     },
@@ -58,7 +58,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'rps',
-        'display_name': "2/3/4. Advised Rock Paper Scissors  (ver 0.3.6)",
+        'display_name': "2/3/4. Advised Rock Paper Scissors  (ver 0.4)",
         'num_demo_participants': 1,
 #        'dev_game': True,
         'num_RPS_rounds': 2,
@@ -68,7 +68,7 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'prisoner_multiplayer_2',
-        'display_name': "5. Peace-War (ver 0.3.5) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
+        'display_name': "5. Peace-War (ver 0.3.6) (2nd instance for counterbalancing) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
 #        'counterbalancing': 2,#needs to be 2 or 3 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
@@ -77,7 +77,7 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'post_game_survey',
-        'display_name': "6. Post-Game Questionnaire (0.3.5)",
+        'display_name': "6. Post-Game Questionnaire (0.3.7)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent','post_game_survey'],
     },

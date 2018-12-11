@@ -12,10 +12,10 @@ Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
 -- PW 0.3.6<br>
--- RPS 0.3.9b<br> 
+-- RPS 0.4<br> 
 -- settings.py 0.3<br>
 -- Pre-Game questionnaires 0.3<br>
--- Post-Game questionnaires 0.3.6<br>
+-- Post-Game questionnaires 0.3.7<br>
 -- informed consent 0.3.1
 -- bots version 0.4.2
 - Readme Version 0.4.2
