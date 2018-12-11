@@ -63,6 +63,11 @@ class WaitForPlayers(Page):
     
 class Decision(Page):
     def is_displayed(self):
+        print("Dself.round_number "+str(self.round_number))
+        print("Dself.session.config['num_PW_rounds'] "+str(self.session.config['num_PW_rounds']))
+        print("Dself.participant.vars['consent'] "+str(self.participant.vars['consent']))
+        print("Dself.player.play_now()) "+str(self.player.play_now()))
+        print("DConstants.num_rounds "+str(Constants.num_rounds))
         return ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now())
     form_model = 'player'
 #    def get_form_fields(self):
@@ -128,7 +133,8 @@ class Decision(Page):
                         
     def before_next_page(self):
         me = self.player
-
+#        print("before_next_page")
+#        print("round_number "+str(me.round_number))
         me.set_payoff()
         
 class ResultsWaitPage(WaitPage):

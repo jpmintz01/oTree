@@ -17,18 +17,20 @@ Notes:
 -- Pre-Game questionnaires 0.3<br>
 -- Post-Game questionnaires 0.3.6<br>
 -- informed consent 0.3.1
-- Readme Version 0.4
+- Readme Version 0.4.1
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
-- add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to both Informed Consent and Post-Game Questionnaire
+- make bots more robust (random answers)
+- test basic data collection and analysis with bots (random_choice...)
+- add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to Post-Game Questionnaire
 - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - remove "examples" from post-game questions like "i played randomly"
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - cut down number of extra rounds or somehow set them to the config vars
 - cut down extra variables in player
 - figure out kiosk mode
-- need a self.participant.vars dump for each app
+- need a self.participant.vars dump for each app (or just at end of post-game questionnaire)
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - adjust post-game questions based on Prahl and Swol 2017?
 -- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
@@ -39,6 +41,8 @@ To do before experiment:
 -- change questions to "Why did you choose the strategy you did?"
 - test server
 - test data collection
+- Get room in library?
+- test heroku server with bots
 - upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
 - check peace-war payoffs (war-war should be negative...)
 - create room & list of participant id's<br>
@@ -58,6 +62,8 @@ To do later:
 
 
 Fixed:
+- created basic bots for all but post-game questionnaire
+- add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to both Informed Consent
 - add number of rounds to RPS instructions
 - add css animation to adversary type in RPS instructions
 - Remove undergraduate minor

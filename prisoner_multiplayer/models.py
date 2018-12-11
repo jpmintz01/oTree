@@ -131,6 +131,7 @@ class Player(BasePlayer):
 
         
         print("not rps_played and pw_first: "+str(not (rps_played == pw_first)))
+        print("self.session.config['num_PW_Rounds']"+str(self.session.config['num_PW_rounds']))
         return not (rps_played == pw_first) # not(==) is XOR
             
             
