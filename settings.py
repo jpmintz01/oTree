@@ -29,7 +29,8 @@ SESSION_CONFIG_DEFAULTS = {
     #6 - AI, HAI, H (321)
 }
 
-BROWSER_COMMAND = 'Chrome'
+#BROWSER_COMMAND = 'Chrome'
+
 
 SESSION_CONFIGS = [
 
