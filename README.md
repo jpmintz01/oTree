@@ -22,34 +22,43 @@ Notes:
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
+BOTS
 - make bots more robust (random answers)
+EXPERIMENT CONDUCT
+- fix RPS adv_type storage
+- Move experiment_contamination to post-game questionnaire
+- have 2-3 example rounds of each game to show them how to play...
 - test basic data collection and analysis with bots (random_choice...)
-- Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
-- remove "examples" from post-game questions like "i played randomly"
-- Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - cut down number of extra rounds or somehow set them to the config vars
 - cut down extra variables in player
 - figure out kiosk mode
-- need a self.participant.vars dump for each app (or just at end of post-game questionnaire)
-- give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
-- adjust post-game questions based on Prahl and Swol 2017?
--- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
--- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
+- test self.participant.vars dump
 - control P-W score
 - Make P-W results page better 
-- fix post-game questions<br>
--- change questions to "Why did you choose the strategy you did?"
 - test server
 - test data collection
 - Get room in library?
 - test heroku server with bots
 - upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
+- block browser commands (back/reload/keyboard/etc)
+EXPERIMENT DESIGN
+- split to H vs HAI, then H vs AI instead of all three at once?  That gives twice as many control inputs, and removes the possible confound of three variables?
+- If I get enough participants ()
+- Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
+- remove "examples" from post-game questions like "i played randomly"
+- Add "have you ever served on a CCDR, JCS, or OSD staff?"
+- give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
+- adjust post-game questions based on Prahl and Swol 2017?
+-- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
+-- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
+- fix post-game questions<br>
+-- change questions to "Why did you choose the strategy you did?"
 - check peace-war payoffs (war-war should be negative...)
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
-- block browser commands (back/reload/keyboard/etc)
+
 
 
 To do later:

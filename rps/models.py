@@ -16,7 +16,7 @@ class Constants(BaseConstants):
     name_in_url = 'rps'
     players_per_group = None
     num_adversaries = 1
-    num_rounds = 50 #this is set high just to be higher than self.session.config['num_rounds']
+    num_rounds = 60 #this is set high just to be higher than 3x self.session.config['num_RPS_rounds']
     # the below two must add up to the num_adversaries
     #num_rounds = self.session.config['num_rounds']
     #num_AI_adv = 2
@@ -172,10 +172,10 @@ class Player(BasePlayer):
         initial=c(0)
     )
     adv_1_type = models.StringField(
-        choices=['human','human+AI','AI'],
+        choices=['Human','Human+AI','AI'],
         doc="""Adversary type""",
         widget=widgets.RadioSelect,
-        initial='human'
+        #initial='human'
     )
     advisor_choice = models.StringField(
         choices=['human','AI','none'],

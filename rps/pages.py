@@ -22,13 +22,16 @@ def adversary_id (self): #only need to call this once
     if self.round_number <= self.session.config['num_RPS_rounds']:
         self.player.adversary_id = self.player.first_adversary_id
         print("self.player.first_adversary_id "+str(self.player.first_adversary_id))
+        self.player.adv_1_type = self.player.first_adv
         return self.player.first_adversary_id
     elif self.round_number <= (self.session.config['num_RPS_rounds']*2):
         self.player.adversary_id = self.player.second_adversary_id
+        self.player.adv_1_type = self.player.second_adv
         return self.player.second_adversary_id
         print("self.player.second_adversary_id "+str(self.player.second_adversary_id))
     else:
         self.player.adversary_id = self.player.third_adversary_id
+        self.player.adv_1_type = self.player.third_adv
         return self.player.third_adversary_id
         print("self.player.third_adversary_id   "+str(self.player.third_adversary_id))
     
@@ -202,7 +205,7 @@ class Results(Page):
 #        self.player.participant_vars_dump = str(self.participant.vars)
 
         
-class EndGame(Page):
+class EndGame(Page): #delete
     form_model = 'player'
     form_fields = ['player_guess_adv_1_type']    
     def is_displayed(self):

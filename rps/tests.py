@@ -23,11 +23,13 @@ def introduction_check(self):
 class PlayerBot(Bot):
 
     def play_round(self):
+        advisor_choices=['human','AI','none']
+        decision_choices=['Rock', 'Paper', 'Scissors']
         if introduction_check(self):
             yield (pages.Introduction)
         if (((self.round_number <= 1)  or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent'])):
             yield Submission (pages.WaitForPlayers, check_html=False)
         if ((self.round_number <= (self.session.config['num_RPS_rounds']*3)) and (self.participant.vars['consent'])):
-            yield Submission (pages.Decision, {'decision_vs_adv_1':"Rock", 'decision_of_adv_1':"Paper",'advisor_choice':"human"}, check_html=False)
+            yield Submission (pages.Decision, {'decision_vs_adv_1':random.choice(decision_choices), 'decision_of_adv_1':random.choice(decision_choices),'advisor_choice':random.choice(advisor_choices)}, check_html=False)
         if ((self.round_number == ((self.session.config['num_RPS_rounds']*3)+1)) and (self.participant.vars['consent'])):
             yield (pages.Results)

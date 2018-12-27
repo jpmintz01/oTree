@@ -75,7 +75,7 @@ class Player(BasePlayer):
         blank=True
     )
     comments_AI_players = models.StringField(
-        label='What comments do you have about your <b>AI competitors</b> in the games?',
+        label='What comments do you have about your <b>AI competitors</b>?',
         blank=True
     )
 
