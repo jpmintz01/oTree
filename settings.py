@@ -113,25 +113,16 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ROOMS = [
-    #    {
-    #        'name': 'econ101',
-    #        'display_name': 'Econ 101 class',
-    #        'participant_label_file': '_rooms/econ101.txt',
-    #    },
     {
-        'name': 'AU',
-        'display_name': 'Air University',
-        'participant_label_file': '_rooms/AU_test.txt',
+        'name': 'AU_live_Jan_2019',
+        'display_name': 'AU In-Person Group Jan 2019',
+        'participant_label_file': '_rooms/au_live_Jan_2019.txt',
     },
-    #    {
-    #        'name': 'USAFA',
-    #        'display_name': 'USAFA',
-    #        'participant_label_file': '_rooms/USAFA.txt',
-    #    },
-    #    {
-    #        'name': 'live_demo',
-    #        'display_name': 'Room for live demo (no participant labels)',
-    #    },
+    {
+        'name': 'test_file',
+        'display_name': 'test_4_jan',
+        'participant_label_file': '_rooms/test_file.txt',
+    },
 ]
 
 

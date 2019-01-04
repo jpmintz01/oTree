@@ -20,6 +20,7 @@ class InformedConsent(Page):
 
 class Experience(Page):
     def is_displayed(self):
+        print('self.part.vars["consent"] '+ str(self.participant.vars['consent']))
         return self.participant.vars['consent']
     form_model = 'player'
     form_fields = ['experiment_contamination',
@@ -32,6 +33,9 @@ class Experience(Page):
 
 class Introduction(Page):
     def is_displayed(self):
+        self.participant.vars['RPS_played'] = False
+        print('inf consent intro set self.part.vars[RPS_played]' +str(self.participant.vars['RPS_played']))
+        print('self.part.vars["consent"] '+str(self.participant.vars['consent']))
         return self.participant.vars['consent']
     pass
 #

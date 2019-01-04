@@ -76,7 +76,6 @@ def ai_advice_adv_1(self): #actually used for both AI and human advice.
 class Introduction(Page):
 
     def is_displayed(self):
-        self.participant.vars['RPS_played'] = True
         counterbalance_adversary (self)
         if (self.participant.vars['consent']): #if you have consent
             if (self.round_number == 1): #if the first treatment section
@@ -187,8 +186,12 @@ class Decision(Page):
 
 class Results(Page):
     def is_displayed(self):
+        self.participant.vars['RPS_played'] = True
+        print('rps pages results is_displayed self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
         return ((self.round_number == ((self.session.config['num_RPS_rounds']*3)+1)) and (self.participant.vars['consent'])) #show the results if it's the last round and consent was given
     def vars_for_template(self):
+        self.participant.vars['RPS_played'] = True
+        print('rps pages results vars_for_template self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
         me = self.player
         #opponent = me.other_player()
         last_round = max(0,self.round_number-1)

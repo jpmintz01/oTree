@@ -106,8 +106,12 @@ class Player(BasePlayer):
         
         try: #find out if they've already played RPS by checking participant.vars
             if self.participant.vars['RPS_played']: #why is this showing true?
-                print("part.vars: "+ str(self.participant.vars['RPS_played']))
+                print("pw models play_now part.vars: "+ str(self.participant.vars['RPS_played']))
                 rps_played = True
+            elif not self.participant.vars['RPS_played']:
+                print('pw models play_now part.vars[RPS_played]')
+                print(self.participant.vars['RPS_played'])
+                rps_played = False
         except: #If no participant.vars, then set rps_played = false.
             rps_played = False
         print("rps_played: "+str(rps_played))
@@ -133,6 +137,7 @@ class Player(BasePlayer):
         print("not rps_played and pw_first: "+str(not (rps_played == pw_first)))
         print("self.session.config['num_PW_Rounds']"+str(self.session.config['num_PW_rounds']))
         return not (rps_played == pw_first) # not(==) is XOR
+    
             
             
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class

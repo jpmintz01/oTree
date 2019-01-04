@@ -110,7 +110,7 @@ class Player(BasePlayer):
         min=0, max=50)
 
     major = models.StringField(
-        label='What was/is your undergraduate major? (list all separated by comma)',
+        label='What was/is your undergraduate major(s)? (list all separated by comma)',
         blank=True
     )
 
@@ -120,7 +120,7 @@ class Player(BasePlayer):
 #    )
 
     post_grad = models.StringField(
-        label='What post-graduate degrees do you have? (list all separated by comma, or "none". Ex. MS in Computer Engineering, MA in Military and Strategic Studies, PhD in English Literature)',
+        label='What post-graduate degree(s) do you have? (list all separated by comma, or "none". Ex. MS in Computer Engineering, MA in Military and Strategic Studies, PhD in English Literature)',
         blank=True
     )
 

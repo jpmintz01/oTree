@@ -9,7 +9,7 @@ import random
 author = 'Spear'
 
 doc = """
-This is second instance of 'strategic' "Prisoner's Dilemma" instantiated as Peace-War. There are three human players (including you) and 1 artificial players. Players are asked separately whether they want to Peace or War. Their choices directly determine the payoffs.
+This is a 'strategic' "Prisoner's Dilemma". There are three human players (including you) and 1 artificial players. Players are asked separately whether they want to Peace or War. Their choices directly determine the payoffs.
 
 At each "turn", the player must make a play (Peace or War) with all other players.
 """
@@ -38,65 +38,13 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-#    def creating_session(self):
-#        for p in self.get_players():
-#            try:
-#                if p.participant.vars['RPS_played']:
-#                    rps_played = True
-#            except:
-#                rps_played = False
-#            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
-#                # demo mode
-#                p.play_pw = True
-#            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
-#                p.play_pw = False
-#            else:
-#                # (randomizes)
-#                p.play_pw = random.choice([True,False])
+
     pass
                 
 class Group(BaseGroup):
     pass
 
-#class Adversary:  ## not used in this version - didn't work with oTree
-#
-#    adv_decision = models.StringField(
-#        choices=['Peace', 'War'],
-#        doc="""Adversary decision""",
-#        widget=widgets.RadioSelect
-#    )
-#    player_decision = models.StringField(
-#        choices=['Peace', 'War'],
-#        doc="""Adversary decision""",
-#        widget=widgets.RadioSelect
-#    )
-#    adv_payoff = models.CurrencyField(
-#        choices=currency_range(c(0), c(3), c(1)),
-#        initial=c(0)
-#    )
-#    player_payoff = models.CurrencyField(
-#        choices=currency_range(c(0), c(3), c(1)),
-#        initial=c(0)
-#    )
-#    adv_type = models.StringField(
-#        choices=['human','AI'],
-#        doc="""Adversary type""",
-#        widget=widgets.RadioSelect
-#    )
-#    round_number = models.IntegerField(initial=1)
-#
-#    def adv_choice_function(adversary, self, player_choice_last_round):
-#        choice_list = ['Peace','War']
-#        if adversary.adv_type == 'human': #if adv = human
-#            adversary.adv_decision = random.choice(choice_list)#define human strategy (random choice)
-#        else: # this is the AI 'TFT
-#            if adversary.round_number == 1: # Peace in round one (can change)
-#                adversary.adv_decision = 'Peace'
-#            else:
-#                if player_choice_last_round == 'War': #no max arg needed because it's nested if that isn't round 1
-#                   adversary.adv_decision = 'War' #if player Wars, adv Wars
-#                else:
-#                    adversary.adv_decision = 'Peace'
+
 
     
 class Player(BasePlayer):
@@ -106,8 +54,12 @@ class Player(BasePlayer):
         
         try: #find out if they've already played RPS by checking participant.vars
             if self.participant.vars['RPS_played']: #why is this showing true?
-                print("part.vars: "+ str(self.participant.vars['RPS_played']))
+                print("pw models play_now part.vars: "+ str(self.participant.vars['RPS_played']))
                 rps_played = True
+            elif not self.participant.vars['RPS_played']:
+                print('pw models play_now part.vars[RPS_played]')
+                print(self.participant.vars['RPS_played'])
+                rps_played = False
         except: #If no participant.vars, then set rps_played = false.
             rps_played = False
         print("rps_played: "+str(rps_played))
@@ -133,6 +85,7 @@ class Player(BasePlayer):
         print("not rps_played and pw_first: "+str(not (rps_played == pw_first)))
         print("self.session.config['num_PW_Rounds']"+str(self.session.config['num_PW_rounds']))
         return not (rps_played == pw_first) # not(==) is XOR
+    
             
             
     ###### adversary #1 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class

@@ -82,9 +82,10 @@ class Player(BasePlayer):
     third_adversary_id = models.StringField()
     adversary_id = models.StringField()
     def counterbalance_rps (self): #called only by the Inroduction page on round 1
-
+        
         try: #if there's a participant label, use it for counterbalancing
-
+            print("Counterbalance_rps didn't raise an exception.  self.participant.label:")
+            print(self.participant.label)
             rps_counterbalance_digit = int(self.participant.label[-1]) #last digit of participant label is rps counterbalance digit.
         # a list 1-6 of orders to play the adversaries
         #1 - H,HAI,AI (123)
@@ -96,7 +97,9 @@ class Player(BasePlayer):
         except: 
             # if thres no participant.label, use the default session.config variable
             rps_counterbalance_digit = int(self.session.config['rps_counterbalance'])
-        
+            print("Counterbalance_rps raised an exception.  self.participant.label:")
+        print("rps_counterbalance_digit: ")
+        print(rps_counterbalance_digit)
         if rps_counterbalance_digit == 1: #redundant with else
             self.participant.vars['rps_order'] = 123
             
@@ -184,11 +187,11 @@ class Player(BasePlayer):
     ######### end adversary #1
     
     ## remove this.
-    player_guess_adv_1_type = models.StringField(
-        choices=['Simple Algorithm', 'Artificial Intelligence'],
-        label='What type of machine were you just playing with?',
-        widget=widgets.RadioSelect
-    )
+#    player_guess_adv_1_type = models.StringField(
+#        choices=['Simple Algorithm', 'Artificial Intelligence'],
+#        label='What type of machine were you just playing with?',
+#        widget=widgets.RadioSelect
+#    )
     ###### adversary #2 (ensure Constants.num_adversaries is correct until incorporating {}.format(i) into the PLayer class
 #    decision_vs_adv_2 = models.StringField( #my decision
 #        choices=['Rock', 'Paper', 'Scissors'],

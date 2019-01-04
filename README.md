@@ -48,11 +48,7 @@ EXPERIMENT DESIGN
 - remove "examples" from post-game questions like "i played randomly"
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
-- adjust post-game questions based on Prahl and Swol 2017?
--- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
--- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
-- fix post-game questions<br>
--- change questions to "Why did you choose the strategy you did?"
+
 - check peace-war payoffs (war-war should be negative...)
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
@@ -68,9 +64,14 @@ To do later:
 -- so clunky, but it works<br>
 - Comment code (before publishing)
 - if time, add P-W animation (handshake or jet-explosion)
+- adjust post-game questions based on Prahl and Swol 2017?
+-- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
+-- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
 
 
 Fixed:
+- fix post-game questions<br>
+-- change questions to "Why did you choose the strategy you did?"
 - Move experiment_contamination to post-game questionnaire
 - add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to Post-Game Questionnaire
 - created basic bots for all but post-game questionnaire

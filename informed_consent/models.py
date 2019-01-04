@@ -104,7 +104,8 @@ class Player(BasePlayer):
             else:
                 self.participant.vars['pw_order'] = 1
 #                counterbalance_rps(self)#sets. self.participant.vars['rps_order']
-        
+        self.participant.vars['RPS_played'] = False
+    
     def consent_check (self):
         self.participant.vars['consent'] = True
         
