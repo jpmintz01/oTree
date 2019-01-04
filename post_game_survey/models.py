@@ -128,18 +128,38 @@ class Player(BasePlayer):
     
     #add an "I have studied game theory before
     
-    game_theory_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I am familiar with terms such as Nash equilibria and Pareto Optimal", what level of experience do you have with Game Theory or Prisoners Dilemma?' # I should change this to a "Test" like "which definition of pareto-optimal is most true
+   # game_theory_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I am familiar with terms such as Nash  equilibria and Pareto Optimal", how well do you have with Game Theory or Prisoners Dilemma?' # I should change this to a "Test" like "which definition of pareto-optimal is most true
+    #)
+    game_theory_experience = models.StringField(
+        choices=["1-None at all", "2-Basic understanding", "3-Knowledgeable (I can describe game theory or the Prisoner's Dilemma)", "4-Very knowledgeable (I can explain Nash equilibria and Pareto Optimal)"], 
+        label= 'On a scale of 1-4, how much knowledge do you have about Game Theory or Prisoners Dilemma?',
+        widget=widgets.RadioSelect,
     )
+
 
     # add a few AI-related test questions
     # which computer language is most popular with machine learning developers Linux, C++, Python, HTML
     # which of the following have AI researchers or engineers? (DeepMind, Future of Life Institute, Future of Humanity Institute, )
-    machine_learning_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I can code an AI using tensorflow", what level of experience do you have with machine learning and/or artificial intelligence?' #
+    #machine_learning_experience = likert_var('On a scale of 1-5 with 1 being little to none, and 5 being "I can code an AI using tensorflow", what level of experience do you have with machine learning and/or artificial intelligence?' #
+    #)
+    machine_learning_experience = models.StringField(
+        choices=["1-None at all", "2-Basic understanding", "3-Knowledgeable (I can describe the strengths and weaknesses of machine learning)", "4-Very knowledgeable (I can describe how machine learning works or code a machine learning algorithm)"], 
+        label= 'On a scale of 1-4, how much knowledge do you have about Machine Learning?',
+        widget=widgets.RadioSelect,
     )
     
     agree = models.BooleanField(
         label='Please select "Yes" to acknowledge you will not share information about or discuss this game with anyone until notified that it is ok to do so by the researcher.'
     )
+    
+    experiment_contamination = models.StringField(
+        label='Before participating today, what had you heard about this experiment from other participants? If nothing, write "nothing" or leave this field blank.',
+        blank=True)
+    
+    attention_check = models.StringField(
+        choices=['Texas', 'Austria', 'Tennessee', 'Georgia', 'Other'],
+        label='What state is Atlanta in?',
+        widget=widgets.RadioSelect)
     
     self_participant_vars_dump = models.StringField()
 #    self_session_dump = {}

@@ -17,23 +17,26 @@ def human_advisor_id (self):
 
 
 def adversary_id (self): #only need to call this once
-    print("a11")
+#    print("a11")
     counterbalance_adversary(self)
     if self.round_number <= self.session.config['num_RPS_rounds']:
         self.player.adversary_id = self.player.first_adversary_id
-        print("self.player.first_adversary_id "+str(self.player.first_adversary_id))
+#        print("self.player.first_adversary_id "+str(self.player.first_adversary_id))
         self.player.adv_1_type = self.player.first_adv
+        self.player.order_cb = 1
         return self.player.first_adversary_id
     elif self.round_number <= (self.session.config['num_RPS_rounds']*2):
         self.player.adversary_id = self.player.second_adversary_id
         self.player.adv_1_type = self.player.second_adv
+        self.player.order_cb = 2
         return self.player.second_adversary_id
-        print("self.player.second_adversary_id "+str(self.player.second_adversary_id))
+#        print("self.player.second_adversary_id "+str(self.player.second_adversary_id))
     else:
         self.player.adversary_id = self.player.third_adversary_id
         self.player.adv_1_type = self.player.third_adv
+        self.player.order_cb = 3
         return self.player.third_adversary_id
-        print("self.player.third_adversary_id   "+str(self.player.third_adversary_id))
+#        print("self.player.third_adversary_id   "+str(self.player.third_adversary_id))
     
     
     

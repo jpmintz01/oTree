@@ -215,7 +215,8 @@ class Player(BasePlayer):
 #        initial='AI'
 #    )
     ########## end adversary #2
-
+    order_cb = models.IntegerField() #counterbalance order within rps (integer 1, 2, or 3 will indicate what "third" of the game the participant is in)
+    
     round_payoff = models.CurrencyField(
         choices=currency_range(c(-1000), c(1000), c(1)),
         initial=c(0)

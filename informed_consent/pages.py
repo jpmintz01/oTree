@@ -37,6 +37,6 @@ class Introduction(Page):
 #
 page_sequence = [
     InformedConsent,
-    Experience,
+#    Experience,
     Introduction
 ]
