@@ -8,7 +8,7 @@ import string
 author = 'Spear'
 
 doc = """
-This is a repeated Rock-Paper-Scissors game. 
+This is a repeated advised Rock-Paper-Scissors game. 
 """
 #version 0.3.1
 

@@ -14,31 +14,31 @@ Notes:
 -- PW 0.3.6<br>
 -- RPS 0.4<br> 
 -- settings.py 0.3<br>
--- Pre-Game questionnaires 0.3<br>
--- Post-Game questionnaires 0.3.7<br>
--- informed consent 0.3.1
--- bots version 0.4.2
-- Readme Version 0.4.2
+-- Post-Game questionnaires 0.3.8<br>
+-- informed consent 0.3.2
+--- Pre-Game questionnaires (now included in Informed Consent<br>
+-- bots version 0.4.3
+- Readme Version 0.4.3
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 BOTS
 - make bots more robust (random answers)
+- make bots test session and participant ID usage
 EXPERIMENT CONDUCT
-- fix RPS adv_type storage
-- Move experiment_contamination to post-game questionnaire
+- fix RPS adversary and expert "player IDs": make them the same for all players (get rid of random variable)
+- fix RPS adv_type storage (to make data analysis easier)
 - have 2-3 example rounds of each game to show them how to play...
-- test basic data collection and analysis with bots (random_choice...)
+- fix RPS "control" score - it's always win/lose/win/lose...
 - cut down number of extra rounds or somehow set them to the config vars
-- cut down extra variables in player
+- cut down extra variables in player class
 - figure out kiosk mode
 - test self.participant.vars dump
 - control P-W score
 - Make P-W results page better 
 - test server
 - test data collection
-- Get room in library?
-- test heroku server with bots
+- test heroku server with browser bots (works so far)
 - upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
 - block browser commands (back/reload/keyboard/etc)
 EXPERIMENT DESIGN
@@ -71,6 +71,7 @@ To do later:
 
 
 Fixed:
+- Move experiment_contamination to post-game questionnaire
 - add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to Post-Game Questionnaire
 - created basic bots for all but post-game questionnaire
 - add survey control number (AUFELLOW1201) and IRB (FWr20190020H) to both Informed Consent
