@@ -28,13 +28,13 @@ class Constants(BaseConstants):
     draw_payoff = c(0)
     lose_payoff = c(-1)
     num_chars_player_id = 5  #ideally should pull this from the participant label file, but can't do that in models.py (I think...)
-    human_advisor_1_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
-    human_advisor_2_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
-    human_advisor_3_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_advisor_1_id = 'xpr1t'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_advisor_2_id = 'xpr1t'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_advisor_3_id = 'xpr1t'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
     
-    human_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
-    human_ai_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
-    ai_adversary_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_adversary_id = 'zcc75'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    human_ai_adversary_id = '8xe21'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
+    ai_adversary_id = 'tkf72'#''.join(random.choices(string.ascii_lowercase + string.digits, k=num_chars_player_id))
     
     #these choices may be artifacts if I'm controlling score and not inputs...
     adversary_choices = {0: 'Peace', 1: 'Peace', 2: 'Peace', 3: 'War', 4: 'War', 5: 'Peace', 6: 'Peace', 7: 'Peace', 8: 'War', 9: 'War', 10: 'War', 11: 'War', 12: 'War', 13: 'Peace', 14: 'Peace', 15: 'Peace', 16: 'War', 17: 'Peace', 18: 'War', 19: 'War', 20: 'War', 21: 'War', 22: 'War', 23: 'War', 24: 'Peace', 25: 'War', 26: 'Peace', 27: 'Peace', 28: 'Peace', 29: 'War', 30: 'Peace', 31: 'Peace', 32: 'War', 33: 'War', 34: 'Peace', 35: 'Peace', 36: 'War', 37: 'War', 38: 'War', 39: 'War', 40: 'War', 41: 'War', 42: 'War', 43: 'War', 44: 'Peace', 45: 'War', 46: 'Peace', 47: 'Peace', 48: 'Peace', 49: 'War', 50: 'Peace', 51: 'Peace', 52: 'Peace', 53: 'War', 54: 'Peace', 55: 'War', 56: 'Peace', 57: 'War', 58: 'Peace', 59: 'War', 60: 'Peace', 61: 'War', 62: 'War', 63: 'Peace', 64: 'Peace', 65: 'Peace', 66: 'War', 67: 'War', 68: 'War', 69: 'War', 70: 'War', 71: 'War', 72: 'Peace', 73: 'War', 74: 'War', 75: 'Peace', 76: 'War', 77: 'War', 78: 'Peace', 79: 'War', 80: 'War', 81: 'War', 82: 'Peace', 83: 'War', 84: 'Peace', 85: 'War', 86: 'War', 87: 'War', 88: 'Peace', 89: 'War', 90: 'War', 91: 'War', 92: 'Peace', 93: 'Peace', 94: 'War', 95: 'Peace', 96: 'War', 97: 'War', 98: 'War', 99: 'Peace'} #adversary choices are the same, regardless of "adversary type" so first adversary's first choice is always scissors.
