@@ -13,9 +13,9 @@ Notes:
 - Apps Versions:<br>
 -- PW 0.3.6<br>
 -- RPS 0.4<br> 
--- settings.py 0.3<br>
+-- settings.py 0.3.1<br>
 -- Post-Game questionnaires 0.3.8<br>
--- informed consent 0.3.2
+-- informed consent 0.3.2<br>
 --- Pre-Game questionnaires (now included in Informed Consent<br>
 -- bots version 0.4.3
 - Readme Version 0.4.3
@@ -26,29 +26,23 @@ BOTS
 - make bots more robust (random answers)
 - make bots test session and participant ID usage
 EXPERIMENT CONDUCT
-- fix RPS adversary and expert "player IDs": make them the same for all players (get rid of random variable)
-- fix RPS adv_type storage (to make data analysis easier)
 - have 2-3 example rounds of each game to show them how to play...
 - fix RPS "control" score - it's always win/lose/win/lose...
 - cut down number of extra rounds or somehow set them to the config vars
-- cut down extra variables in player class
 - figure out kiosk mode
 - test self.participant.vars dump
-- control P-W score
 - Make P-W results page better 
 - test server
 - test data collection
 - test heroku server with browser bots (works so far)
 - upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
 - block browser commands (back/reload/keyboard/etc)
+
 EXPERIMENT DESIGN
-- split to H vs HAI, then H vs AI instead of all three at once?  That gives twice as many control inputs, and removes the possible confound of three variables?
-- If I get enough participants ()
 - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - remove "examples" from post-game questions like "i played randomly"
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
-
 - check peace-war payoffs (war-war should be negative...)
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?
@@ -58,6 +52,7 @@ EXPERIMENT DESIGN
 
 
 To do later:
+- cut down extra variables in player class
 - add "learning epochs" to AIs?
 - explain AI better?
 - Clean up code (low priority as long as it works)<br>
@@ -67,9 +62,13 @@ To do later:
 - adjust post-game questions based on Prahl and Swol 2017?
 -- how did you feel when the AI advisor failed you? were you ever going to use it again?<br>
 -- How did you feel about the other human players?  Did you feel you had more in common with them than the AI?  Was there a kind of kinship? <br>
+- split to H vs HAI, then H vs AI instead of all three at once?  That gives twice as many control inputs, and removes the possible confound of three variables?
+- control P-W score
 
 
 Fixed:
+- fix RPS adversary and expert "player IDs": make them the same for all players (get rid of random variable)
+- fix RPS adv_type storage (to make data analysis easier)
 - fix post-game questions<br>
 -- change questions to "Why did you choose the strategy you did?"
 - Move experiment_contamination to post-game questionnaire
