@@ -25,9 +25,6 @@ Notes:
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
-- disable buttons on RPS instruction page...(use div instead of button)
-- Make peace-war selected button darker
-- Add "I will not share information about this study with others until told to do so" to informed consent.
 - double-check PW = PW2 version
 - double check heroku and local versions are same and current
 - ensure settings.py (all repositories) is correct
@@ -79,6 +76,8 @@ To do later:
 
 
 Fixed:
+- disable buttons on RPS instruction page...(use div instead of button)
+- Add "I will not share information about this study with others until told to do so" to informed consent.
 - fix text and button size on tablet (P-W) 
 - block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
 - figure out kiosk mode

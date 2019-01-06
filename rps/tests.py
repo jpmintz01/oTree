@@ -23,7 +23,7 @@ def introduction_check(self):
 class PlayerBot(Bot):
 
     def play_round(self):
-        advisor_choices=['human']*50+['AI']*25+['none']*25 #make human choice twice as likely as the other two
+        advisor_choices=['human']*2+['AI']*1+['none']*1 #make human choice twice as likely as the other two
         decision_choices=['Rock', 'Paper', 'Scissors']
         if introduction_check(self):
             yield (pages.Introduction)

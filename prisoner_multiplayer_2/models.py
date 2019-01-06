@@ -38,13 +38,65 @@ class Constants(BaseConstants):
     
 
 class Subsession(BaseSubsession):
-
+#    def creating_session(self):
+#        for p in self.get_players():
+#            try:
+#                if p.participant.vars['RPS_played']:
+#                    rps_played = True
+#            except:
+#                rps_played = False
+#            if (((self.session.config['counterbalancing'] in (1,4)) and not rps_played) or ((self.session.config['counterbalancing'] in (2,3)) and rps_played)):
+#                # demo mode
+#                p.play_pw = True
+#            elif (((self.session.config['counterbalancing'] in (2,3)) and not rps_played) or ((self.session.config['counterbalancing'] in (1,4)) and rps_played)):
+#                p.play_pw = False
+#            else:
+#                # (randomizes)
+#                p.play_pw = random.choice([True,False])
     pass
                 
 class Group(BaseGroup):
     pass
 
-
+#class Adversary:  ## not used in this version - didn't work with oTree
+#
+#    adv_decision = models.StringField(
+#        choices=['Peace', 'War'],
+#        doc="""Adversary decision""",
+#        widget=widgets.RadioSelect
+#    )
+#    player_decision = models.StringField(
+#        choices=['Peace', 'War'],
+#        doc="""Adversary decision""",
+#        widget=widgets.RadioSelect
+#    )
+#    adv_payoff = models.CurrencyField(
+#        choices=currency_range(c(0), c(3), c(1)),
+#        initial=c(0)
+#    )
+#    player_payoff = models.CurrencyField(
+#        choices=currency_range(c(0), c(3), c(1)),
+#        initial=c(0)
+#    )
+#    adv_type = models.StringField(
+#        choices=['human','AI'],
+#        doc="""Adversary type""",
+#        widget=widgets.RadioSelect
+#    )
+#    round_number = models.IntegerField(initial=1)
+#
+#    def adv_choice_function(adversary, self, player_choice_last_round):
+#        choice_list = ['Peace','War']
+#        if adversary.adv_type == 'human': #if adv = human
+#            adversary.adv_decision = random.choice(choice_list)#define human strategy (random choice)
+#        else: # this is the AI 'TFT
+#            if adversary.round_number == 1: # Peace in round one (can change)
+#                adversary.adv_decision = 'Peace'
+#            else:
+#                if player_choice_last_round == 'War': #no max arg needed because it's nested if that isn't round 1
+#                   adversary.adv_decision = 'War' #if player Wars, adv Wars
+#                else:
+#                    adversary.adv_decision = 'Peace'
 
     
 class Player(BasePlayer):
