@@ -115,6 +115,22 @@
     }
     /* Add animation (fade in the popup) */
 
+    @media (max-width: 768px) {
+        .btn-responsive {
+            padding:2px 4px;
+            font-size:80%;
+            line-height: 1;
+            border-radius:3px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 992px) {
+        .btn-responsive {
+            padding:4px 9px;
+            font-size:90%;
+            line-height: 1.2;
+        }
+    }
 </style>
 
 {% endblock %}
@@ -128,10 +144,10 @@
         });
         $(".btn").click(function(){
             //animates the "war" or "peace" when clicked
-//            $("#v_human_jet").css("visibility","visible");
-//            $("#v_human_jet").addClass("anim_from_left");
-//            $("#v_human_AI_jet").css("visibility","visible");
-//            $("#v_human_AI_jet").addClass("anim_from_left");
+            //            $("#v_human_jet").css("visibility","visible");
+            //            $("#v_human_jet").addClass("anim_from_left");
+            //            $("#v_human_AI_jet").css("visibility","visible");
+            //            $("#v_human_AI_jet").addClass("anim_from_left");
         });
         $(".popup").click(function(){
             $(this).children().toggleClass("show");
@@ -161,7 +177,7 @@
         <tr class="underlineCell">
             <td align="center" >
 
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <div class="btn-group btn-group-toggle btn-responsive" data-toggle="buttons">
                     <label class="btn btn-primary" style="border-color:black">
                         <input type="radio" name="decision_vs_adv_1" value="Peace">
                         <i class="far fa-handshake fa-4x"></i><br>Peace
@@ -171,7 +187,7 @@
                     </label>
 
                 </div>
-<!--                <i id="v_human_jet" style="visibility: hidden; position:relative" class="fas fa-fighter-jet fa-4x "></i>-->
+                <!--                <i id="v_human_jet" style="visibility: hidden; position:relative" class="fas fa-fighter-jet fa-4x "></i>-->
 
             </td>
             <td align="center" style="align:center; vertical-align: top" >
@@ -221,7 +237,7 @@
                         <input type="radio" name="decision_vs_adv_2" value="War" ><i class="fas fa-fighter-jet fa-4x "></i><br>War
                     </label>
                 </div>
-                    <i id="v_human_AI_jet" style="visibility: hidden; position:fixed" class="fas fa-fighter-jet fa-4x "></i>
+                <i id="v_human_AI_jet" style="visibility: hidden; position:fixed" class="fas fa-fighter-jet fa-4x "></i>
             </td>
             <td align="center" style="align:center; vertical-align: top">
                 <div>
