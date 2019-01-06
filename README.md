@@ -11,20 +11,21 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
--- PW 0.3.6<br>
+-- PW 0.4<br>
+-- PW2 0.3.6
 -- RPS 0.4<br> 
 -- settings.py 0.3.1<br>
 -- Post-Game questionnaires 0.3.8<br>
--- informed consent 0.3.3<br>
+-- informed consent 0.4<br>
 --- Pre-Game questionnaires (now included in Informed Consent<br>
 -- bots version 0.4.3
-- Readme Version 0.4.5
+- Readme Version 0.4.6
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
-- somehow disable adversary buttons in P-W (clicking them submits the form or causes something to happen) - maybe make it a div with icon like top "you (player dmo11)" instead of icon.  
+- disable buttons on instruction pages...(use div instead of button)
 - fix text and button size on tablet (P-W) 
 -- "Icon turns green.."too wide, Player+AI button too wide (bold?), 
 - Change "next" button to "Submit Round Choices"
@@ -83,6 +84,7 @@ To do later:
 
 
 Fixed:
+- somehow disable adversary buttons in P-W (clicking them submits the form or causes something to happen) - maybe make it a div with icon like top "you (player dmo11)" instead of icon.  
 - remove "examples" from post-game questions like "i played randomly"
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?

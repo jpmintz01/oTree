@@ -122,6 +122,7 @@
 {% block scripts %}
 <script>
     $(document).ready(function() {
+        $(".otree-btn-next").html("Submit Round Choices")
         $("#flip").click(function(){
             $("#panel").slideToggle("slow");
         });
@@ -153,7 +154,7 @@
                 Current score: {{ my_total_payoff }}
             </td>
             <td align="center"><h1>Round: {{ player.round_number }}</h1></td>
-            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><button class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when adversary has chosen</small></button>
+            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><div class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when adversary has chosen</small></div>
             </td>
 
         </tr>
@@ -202,8 +203,8 @@
             </td>
             <td align="center">
                 <div align="center">
-                    <button class="btn btn-primary btn-large  adv_1_DecisionIndicator" style="visibility: hidden">
-                        <i class="fas fa-user fa-4x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Player xqf37</div></i></button>
+                    <div class="btn btn-primary btn-large  adv_1_DecisionIndicator" style="visibility: hidden">
+                        <i class="fas fa-user fa-4x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Player xqf37</div></i></div>
                 </div>
 
 
@@ -251,10 +252,10 @@
             </td>
             <td align="center">
                 <div>
-                    <button class="btn btn-primary btn-large  adv_2_DecisionIndicator" style="visibility: hidden">
+                    <div class="btn btn-primary btn-large  adv_2_DecisionIndicator" style="visibility: hidden">
 
                         <i class="fas fa-user fa-4x" style="visibility: visible"><i class="fas fa-laptop-code" style="visibility: visible"></i><br><div align="center" style="font-size: 30%">Player ms7k5 (w/AI)</div></i>
-                    </button>
+                    </div>
                 </div>
             </td>
         </tr>
@@ -301,9 +302,9 @@
             </td>
             <td align="center">
                 <div>
-                    <button class="btn btn-primary btn-large  adv_3_DecisionIndicator" style="visibility: hidden">
+                    <div class="btn btn-primary btn-large  adv_3_DecisionIndicator" style="visibility: hidden">
                         <i class="fas fa-laptop-code fa-4x" style="visibility:visible"><br><div align="center" style="font-size: 30%">AI</div></i>
-                    </button>
+                    </div>
                 </div>
             </td>
         </tr>
