@@ -27,8 +27,6 @@ EXPERIMENT CONDUCT
 MUST DO:
 - disable buttons on instruction pages...(use div instead of button)
 - fix text and button size on tablet (P-W) 
--- "Icon turns green.."too wide, Player+AI button too wide (bold?), 
-- Change "next" button to "Submit Round Choices"
 - Make peace-war selected button darker
 - Add "I will not share information about this study with others until told to do so" to informed consent.
 - double-check PW = PW2 version
@@ -84,7 +82,9 @@ To do later:
 
 
 Fixed:
+- Change "next" button to "Submit Round Choices"
 - somehow disable adversary buttons in P-W (clicking them submits the form or causes something to happen) - maybe make it a div with icon like top "you (player dmo11)" instead of icon.  
+-- "Icon turns green.."too wide, Player+AI button too wide (bold?), 
 - remove "examples" from post-game questions like "i played randomly"
 - create room & list of participant id's<br>
 -- Do I need to split them up by AU College?

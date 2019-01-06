@@ -76,6 +76,11 @@
     .underlineCell {
         border-bottom: 1px solid black;
     }
+/*
+    .btn,btn-primary input[type="radio"]:checked+label {
+        background-color: #bbb;
+    }
+*/
 
     /* Popup container - can be anything you want */
     .popup {
@@ -152,6 +157,7 @@
         $(".popup").click(function(){
             $(this).children().toggleClass("show");
         });
+
     });
 </script>
 
@@ -170,7 +176,7 @@
                 Current score: {{ my_total_payoff }}
             </td>
             <td align="center"><h1>Round: {{ player.round_number }}</h1></td>
-            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><div class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when adversary has chosen</small></div>
+            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><div class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when <br>adversary has chosen</small></div>
             </td>
 
         </tr>
