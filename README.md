@@ -26,7 +26,6 @@ To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
 - disable buttons on RPS instruction page...(use div instead of button)
-- fix text and button size on tablet (P-W) 
 - Make peace-war selected button darker
 - Add "I will not share information about this study with others until told to do so" to informed consent.
 - double-check PW = PW2 version
@@ -41,7 +40,6 @@ MUST DO:
 - test final version on heroku server with browser bots (works so far)
 
 SHOULD DO:
-- add "I consent" button to top of informed consent page
 - Add a win anomation to P-W next to each 
 - Change P-W to Promote Peace or Wage War (PP or WW) to make it a verb like Cooperate or Defect
 - have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
@@ -81,6 +79,7 @@ To do later:
 
 
 Fixed:
+- fix text and button size on tablet (P-W) 
 - block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
 - figure out kiosk mode
 - Change "next" button to "Submit Round Choices"

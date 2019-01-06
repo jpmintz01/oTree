@@ -45,7 +45,9 @@ class PlayerBot(Bot):
         return not (rps_played == pw_first) # not(==) is XOR
     
     def play_round(self):
-        choice_list = ["Peace","War"]
+        choice_list_human = ["Peace"]*1+["War"]*1
+        choice_list_HAI = ["Peace"]*1+["War"]*1 
+        choice_list_AI = ["Peace"]*1+["War"]*2 #make WAR twice as likely against an AI
         print('pw bot self.player.play_now: ')
         print(self.play_now())
         if ((self.round_number <= 1) and (self.participant.vars['consent']) and self.play_now()):
@@ -53,7 +55,7 @@ class PlayerBot(Bot):
             yield Submission(pages.WaitForPlayers,{}, check_html=False)
         if ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.play_now()): 
             
-            yield Submission(pages.Decision, {'decision_vs_adv_1': random.choice(choice_list), 'decision_vs_adv_2': random.choice(choice_list), 'decision_vs_adv_3': random.choice(choice_list)}, check_html=False)
+            yield Submission(pages.Decision, {'decision_vs_adv_1': random.choice(choice_list_human), 'decision_vs_adv_2': random.choice(choice_list_HAI), 'decision_vs_adv_3': random.choice(choice_list_AI)}, check_html=False)
         if ((self.round_number == self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.play_now()):
             yield Submission(pages.Results, check_html=False)
 
