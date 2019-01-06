@@ -25,7 +25,7 @@ Notes:
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
-- disable buttons on instruction pages...(use div instead of button)
+- disable buttons on RPS instruction page...(use div instead of button)
 - fix text and button size on tablet (P-W) 
 - Make peace-war selected button darker
 - Add "I will not share information about this study with others until told to do so" to informed consent.
@@ -41,14 +41,13 @@ MUST DO:
 - test final version on heroku server with browser bots (works so far)
 
 SHOULD DO:
+- add "I consent" button to top of informed consent page
 - Add a win anomation to P-W next to each 
 - Change P-W to Promote Peace or Wage War (PP or WW) to make it a verb like Cooperate or Defect
 - have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
 - fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
 -- Win, 
-- block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
 - cut down number of extra rounds or somehow set them to the config vars
-- figure out kiosk mode
 - Make P-W results page better 
 
 
@@ -82,6 +81,8 @@ To do later:
 
 
 Fixed:
+- block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
+- figure out kiosk mode
 - Change "next" button to "Submit Round Choices"
 - somehow disable adversary buttons in P-W (clicking them submits the form or causes something to happen) - maybe make it a div with icon like top "you (player dmo11)" instead of icon.  
 -- "Icon turns green.."too wide, Player+AI button too wide (bold?), 

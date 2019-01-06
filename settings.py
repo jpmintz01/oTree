@@ -36,7 +36,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'informed_consent',
-        'display_name': "1. Informed Consent (ver 0.3.1)",
+        'display_name': "1. Informed Consent (ver 0.4)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent'],
     },
@@ -49,7 +49,7 @@ SESSION_CONFIGS = [
 
     {
         'name': 'prisoner_multiplayer',
-        'display_name': "2. Peace-War (ver 0.3.6) (multiplayer strategic no chat)",
+        'display_name': "2. Peace-War (ver 0.4) (multiplayer strategic no chat)",
         'num_demo_participants': 1,
 #        'counterbalancing': 1,#needs to be 1 or 4 or else it won't play
         'app_sequence': ['informed_consent','prisoner_multiplayer'],
@@ -78,7 +78,7 @@ SESSION_CONFIGS = [
     },
     {
         'name': 'post_game_survey',
-        'display_name': "6. Post-Game Questionnaire (0.3.7)",
+        'display_name': "6. Post-Game Questionnaire (0.3.8)",
         'num_demo_participants': 1,
         'app_sequence': ['informed_consent','post_game_survey'],
     },
