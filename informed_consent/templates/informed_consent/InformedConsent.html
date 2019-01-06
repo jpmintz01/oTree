@@ -14,11 +14,13 @@ Informed Consent
 {% endblock %}
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
+<script>   
+
     $(document).ready(function(){
         //        $("#exit").width($("#continue").width());
+//        openFullscreen();
     })
-   
+
 </script>
 
 
@@ -75,6 +77,9 @@ Informed Consent
     Before you decide whether to continue, please ask any questions you have. Later, if you have questions, suggestions, concerns, or complaints about the study, you can contact the investigator, Lt Col Mintz at 901-800-7613 or johnpaul.mintz@us.af.mil. If you have questions about your rights as a volunteer in this research or believe you were harmed as a result of participation, contact the AFRL IRB Administrator at (937) 904-8100 (DSN: 312-674-8100) or at AFRL.IR.ProtocolManagement@us.af.mil.  This study has been approved under AFRL/AU IRB protocol number FWr20190020H and Air University Survey Control Number AUFELLOW1201.
 </p>
 <p>
+    <b>Non-disclosure:</b> Please do not discuss this study with anyone potential particpants until told by the researcher it is acceptable to do so (likely in a week or two).
+</p>
+<p>
     Please click continue to indicate your willingness to participate in this research study. 
 </p>
 <div align="center">
@@ -88,5 +93,5 @@ Informed Consent
         <i class="fas fa-times-circle fa-2x"></i><br>I do <b>NOT</b> wish to participate in this study.
     </button>
 </div>
- {{ form.agree_to_participate.errors }}
+{{ form.agree_to_participate.errors }}
 {% endblock %}

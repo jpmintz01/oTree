@@ -15,35 +15,53 @@ Notes:
 -- RPS 0.4<br> 
 -- settings.py 0.3.1<br>
 -- Post-Game questionnaires 0.3.8<br>
--- informed consent 0.3.2<br>
+-- informed consent 0.3.3<br>
 --- Pre-Game questionnaires (now included in Informed Consent<br>
 -- bots version 0.4.3
-- Readme Version 0.4.4
+- Readme Version 0.4.5
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 EXPERIMENT CONDUCT
+MUST DO:
+- somehow disable adversary buttons in P-W (clicking them submits the form or causes something to happen) - maybe make it a div with icon like top "you (player dmo11)" instead of icon.  
+- fix text and button size on tablet (P-W) 
+-- "Icon turns green.."too wide, Player+AI button too wide (bold?), 
+- Change "next" button to "Submit Round Choices"
+- Make peace-war selected button darker
+- Add "I will not share information about this study with others until told to do so" to informed consent.
 - double-check PW = PW2 version
 - double check heroku and local versions are same and current
+- ensure settings.py (all repositories) is correct
+- open the room session
+- test the room session
 - ensure able to use backup on local version
-- have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
-- fix RPS "control" score - it's always win/lose/win/lose...
-- cut down number of extra rounds or somehow set them to the config vars
-- figure out kiosk mode
 - test self.participant.vars dump
-- Make P-W results page better 
 - test server
 - test data collection
-- test heroku server with browser bots (works so far)
+- test final version on heroku server with browser bots (works so far)
+
+SHOULD DO:
+- Add a win anomation to P-W next to each 
+- Change P-W to Promote Peace or Wage War (PP or WW) to make it a verb like Cooperate or Defect
+- have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
+- fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
+-- Win, 
 - block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
+- cut down number of extra rounds or somehow set them to the config vars
+- figure out kiosk mode
+- Make P-W results page better 
+
 
 EXPERIMENT DESIGN
-- (use participant.vars variable - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
-- Add "have you ever served on a CCDR, JCS, or OSD staff?"
+MUST DO:
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - check peace-war payoffs (war-war should be negative...)
-- Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
+SHOULD DO:
+- (use participant.vars variable - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
+- Add "have you ever served on a CCDR, JCS, or OSD staff?"
+- Change/update/add immediate visual feedback on decisions
 
 
 
