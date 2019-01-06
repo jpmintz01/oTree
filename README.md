@@ -18,15 +18,15 @@ Notes:
 -- informed consent 0.3.2<br>
 --- Pre-Game questionnaires (now included in Informed Consent<br>
 -- bots version 0.4.3
-- Readme Version 0.4.3
+- Readme Version 0.4.4
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
-BOTS
-- make bots more robust (random answers)
-- make bots test session and participant ID usage
 EXPERIMENT CONDUCT
-- have 2-3 example rounds of each game to show them how to play...
+- double-check PW = PW2 version
+- double check heroku and local versions are same and current
+- ensure able to use backup on local version
+- have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
 - fix RPS "control" score - it's always win/lose/win/lose...
 - cut down number of extra rounds or somehow set them to the config vars
 - figure out kiosk mode
@@ -35,23 +35,21 @@ EXPERIMENT CONDUCT
 - test server
 - test data collection
 - test heroku server with browser bots (works so far)
-- upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
-- block browser commands (back/reload/keyboard/etc)
+- block browser commands (back/reload/keyboard/etc) or tell participants not to use keyboard except to type (and not to click back or reload)
 
 EXPERIMENT DESIGN
-- Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
-- remove "examples" from post-game questions like "i played randomly"
+- (use participant.vars variable - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
 - check peace-war payoffs (war-war should be negative...)
-- create room & list of participant id's<br>
--- Do I need to split them up by AU College?
 - Change/update/add immediate visual feedback on decisions
 - change/update/add post-game feedback
 
 
 
 To do later:
+- BOTS
+-- make bots more robust (random answers)<br>
 - cut down extra variables in player class
 - add "learning epochs" to AIs?
 - explain AI better?
@@ -67,6 +65,13 @@ To do later:
 
 
 Fixed:
+- remove "examples" from post-game questions like "i played randomly"
+- create room & list of participant id's<br>
+-- Do I need to split them up by AU College?
+- cut down extra variables in player class
+- upgrade heroku redis, dynos, db, etc to paid versions using otree hub or directly on heroku site
+- fixed rps advice (got peace-war choices in there accidentally - Rand_Round generator)
+- make bots test session and participant ID usage
 - fix RPS adversary and expert "player IDs": make them the same for all players (get rid of random variable)
 - fix RPS adv_type storage (to make data analysis easier)
 - fix post-game questions<br>
