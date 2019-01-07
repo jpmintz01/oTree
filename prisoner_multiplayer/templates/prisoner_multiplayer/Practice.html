@@ -1,0 +1,342 @@
+{% extends "global/Page.html" %} {% load otree static %}
+
+
+{% block title %}
+{% endblock %}
+
+{% block styles %}
+<style>
+
+    .highlight-row-on-hover:hover td {
+        background-color: #fcf8e3;
+    }
+    .invalid-blink {
+        background-color: gray;
+    }
+
+    .highlight-selected {
+        background-color: red;
+    }
+    .floatedTable {
+        float:left;
+    }
+    .inlineTable {
+        display: inline-block;
+        vertical-align: top;
+    }
+    h4 {text-align:center;}
+
+    .adv_1_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_1_DelayTime }};
+    }
+    .adv_2_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_2_DelayTime }};
+    }
+    .adv_3_DecisionIndicator {
+        animation: pulse .25s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-delay: {{ adv_3_DelayTime }};
+    }
+    @keyframes pulse {
+        0% {
+            color: inherit;
+            background-color: inherit;
+
+        }
+        100% {
+            background-color: darkgreen;
+            color: inherit;
+            visibility: visible;
+            border-color: inherit;
+        }
+    }
+    .narrowButton {
+        padding: 0px 5px 0px 5px;
+    }
+    .anim_from_left{
+        -webkit-transition: -webkit-transform 1s ease-in;
+        -webkit-transform:translateX(400px);
+
+    }
+    .anim_from_right{
+        -webkit-transition: -webkit-transform 1s ease-in;
+        -webkit-transform:translateX(-400px);
+        visibility: visible;
+    }
+    table td {
+        padding: 10px 10px 10px 10px;
+    }
+    .underlineCell {
+        border-bottom: 1px solid black;
+    }
+/*
+    .btn,btn-primary input[type="radio"]:checked+label {
+        background-color: #bbb;
+    }
+*/
+
+    /* Popup container - can be anything you want */
+    .popup {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* The actual popup */
+    .popup .popuptext {
+        visibility: hidden;
+        text-align: center;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+    }
+
+    /* Popup arrow */
+    .popup .popuptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+    }
+
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+    }
+    /* Add animation (fade in the popup) */
+
+    @media (max-width: 768px) {
+        .btn-responsive {
+            padding:2px 4px;
+            font-size:80%;
+            line-height: 1;
+            border-radius:3px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 992px) {
+        .btn-responsive {
+            padding:4px 9px;
+            font-size:90%;
+            line-height: 1.2;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $(".otree-btn-next").html("Start Game")
+        $("#flip").click(function(){
+            $("#panel").slideToggle("slow");
+        });
+        $(".btn").click(function(){
+            //animates the "war" or "peace" when clicked
+            //            $("#v_human_jet").css("visibility","visible");
+            //            $("#v_human_jet").addClass("anim_from_left");
+            //            $("#v_human_AI_jet").css("visibility","visible");
+            //            $("#v_human_AI_jet").addClass("anim_from_left");
+        });
+        $(".popup").click(function(){
+            $(this).children().toggleClass("show");
+        });
+
+    });
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<body style="background-color: dimgray; color: white">
+    <table align="center" style="border: 1px solid black; width: 100%; table-layout: fixed">
+        <tr class="underlineCell">
+            <td align="center">
+                <div align="center">
+                    <i class="fas fa-user-circle fa-4x"><br><div align="center" style="font-size: 30%">You <br>(Player {{ participant.label }})</div></i>
+                </div>
+                Current score: {{ my_total_payoff }}
+            </td>
+            <td align="center"><h1>Practice Round</h1></td>
+            <td align="center" style="font-family: FontAwesome"><b><h4>Competitors</h4></b><br><div class="btn btn-primary btn-large narrowButton" style="background-color: darkgreen; border-color: white;"><small>Icon turns green when <br>adversary has chosen</small></div>
+            </td>
+
+        </tr>
+        <tr class="underlineCell">
+            <td align="center" >
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_1" value="Peace">
+                        <i class="far fa-handshake fa-3x"></i><br>Peace
+                    </label>
+                    <label class="btn btn-primary" id="fighter" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_1" value="War" ><i class="fas fa-fighter-jet fa-3x "></i><br>War
+                    </label>
+
+                </div>
+                <!--                <i id="v_human_jet" style="visibility: hidden; position:relative" class="fas fa-fighter-jet fa-3x "></i>-->
+
+            </td>
+            <td align="center" style="align:center; vertical-align: top" >
+                <div>
+                    <small>{{ total_payoff_v_adv_1}} </small>| Score |<small> {{ payoff_of_adv_1}}</small>
+                </div>
+                <div class="popup" align="center"><small>Click here for history<br> with this player.</small>
+                    <span class="popuptext" id="myHistory_v_human">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_1.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div align="center">
+                    <div class="btn btn-primary btn-large  adv_1_DecisionIndicator" style="visibility: hidden">
+                        <i class="fas fa-user fa-3x" style="visibility: visible"><br><div align="center" style="font-size: 30%">Player X</div></i></div>
+                </div>
+
+
+            </td>
+        </tr>
+        <tr class="underlineCell">
+            <td align="center">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_2" value="Peace">
+                        <i class="far fa-handshake fa-3x "></i><br>Peace
+                    </label>
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_2" value="War" ><i class="fas fa-fighter-jet fa-3x "></i><br>War
+                    </label>
+                </div>
+                <i id="v_human_AI_jet" style="visibility: hidden; position:fixed" class="fas fa-fighter-jet fa-3x "></i>
+            </td>
+            <td align="center" style="align:center; vertical-align: top">
+                <div>
+                    <small>{{ total_payoff_v_adv_2}} </small>| Score |<small> {{ payoff_of_adv_2}}</small>
+                </div>
+                <div class="popup"><small>Click here for history<br> with this player.</small>
+                    <span class="popuptext" id="myHistory_v_human_AI">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_2.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div>
+                    <div class="btn btn-primary btn-large  adv_2_DecisionIndicator" style="visibility: hidden">
+
+                        <i class="fas fa-user fa-3x" style="visibility: visible"><i class="fas fa-laptop-code" style="visibility: visible"></i><br><div align="center" style="font-size: 30%">Player Y (w/AI)</div></i>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td  align="center">
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary" style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_3" value="Peace">
+                        <i class="far fa-handshake fa-3x "></i><br>Peace
+                    </label>
+                    <label class="btn btn-primary"  style="border-color:black">
+                        <input type="radio" name="decision_vs_adv_3" value="War" ><i class="fas fa-fighter-jet fa-3x "></i><br>War
+                    </label>
+                </div>
+
+            </td>
+            <td align="center" style="align:center; vertical-align: top">
+                <div>
+                    <small>{{ total_payoff_v_adv_3}} </small>| Score |<small> {{ payoff_of_adv_3}}</small>
+                </div>
+                <div class="popup"><small>Click here for history<br> with this player.</small>
+                    <span class="popuptext" id="myHistory_v_AI">
+                        <div align="center">
+                            <table border=1  class="inlineTable table-bordered text-center" style="width: auto; margin: auto; font-size: 10px; background-color: #555">
+                                <th>Round</th><th>You</th><th>Payoff</th><th>Competitor</th><th>Payoff</th>
+                                {% for key,value in history_w_adv_3.items %}
+                                {%if key == player.round_number %}
+                                {% else %}
+                                <tr>
+                                    <td >{{key}}</td>
+                                    {% for i in value %}
+                                    <td style="padding: 0px 0px 0px 0px;">
+                                        {{i}} 
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </span>
+                </div>
+            </td>
+            <td align="center">
+                <div>
+                    <div class="btn btn-primary btn-large  adv_3_DecisionIndicator" style="visibility: hidden">
+                        <i class="fas fa-laptop-code fa-3x" style="visibility:visible"><br><div align="center" style="font-size: 30%">AI</div></i>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div align="center">
+        {% next_button %}
+    </div>
+    <div id="flip">Click for Instructions</div> 
+    <div id="panel">{% include Constants.instructions_template %}</div>
+
+</body>
+{% endblock %}

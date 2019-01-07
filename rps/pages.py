@@ -99,9 +99,43 @@ class Introduction(Page):
             'adversary_id': adversary_id(self),
 #            'number_of_rounds': self.session.config['num_RPS_rounds'],
         }
+
+class Practice(Page):
+    def is_displayed(self):
+        return (((self.round_number <= 1)  or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent']) and self.participant.vars['show_RPS_practice'])
+    def vars_for_template(self):
+        me = self.player
+        last_round = max(0, self.round_number-1)
+
+        history = {}
+        if not (self.session.config['control_RPS_score']): #this should be a boolean variable that is session-configurable to tell the function to return not a choice, but a number.  If this variable is false, then run the adversary_choice function
+            adversary_choice(self); #provides the adversary's choice to the template (global function above)
+                
+        for p in me.in_all_rounds():
+            history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
+        return {
+            'control_RPS_score': self.session.config['control_RPS_score'],
+            'target_RPS_score': self.session.config['target_RPS_score'],
+            'human_advice_v_adv_1': ai_advice_adv_1(self),
+            'AI_advice_v_adv_1': ai_advice_adv_1(self),
+            'my_decision_adv_1': me.decision_vs_adv_1,
+            'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
+            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
+            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()[:-1]],
+            'my_payoff_adv_1': me.payoff_vs_adv_1,
+            'adv_1_decision': me.decision_of_adv_1,
+            'adv_1_payoff': me.payoff_of_adv_1,
+            #'my_total_payoff': me.round_payoff,
+            'my_total_payoff': sum([p.round_payoff for p in me.in_all_rounds()]),
+            'history_list': history,
+            'human_advisor_id': human_advisor_id(self),
+            'adversary_id': adversary_id(self),
+           
+        }
     
 class WaitForPlayers(Page):
     def is_displayed(self):
+        self.participant.vars['show_RPS_practice'] = False
         return (((self.round_number <= 1)  or (self.round_number == (self.session.config['num_RPS_rounds']+1)) or (self.round_number == ((self.session.config['num_RPS_rounds']*2)+1))) and (self.participant.vars['consent'])) #show the player match page if it's round 1 or the first round of treatment 2 (the second half)
         #need to change number of players based on whether two humans or one
     def vars_for_template (self):
@@ -219,6 +253,7 @@ class EndGame(Page): #delete
     
 page_sequence = [
     Introduction,
+    Practice,
     WaitForPlayers,
     Decision,
     #ResultsWaitPage,

@@ -34,8 +34,10 @@ class Experience(Page):
 class Introduction(Page):
     def is_displayed(self):
         self.participant.vars['RPS_played'] = False
-        print('inf consent intro set self.part.vars[RPS_played]' +str(self.participant.vars['RPS_played']))
-        print('self.part.vars["consent"] '+str(self.participant.vars['consent']))
+        self.participant.vars['show_PW_practice'] = True
+        self.participant.vars['show_RPS_practice'] = True
+#        print('inf consent intro set self.part.vars[RPS_played]' +str(self.participant.vars['RPS_played']))
+#        print('self.part.vars["consent"] '+str(self.participant.vars['consent']))
         return self.participant.vars['consent']
     pass
 #

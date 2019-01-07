@@ -23,15 +23,15 @@
                  <li>An AI decision-maker: <i class="fas fa-laptop-code fa-2x"></i></li>
             </ul>
             <br>
-            <b>Decisions:</b> In each round, choose <button type="button" class="btn btn-primary btn-large" style="border-color: black"><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i></button> or <button type="button" class="btn btn-primary btn-large" style="border-color: black"><i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i></button> with each of these competitors. <br><u><i>Note: You will make three decisions each round</i></u> (one for each competitor).
+            <b>Decisions:</b> In each round, promote <button type="button" class="btn btn-primary btn-large" style="border-color: black"><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i></button> or wage <button type="button" class="btn btn-primary btn-large" style="border-color: black"><i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i></button> with each of these competitors. <br><u><i>Note: You will make three decisions each round</i></u> (one for each competitor).
             <br>
             <br>
             <br>
             <b> Scoring: </b>
             <ul>
-                <li>If you both select peace, you enjoy prosperity and get {{ Constants.both_Peace_payoff }}.<br><br><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> + <i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> = {{ Constants.both_Peace_payoff }} each.</li><br>
-                <li>If one of you chooses Peace and the other chooses War, the player who chose Peace gets defeated and gets {{ Constants.betrayed_payoff }} and the player who chose War wins the spoils and gets {{ Constants.betray_payoff }}.<br><br><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> + <i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> = Winner: {{ Constants.betray_payoff }}, Loser: {{ Constants.betrayed_payoff}}</li><br>
-                <li>If both of you select War, you go to a costly war and both of you receive {{ Constants.both_War_payoff }}.<br><br><i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> + <i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> = {{ Constants.both_War_payoff }} each.</li>
+                <li>If you both promote Peace, you both enjoy prosperity and get {{ Constants.both_Peace_payoff }}.<br><br><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> + <i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> = {{ Constants.both_Peace_payoff }} each.</li><br>
+                <li>If one of you promotes Peace and the other wages War, the Peace promoter gets defeated (gets {{ Constants.betrayed_payoff }}) and the War wager wins the spoils (gets {{ Constants.betray_payoff }}).<br><br><i align="center" class="far fa-handshake fa-lg"><br><small>Peace</small></i> + <i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> = War wager: {{ Constants.betray_payoff }}, Peace promoter: {{ Constants.betrayed_payoff}}</li><br>
+                <li>If both of you wage War, you go to a costly war and both of you receive {{ Constants.both_War_payoff }}.<br><br><i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> + <i align="center" class="fas fa-fighter-jet fa-lg"><br><small>War</small></i> = {{ Constants.both_War_payoff }} each.</li>
                 <br><i>
                 Therefore, your best interest is based upon the combination of your choice and your adversary's choice.  You will not know your adversary's choice until after you select yours, but you can see previous choices.</i>
             </ul>

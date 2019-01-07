@@ -282,7 +282,7 @@
     <table class="whitebox" frame="box" align="center" id="small_table" style="background-color: white">      
         <tr>
             <th colspan="3" align="center">
-                <h2 align="center">Round: {{player.round_number}}</h2>
+                <h2 align="center">Practice Round</h2>
             </th>
         </tr>
         <tr>
@@ -292,7 +292,7 @@
             <td align="center">
                 vs:</td>
             <td id="adversary_identifier" align="center">
-                <i  align="center" class="far fa-user fa-3x"></i> <br> {{ adversary_id }}
+                <i  align="center" class="far fa-user fa-3x"></i> <br> Practice Adversary
             </td>
 
         </tr>
@@ -326,7 +326,7 @@
                                 <div id="adversary">
                                     <div style="display: none" align="center" class="un_labels">
                                         <div style="display: none;" id="adv_bounce" class="buttonFlip"><i class="far fa-hand-rock fa-7x"></i><br></div>
-                                        Adversary<br>({{ adversary_id }})
+                                        Adversary<br>
                                     </div>
                                 </div>
                             </th>
@@ -355,12 +355,12 @@
                         <tr> 
                             <th>
                                 <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="AI_expert" autocomplete="off">
-                                    <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI Decision<br>Engine
+                                    <i class="fas fa-desktop fa-3x"></i><i class="fas fa-server fa-3x"></i><br>AI<br>Advisor
                                 </button> 
                             </th> 
                             <th>
                                 <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"  id="human_expert" autocomplete="off">
-                                    <i class="fas fa-user fa-3x"></i><br>Steven<br>(Player {{ human_advisor_id}})
+                                    <i class="fas fa-user fa-3x"></i><br>Person<br>(Sim - practice round)
                                 </button>
                             </th>
                         </tr>
@@ -401,6 +401,5 @@
     <hr>
     <div id="flip" align="center">Click for Instructions</div> 
     <div id="panel">{% include Constants.instructions_template %}</div>
-    {{ form.advisor_choice.errors }}
 </body>
 {% endblock %}

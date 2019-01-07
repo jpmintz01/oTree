@@ -11,47 +11,41 @@ To work with individual apps, click the app, then the bottom link.
 Notes:
 - <b> DON'T BE FOOLED!  The game called prisoner_multiplayer is actually the Peace-War game.</b>  Original naming convention stuck so as not to blow up to code.  Will fix when I go to "code cleanup" phase...
 - Apps Versions:<br>
--- PW 0.4<br>
--- PW2 0.3.6
--- RPS 0.4<br> 
+-- PW 0.4.1 (includes practice round)<br>
+-- PW2 0.4
+-- RPS 0.4.1 (includes practice round<br> 
 -- settings.py 0.3.1<br>
 -- Post-Game questionnaires 0.3.8<br>
--- informed consent 0.4<br>
+-- informed consent 0.4.1 (sets up practice round)<br>
 --- Pre-Game questionnaires (now included in Informed Consent<br>
--- bots version 0.4.3
-- Readme Version 0.4.6
+-- bots version 0.4.3b (needs to account for RPS practice round)
+- Readme Version 0.4.7
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
 - double-check PW = PW2 version
+- re-test counterbalancing from part.id
 - double check heroku and local versions are same and current
 - ensure settings.py (all repositories) is correct
 - open the room session
 - test the room session
 - ensure able to use backup on local version
-- test self.participant.vars dump
-- test server
-- test data collection
 - test final version on heroku server with browser bots (works so far)
+- fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
 
 SHOULD DO:
-- Add a win anomation to P-W next to each 
-- Change P-W to Promote Peace or Wage War (PP or WW) to make it a verb like Cooperate or Defect
-- have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
-- fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
--- Win, 
+- Add an outcome anomation to P-W next to each 
 - cut down number of extra rounds or somehow set them to the config vars
 - Make P-W results page better 
 
 
 EXPERIMENT DESIGN
 MUST DO:
-- give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
-- check peace-war payoffs (war-war should be negative...)
-- change/update/add post-game feedback
+
 SHOULD DO:
+- change/update/add post-game feedback
 - (use participant.vars variable - Make the first choice of each type in RPS a "win" to control out the "algorithm aversion when seeing it err."  If any advisor loses the first time, the participant is likely to avoid that advisor again.  But, I'd also need to make the first "no-choice" a win also.  After that, I'd control score back to target_RPS_score.
 - Add "have you ever served on a CCDR, JCS, or OSD staff?"
 - Change/update/add immediate visual feedback on decisions
@@ -75,7 +69,14 @@ To do later:
 - control P-W score
 
 
-Fixed:
+Done:
+- test server
+- test data collection
+- test self.participant.vars dump
+- check peace-war payoffs (war-war should be negative...)
+- give the human advisors a name?  Like "Steven" or something - Prahl and Swol 2017 - accentuates the difference between the human and AI.
+- have 2-3 example rounds of each game to show them how to play (use Javascript to hide/prevent "submit" until player selects "I'm ready to start")
+- Change P-W to Promote Peace or Wage War (PP or WW) to make it a verb like Cooperate or Defect
 - disable buttons on RPS instruction page...(use div instead of button)
 - Add "I will not share information about this study with others until told to do so" to informed consent.
 - fix text and button size on tablet (P-W) 

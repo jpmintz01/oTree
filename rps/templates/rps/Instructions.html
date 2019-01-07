@@ -33,9 +33,9 @@
   var adversary_id = "{{ adversary_id }}"
   $(document).ready(function() {
     if (adversary_id == 'AI'){
-      $("#adversary_description").html('Adversary: <b>AI</b> - <i class="fas fa-laptop-code fa-2x"></i>')
+      $("#adversary_description").html('<b>Adversary:</b> AI - <i class="fas fa-laptop-code fa-2x"></i>')
     } else if (adversary_id.endsWith('w/AI')){
-      $("#adversary_description").html('Adversary: <b>Another human player who has AI</b>  <i class="far fa-user fa-2x"><i align="center" class="fas fa-laptop-code"></i></i>!')
+      $("#adversary_description").html('<b>Adversary: </b>Another human player who has AI  <i class="far fa-user fa-2x"><i align="center" class="fas fa-laptop-code"></i></i>!')
     }
   });
 </script>
@@ -49,33 +49,39 @@
     {% load otree static %}
     <div class="card bg-light instructions">
       <div class="card-body">    
-        <div> In this game, you are playing Rock-Paper-Scissors against another player, but there's a twist!</div><br>
-        <b>Players:</b>
+        <div align = "center"> In this game, you are playing Rock-Paper-Scissors against another player, but there's a twist!</div><hr>
+        <div align="center"><b>Players:</b></div>
         <ul>
-          <li>You: (Player {{ participant.label}})<i align="center" class="fas fa-user-circle fa-2x"></i></li>
-          <li id = "adversary_description">Adversary: <b>Another human player</b> <i  align="center" class="far fa-user fa-2x"></i> </li>
-        </ul>
-<!--
-        <b>Rounds: </b>
-        <br>
--->
-        <br>
-        <p> Like any command situation, you may make the choice yourself <b>OR</b> you may ask one of your trusted advisors to choose for you. </p>
-        <p><u> To choose for yourself</u>, click <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
-          <i class="far fa-hand-rock fa-lg"></i><br><small>Rock</small>
-          </button>, <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
-          <i class="far fa-hand-paper fa-lg"></i><br><small>Paper</small>
-          </button>, or 
-          <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
-            <i class="far fa-hand-scissors fa-lg"></i><br><small>Scissors</small>
-          </button></p>
-        OR
-        <p> <u>To have an expert advisor choose for you</u>, click <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
-          <i class="fas fa-desktop fa-lg"></i><i class="fas fa-server fa-lg"></i><br><small>AI</small>
-          </button>  or <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
-          <i class="fas fa-user fa-lg"></i><br><small>Human</small></button></p><hr>
+          <li><b>You: </b>(Player {{ participant.label}})<i align="center" class="fas fa-user-circle fa-2x"></i></li><br>
+          <li id = "adversary_description"><b>Adversary:</b>Another human player <i  align="center" class="far fa-user fa-2x"></i> </li><br>
+          <li><b>Your human expert advisor:</b> Name assigned during player match</li>
 
-        <p>
+        </ul>
+        <!--
+<b>Rounds: </b>
+<br>
+-->   <hr>
+        <p align="center">
+        <b>Rules:</b></p>
+        <div align="center">
+          <p> Like any command situation, you may make the choice yourself <b>OR</b> you may ask one of your trusted advisors to choose for you. </p>
+          <p><u> To choose for yourself</u>, click <br><button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+            <i class="far fa-hand-rock fa-lg"></i><br><small>Rock</small>
+            </button>, <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+            <i class="far fa-hand-paper fa-lg"></i><br><small>Paper</small>
+            </button>, or 
+            <button align="center" type="button" style="border-color: black" class="btn btn-secondary active" autocomplete="off">
+              <i class="far fa-hand-scissors fa-lg"></i><br><small>Scissors</small>
+            </button></p>
+          OR
+          <p> <u>To have your expert advisor choose for you</u>, click<br> <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
+            <i class="fas fa-desktop fa-lg"></i><i class="fas fa-server fa-lg"></i><br><small>AI Decision<br>Engine</small>
+            </button>  or <button type="button" align="center" style="border-color: black;" class="btn btn-secondary active"   autocomplete="off">
+            <i class="fas fa-user fa-lg"></i><br><small>Name<br>Player [id]</small></button></p><hr>
+        </div>
+        <p align="center">
+        <b>Scoring:</b></p>
+        <p align="center">
           Winner receives 1 point (+1).  Loser loses a point (-1).  In a draw, both players get zero points (0). 
         </p>
         <table align="center">
@@ -125,7 +131,7 @@
         </table>
         <br>
         <hr>
-        <p><b>Good luck!</b></p>
+        <p align="center"><b>Good luck!</b></p>
       </div>
     </div>
   </body>

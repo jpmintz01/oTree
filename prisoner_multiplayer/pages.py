@@ -55,19 +55,64 @@ class Introduction(Page):
         return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now())#returns True if I want to show the page
 
 
+class Practice(Page):
+    def is_displayed(self):
+        return ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now() and self.participant.vars['show_PW_practice'])
+    def vars_for_template(self):
+        me = self.player
+        history_adv_1 = {}
+        history_adv_2 = {}
+        history_adv_3 = {}
+        last_round = max(0,self.round_number-1)
+        return {
+            'adv_1_DelayTime': str(random.randint(1,10)) + 's',
+            'adv_2_DelayTime': str(random.randint(1,10)) + 's',
+            'adv_3_DelayTime': str(random.randint(1,3)) + 's',
+#            'my_decision_adv_1': me.decision_vs_adv_1,
+#            'my_decision_adv_2': me.decision_vs_adv_2,
+#            'my_decision_adv_3': me.decision_vs_adv_3,
+            'adv_1_decision': me.decision_of_adv_1,
+            'adv_2_decision': me.decision_of_adv_2,
+            'adv_3_decision': me.decision_of_adv_3,
+            'total_payoff_v_adv_1': sum([p.payoff_vs_adv_1 for p in me.in_all_rounds()]),
+            'total_payoff_v_adv_2': sum([p.payoff_vs_adv_2 for p in me.in_all_rounds()]),
+            'total_payoff_v_adv_3': sum([p.payoff_vs_adv_3 for p in me.in_all_rounds()]),
+            'history_w_adv_1': history_adv_1,
+            'history_w_adv_2': history_adv_2,
+            'history_w_adv_3': history_adv_3,
+            'payoff_of_adv_1': sum([p.payoff_of_adv_1 for p in me.in_all_rounds()]),
+            'payoff_of_adv_2': sum([p.payoff_of_adv_2 for p in me.in_all_rounds()]),
+            'payoff_of_adv_3': sum([p.payoff_of_adv_3 for p in me.in_all_rounds()]),
+#            'total_payoff_of_adv_1': 
+            
+#            'list_of_round_nums': [p.round_number for p in me.in_all_rounds()[:-1]],
+#            'my_decision_adv_1_total': [p.decision_vs_adv_1 for p in me.in_all_rounds()[:-1]],
+#            'adv_1_decision_total': [p.decision_of_adv_1 for p in me.in_all_rounds()[:-1]],
+#            'my_payoff_adv_1': me.payoff_vs_adv_1,
+#            'adv_1_decision': me.decision_of_adv_1,
+#            'adv_1_payoff': me.payoff_of_adv_1,
+#
+#            'my_decision_adv_2_total': [p.decision_vs_adv_2 for p in me.in_all_rounds()[:-1]],
+#            'adv_2_decision_total': [p.decision_of_adv_2 for p in me.in_all_rounds()[:-1]],
+#            'my_payoff_adv_2': me.payoff_vs_adv_2,
+#            'adv_2_payoff': me.payoff_of_adv_2,
+            'my_total_payoff': sum([p.round_payoff for p in me.in_all_rounds()]),
+        }
+    
 class WaitForPlayers(Page):
     def is_displayed(self): #only shows in round 1 AND if player has consented (session variable is set in informed consent)
+        self.participant.vars['show_PW_practice'] = False
         return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_now()) #returns True if I want to show the page
     pass
     
     
 class Decision(Page):
     def is_displayed(self):
-        print("Dself.round_number "+str(self.round_number))
-        print("Dself.session.config['num_PW_rounds'] "+str(self.session.config['num_PW_rounds']))
-        print("Dself.participant.vars['consent'] "+str(self.participant.vars['consent']))
-        print("Dself.player.play_now()) "+str(self.player.play_now()))
-        print("DConstants.num_rounds "+str(Constants.num_rounds))
+#        print("Dself.round_number "+str(self.round_number))
+#        print("Dself.session.config['num_PW_rounds'] "+str(self.session.config['num_PW_rounds']))
+#        print("Dself.participant.vars['consent'] "+str(self.participant.vars['consent']))
+#        print("Dself.player.play_now()) "+str(self.player.play_now()))
+#        print("DConstants.num_rounds "+str(Constants.num_rounds))
         return ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.player.play_now())
     form_model = 'player'
 #    def get_form_fields(self):
@@ -184,6 +229,7 @@ class EndGame(Page):
     
 page_sequence = [
     Introduction,
+    Practice,
     WaitForPlayers,
     Decision,
 #    ResultsWaitPage,
