@@ -25,15 +25,12 @@ Notes:
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
-- double-check PW = PW2 version
-- re-test counterbalancing from part.id
+- set heroku environment variables
 - double check heroku and local versions are same and current
-- ensure settings.py (all repositories) is correct
-- open the room session
-- test the room session
+- Mon AM: open the room session
 - ensure able to use backup on local version
 - test final version on heroku server with browser bots (works so far)
-- fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
+
 
 SHOULD DO:
 - Add an outcome anomation to P-W next to each 
@@ -70,6 +67,11 @@ To do later:
 
 
 Done:
+- fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
+- ensure settings.py (all repositories) is correct
+- test the room session
+- re-test counterbalancing from part.id
+- double-check PW = PW2 version
 - test server
 - test data collection
 - test self.participant.vars dump

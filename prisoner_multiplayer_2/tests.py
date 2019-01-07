@@ -54,6 +54,7 @@ class PlayerBot(Bot):
             yield (pages.Introduction)
         if ((self.round_number <= 1) and (self.participant.vars['consent']) and self.play_now() and self.participant.vars['show_PW_practice']):
             yield (pages.Practice)
+        if ((self.round_number <= 1) and (self.participant.vars['consent']) and self.play_now()):
             yield Submission(pages.WaitForPlayers,{}, check_html=False)
         if ((self.round_number <= self.session.config['num_PW_rounds'])and (self.participant.vars['consent']) and self.play_now()): 
             yield Submission(pages.Decision, {'decision_vs_adv_1': random.choice(choice_list_human), 'decision_vs_adv_2': random.choice(choice_list_HAI), 'decision_vs_adv_3': random.choice(choice_list_AI)}, check_html=False)

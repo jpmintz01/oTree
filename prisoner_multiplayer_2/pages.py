@@ -101,7 +101,8 @@ class Practice(Page):
     
 class WaitForPlayers(Page):
     def is_displayed(self): #only shows in round 1 AND if player has consented (session variable is set in informed consent)
-        self.participant.vars['show_PW_practice'] = False
+        if ((self.round_number <= 1) and (self.participant.vars['consent']) and self.player.play_now()):
+            self.participant.vars['show_PW_practice'] = False
         return ((self.round_number <= 1)and (self.participant.vars['consent']) and self.player.play_now()) #returns True if I want to show the page
     pass
     

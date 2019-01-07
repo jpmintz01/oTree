@@ -43,7 +43,9 @@ def adversary_id (self): #only need to call this once
 def adversary_choice(self): #provides adversary's choice to the page BEFORE player's choice
     me = self.player
     choice_list = ['Rock','Paper','Scissors']
-    me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #set the choice to the control
+    me.decision_of_adv_1 = random.choice(choice_list)
+#    print (me.decision_of_adv_1)
+#    me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1] #set the choice to the control
     
     
 #    else: # this is the AI 'TFT
@@ -97,6 +99,7 @@ class Introduction(Page):
         return {
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
+            'total_RPS_rounds': self.session.config['num_RPS_rounds']*3,
 #            'number_of_rounds': self.session.config['num_RPS_rounds'],
         }
 
@@ -115,7 +118,7 @@ class Practice(Page):
             history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
         return {
             'control_RPS_score': self.session.config['control_RPS_score'],
-            'target_RPS_score': self.session.config['target_RPS_score'],
+            'target_RPS_score':self.session.config['target_RPS_score'],
             'human_advice_v_adv_1': ai_advice_adv_1(self),
             'AI_advice_v_adv_1': ai_advice_adv_1(self),
             'my_decision_adv_1': me.decision_vs_adv_1,
@@ -130,6 +133,7 @@ class Practice(Page):
             'history_list': history,
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
+            'total_RPS_rounds': self.session.config['num_RPS_rounds']*3,
            
         }
     
@@ -164,13 +168,19 @@ class Decision(Page):
 
         history = {}
         if not (self.session.config['control_RPS_score']): #this should be a boolean variable that is session-configurable to tell the function to return not a choice, but a number.  If this variable is false, then run the adversary_choice function
+            print("not control_RPS_score")
             adversary_choice(self); #provides the adversary's choice to the template (global function above)
-                
+        else: #if not controlling score, then return the choice in the list in models.py
+            choice_list = ['Rock','Paper','Scissors']
+            me.decision_of_adv_1 = random.choice(choice_list)
+#             me.decision_of_adv_1 = Constants.adversary_choices[self.round_number-1]
         for p in me.in_all_rounds():
             history[p.round_number]=[p.decision_vs_adv_1, p.decision_of_adv_1, p.advisor_choice, p.winner]
         return {
             'control_RPS_score': self.session.config['control_RPS_score'],
             'target_RPS_score': self.session.config['target_RPS_score'],
+            'high_RPS_score': self.session.config['target_RPS_score']+1,
+            'low_RPS_score': self.session.config['target_RPS_score']-1, #puts a small hysteresis in the score
             'human_advice_v_adv_1': ai_advice_adv_1(self),
             'AI_advice_v_adv_1': ai_advice_adv_1(self),
             'my_decision_adv_1': me.decision_vs_adv_1,
@@ -185,6 +195,7 @@ class Decision(Page):
             'history_list': history,
             'human_advisor_id': human_advisor_id(self),
             'adversary_id': adversary_id(self),
+            'total_RPS_rounds': self.session.config['num_RPS_rounds']*3,
            
         }
    
@@ -221,11 +232,11 @@ class Decision(Page):
 class Results(Page):
     def is_displayed(self):
         self.participant.vars['RPS_played'] = True
-        print('rps pages results is_displayed self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
+#        print('rps pages results is_displayed self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
         return ((self.round_number == ((self.session.config['num_RPS_rounds']*3)+1)) and (self.participant.vars['consent'])) #show the results if it's the last round and consent was given
     def vars_for_template(self):
         self.participant.vars['RPS_played'] = True
-        print('rps pages results vars_for_template self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
+#        print('rps pages results vars_for_template self.part.vars[RPS_played]: '+str(self.participant.vars['RPS_played']))
         me = self.player
         #opponent = me.other_player()
         last_round = max(0,self.round_number-1)
