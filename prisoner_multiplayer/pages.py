@@ -216,6 +216,13 @@ class Results(Page):
             'adv_2_decision': me.decision_of_adv_2,
             'adv_2_payoff': me.payoff_of_adv_2,
             
+            'my_decision_adv_3': me.decision_vs_adv_3,
+            'my_decision_adv_3_total': [p.decision_vs_adv_3 for p in me.in_all_rounds()],
+            'adv_3_decision_total': [p.decision_of_adv_3 for p in me.in_all_rounds()],
+            'my_payoff_adv_3': me.payoff_vs_adv_3,
+            'adv_3_decision': me.decision_of_adv_3,
+            'adv_3_payoff': me.payoff_of_adv_3,
+            
             'my_total_payoff': sum([p.round_payoff for p in me.in_all_rounds()]),
 
         }
