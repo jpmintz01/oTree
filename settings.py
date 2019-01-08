@@ -123,6 +123,10 @@ ROOMS = [
         'display_name': 'test_4_jan',
         'participant_label_file': '_rooms/test_file.txt',
     },
+    {
+        'name': 'AU_online_Jan_2019',
+        'display_name': 'AU Online Group Jan 2019',
+    },
 ]
 
 

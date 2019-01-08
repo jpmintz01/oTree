@@ -97,6 +97,7 @@ class Player(BasePlayer):
 #                self.participant.vars['pw_order'] = 1
 #                print("self.participant.vars['pw_order']: " + str(self.participant.vars['pw_order']))
         except: #if the participant label doesn't exist, then continue on to the next section to check session.config and participant.vars
+  
             if ((int(self.session.config['pw_counterbalance'])%2)==0): #if the second to last digit of the participant.label is even
                 self.participant.vars['pw_order'] = 2
 #                counterbalance_rps(self) #sets. self.participant.vars['rps_order']

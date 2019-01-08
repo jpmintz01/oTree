@@ -13,23 +13,21 @@ Notes:
 - Apps Versions:<br>
 -- PW 0.4.1 (includes practice round)<br>
 -- PW2 0.4
--- RPS 0.4.1 (includes practice round<br> 
--- settings.py 0.3.1<br>
+-- RPS 0.4.1 (includes practice round)<br> 
+-- settings.py 0.5<br>
 -- Post-Game questionnaires 0.3.8<br>
--- informed consent 0.4.1 (sets up practice round)<br>
---- Pre-Game questionnaires (now included in Informed Consent<br>
--- bots version 0.4.3b (needs to account for RPS practice round)
-- Readme Version 0.4.7
+-- informed consent 0.5 (counterbalances by setting random ...participant.label if no part.label found) <br>
+--- Pre-Game questionnaires (now included in Informed Consent)<br>
+-- bots version 0.4.3
+- Readme Version 0.5
 - The experiment apps are set to dev version - participant will see something different.
 
 To do before experiment:
 EXPERIMENT CONDUCT
 MUST DO:
-- set heroku environment variables
-- double check heroku and local versions are same and current
 - Mon AM: open the room session
 - ensure able to use backup on local version
-- test final version on heroku server with browser bots (works so far)
+
 
 
 SHOULD DO:
@@ -67,6 +65,9 @@ To do later:
 
 
 Done:
+- test final version on heroku server with browser bots (works so far)
+- double check heroku and local versions are same and current
+- set heroku environment variables
 - fix RPS "control" score - it's always win/lose/win/lose... - maybe make it get back to central after max of 3 wins since first of each choice should be a win
 - ensure settings.py (all repositories) is correct
 - test the room session
