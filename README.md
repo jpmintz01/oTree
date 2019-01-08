@@ -1,3 +1,4 @@
+# This will be the version deployed for online AND in-person experiment (days 2+)
 # The Strategic Decision-making Experiment (Spear's Dissertation)
 
 ## quick start
