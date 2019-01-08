@@ -1,3 +1,4 @@
+# This was the version deployed in-person on day 1
 # The Strategic Decision-making Experiment (Spear's Dissertation)
 
 ## quick start
