@@ -10,29 +10,51 @@ Informed Consent
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <style>
+    .adv_hand {
+        transform: rotate(270deg) scaleX(-1);
+    }
+    #adversary_description  {
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+        animation-name: highlight_adversary;
+        animation-duration: 4s;
+    }
+    /* Safari 4.0 - 8.0 */
+    @-webkit-keyframes highlight_adversary {
+        0%   {background-color: none;}
+        15%  {background-color: red;}
+        100% {background-color: none;}
+    }
+
+    /* Standard syntax */
+    @keyframes highlight_adversary {
+        0%   {background-color: none;}
+        15%  {background-color: red;}
+        100% {background-color: none;}
+    }
 </style>
 {% endblock %}
 {% block scripts %}
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>   
-//    var elem = document.documentElement;
-//
-//    /* View in fullscreen */
-//    function openFullscreen() {
-//        if (elem.requestFullscreen) {
-//            elem.requestFullscreen();
-//        } else if (elem.mozRequestFullScreen) { /* Firefox */
-//            elem.mozRequestFullScreen();
-//        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-//            elem.webkitRequestFullscreen();
-//        } else if (elem.msRequestFullscreen) { /* IE/Edge */
-//            elem.msRequestFullscreen();
-//        }
-//    }
+    //    var elem = document.documentElement;
+    //
+    //    /* View in fullscreen */
+    //    function openFullscreen() {
+    //        if (elem.requestFullscreen) {
+    //            elem.requestFullscreen();
+    //        } else if (elem.mozRequestFullScreen) { /* Firefox */
+    //            elem.mozRequestFullScreen();
+    //        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    //            elem.webkitRequestFullscreen();
+    //        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    //            elem.msRequestFullscreen();
+    //        }
+    //    }
     $(document).ready(function(){
-//        $("#agree").click(function(){
-//            openFullscreen();
-//        })
+        //        $("#agree").click(function(){
+        //            openFullscreen();
+        //        })
     })
 
 </script>
@@ -41,6 +63,8 @@ Informed Consent
 
 {% endblock %}
 {% block content %}
+
+<div id="adversary_description">Please note, <b>NIPRnet computers do not correctly run this site.</b>  Please forward the link to a non-NIPR computer to participate.</div><br>
 <p> 
     Thank you for volunteering to participate in this study. 
 </p>
